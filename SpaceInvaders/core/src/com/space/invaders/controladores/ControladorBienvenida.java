@@ -1,6 +1,9 @@
 package com.space.invaders.controladores;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
+import com.space.invaders.navegacion.NombreRuta;
 import com.space.invaders.vistas.VistaBienvenida;
 
 public class ControladorBienvenida extends ControladorEstadoJuegoBase {
@@ -36,14 +39,19 @@ public class ControladorBienvenida extends ControladorEstadoJuegoBase {
 
 	@Override
 	public void manejarEntradas() {
-		// TODO Auto-generated method stub
+		//vistaBienvenida.manejarEntradas();
+		
+		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+			System.out.println("Enter! Navigate to Main Menu!");
+			navegarControlador(NombreRuta.MenuPrincipal);
+		}
 		
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+		vistaBienvenida.dispose();
 	}
 
 }

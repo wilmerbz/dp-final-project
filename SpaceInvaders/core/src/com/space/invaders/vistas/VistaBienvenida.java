@@ -1,5 +1,7 @@
 package com.space.invaders.vistas;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.space.invaders.interfaces.controladores.IControlador;
@@ -28,7 +30,7 @@ public class VistaBienvenida extends VistaEstadoJuego {
 	public void inicializar() {
 		// TODO Auto-generated method stub
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		img = new Texture("images/logo.png");
 	}
 
 	@Override
@@ -41,14 +43,13 @@ public class VistaBienvenida extends VistaEstadoJuego {
 	public void renderizar() {
 		batch.begin();
 		batch.draw(img, 0, 0);
-		batch.draw(img, 200, 100);
+		
 		batch.end();
 	}
 
 	@Override
 	public void manejarEntradas() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
