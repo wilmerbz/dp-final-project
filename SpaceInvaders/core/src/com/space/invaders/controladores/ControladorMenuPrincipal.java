@@ -7,6 +7,7 @@ import com.space.invaders.entidades.Jugador;
 import com.space.invaders.interfaces.controladores.IControlador;
 import com.space.invaders.interfaces.mensajes.IColega;
 import com.space.invaders.interfaces.mensajes.IMediador;
+import com.space.invaders.modelos.ModeloMenuPrincipal;
 import com.space.invaders.navegacion.AdministradorNavegacion;
 import com.space.invaders.navegacion.NombreRuta;
 import com.space.invaders.vistas.VistaMenuPrincipal;
@@ -15,17 +16,19 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 	
 	private IMediador mediador;
 	private VistaMenuPrincipal vistaMenuPrincipal;
+	private ModeloMenuPrincipal modeloMenuPrincipal;
 	
 	public ControladorMenuPrincipal() {
 		vistaMenuPrincipal = new VistaMenuPrincipal(this);	
+		modeloMenuPrincipal = new ModeloMenuPrincipal();
 	}
 	
 	@Override
 	public void inicializar() {
 
-		
 		System.out.println("Iniciando ControladorMenuPrincipal");
 		vistaMenuPrincipal.inicializar();
+		vistaMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
 		
 		//AdministradorNavegacion.getInstancia().navegar(NombreRuta.Juego);
 		

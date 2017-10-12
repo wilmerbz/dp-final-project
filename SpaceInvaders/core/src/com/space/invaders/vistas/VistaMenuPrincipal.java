@@ -1,5 +1,7 @@
 package com.space.invaders.vistas;
 
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -9,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeBitmapFontData;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.space.invaders.SpaceInvadersGame;
+import com.space.invaders.entidades.menu.ElementoMenu;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
 import com.space.invaders.vistas.base.VistaEstadoJuego;
 
@@ -17,13 +20,16 @@ import com.space.invaders.vistas.base.VistaEstadoJuego;
  */
 public class VistaMenuPrincipal extends VistaEstadoJuego {
 
+	private List<ElementoMenu> elementosMenu;
+	private GlyphLayout[] elementosMenuGlyphLayouts;
+
 	private SpriteBatch spriteBatch;
 	private BitmapFont fuenteTitulo;
 	private BitmapFont fuenteElementosMenu;
 	
 	private final String titulo = "Space Invaders";
 	private final String rutaFuente = "fonts/Hyperspace Bold.ttf"; 
-	private static GlyphLayout glyphLayout = new GlyphLayout();
+	private static GlyphLayout glyphLayoutTitulo = new GlyphLayout();
 	
 	public VistaMenuPrincipal(IControladorEstadoJuego controladorEstadoJuego) {
 		super(controladorEstadoJuego);
@@ -36,11 +42,17 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 		
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(rutaFuente));
 		FreeTypeFontParameter fontParameter = new FreeTypeFontParameter();
-		fontParameter.size = 60;
+		fontParameter.size = 100;
 		fontParameter.color = Color.WHITE;
+		
 		fuenteTitulo = generator.generateFont(fontParameter);
 		
-		glyphLayout.setText(fuenteTitulo, titulo);
+		fontParameter = new FreeTypeFontParameter();
+		fontParameter.size = 50;
+		fontParameter.color = Color.WHITE;
+		fuenteElementosMenu = generator.generateFont(fontParameter);
+		
+		glyphLayoutTitulo.setText(fuenteTitulo, titulo);
 		
 	}
 
@@ -55,7 +67,23 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 		spriteBatch.setProjectionMatrix(SpaceInvadersGame.camara.combined);
 		spriteBatch.begin();
 
-		fuenteTitulo.draw(spriteBatch, glyphLayout, (SpaceInvadersGame.WIDTH-glyphLayout.width)/2, 500);
+		float xTitulo = (SpaceInvadersGame.WIDTH-glyphLayoutTitulo.width)/2;
+		float yTitulo = SpaceInvadersGame.HEIGHT - glyphLayoutTitulo.height;
+		
+		fuenteTitulo.draw(spriteBatch, glyphLayoutTitulo, xTitulo,yTitulo);
+		
+		if(elementosMenuGlyphLayouts!=null && elementosMenuGlyphLayouts.length > 0) {
+			float yElemento = yTitulo - glyphLayoutTitulo.height - 500;
+			for(int i = 0; i< elementosMenuGlyphLayouts.length; i++) {
+				GlyphLayout layoutElemento = this.elementosMenuGlyphLayouts[i];
+				float xElemento = (SpaceInvadersGame.WIDTH-layoutElemento.width)/2;
+				
+				fuenteElementosMenu.draw(spriteBatch, layoutElemento, xElemento, yElemento);
+				
+				yElemento-= layoutElemento.height - 100;
+			}
+			
+		}
 		
 		spriteBatch.end();
 	}
@@ -69,6 +97,29 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	/**
+	 * Asigna la lista de elementos de menú.
+	 * @param elementosMenu
+	 */
+	public void setElementosMenu(List<ElementoMenu> elementosMenu) {
+		this.elementosMenu = elementosMenu;
+		if(elementosMenu==null)
+		{
+			elementosMenuGlyphLayouts =null;
+			return;
+		}
+		elementosMenuGlyphLayouts = new GlyphLayout[elementosMenu.size()];
+		for(int i = 0; i< elementosMenu.size(); i++) {
+			ElementoMenu elemento = this.elementosMenu.get(i);
+			GlyphLayout layoutElemento = new GlyphLayout();
+			layoutElemento.setText(fuenteElementosMenu, elemento.getDescripcion());
+			elementosMenuGlyphLayouts[i] = layoutElemento;
+		}
+		
 		
 	}
 

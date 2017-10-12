@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 /**
  * 
- * @author Manuel Alejandro Coral Lozano - Juan Sebastián Quintero Yoshioka
- *         Proyecto final - Algoritmos y programación II.
+ * @author Manuel Alejandro Coral Lozano - Juan Sebastiï¿½n Quintero Yoshioka
+ *         Proyecto final - Algoritmos y programaciï¿½n II.
  */
 public abstract class Nave implements Serializable {
 
@@ -90,7 +90,7 @@ public abstract class Nave implements Serializable {
 	}
 
 	// -----------------------------------------------------------------
-	// -----------------------------Métodos-----------------------------
+	// -----------------------------Mï¿½todos-----------------------------
 	// -----------------------------------------------------------------
 
 	public String getRutaImage() {
@@ -167,10 +167,10 @@ public abstract class Nave implements Serializable {
 
 	/**
 	 * 
-	 * @param daño
+	 * @param daï¿½o
 	 */
-	public void golpe (int daño) {
-		this.vida = this.vida - daño;
+	public void golpe (int dano) {
+		this.vida = this.vida - dano;
 	}
 	
 	/**

@@ -8,13 +8,13 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "Space Invaders © 2018";
+		config.title = "Space Invaders 2018";
 		
 		//https://pacoup.com/2011/06/12/list-of-true-169-resolutions/
-		config.width = 1152;
-		config.height= 648;
+		config.width = 1536;
+		config.height= 864;
 		config.fullscreen= false;
-		config.resizable = false;
+		config.resizable = true;
 		
 		new LwjglApplication(new SpaceInvadersGame(), config);
 	}
