@@ -1,7 +1,5 @@
 package com.space.invaders.interfaces.controladores;
 
-import com.space.invaders.interfaces.vistas.IVista;
-
 /**
  * Define la Interfaz para el Controlador principal.
  */

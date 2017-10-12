@@ -27,6 +27,5 @@ public interface IControladorEstadoJuego extends IControlador {
 	/***
 	 * Dispone del controlador del estado del juego.
 	 */
-	void dispose();
-	
+	void dispose();	
 }

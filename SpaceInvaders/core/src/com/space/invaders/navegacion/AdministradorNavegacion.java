@@ -10,7 +10,7 @@ import com.space.invaders.interfaces.navegacion.IControladorFactory;
 import com.space.invaders.interfaces.vistas.IVista;
 
 /***
- * Administrador de navegación que permite navegar entre controladores, sin que tengan referencia entre ellos.
+ * Administrador de navegaciï¿½n que permite navegar entre controladores, sin que tengan referencia entre ellos.
  */
 public class AdministradorNavegacion implements IAdministradorNavegacion {
 	
@@ -22,8 +22,8 @@ public class AdministradorNavegacion implements IAdministradorNavegacion {
 	private static AdministradorNavegacion instancia;
 	
 	/***
-	 * Obtiene la instancia singleton del administrador de navegación.
-	 * @return IAdministradorNavegacion Administrador de Navegación.
+	 * Obtiene la instancia singleton del administrador de navegaciï¿½n.
+	 * @return IAdministradorNavegacion Administrador de Navegaciï¿½n.
 	 */
 	public static IAdministradorNavegacion getInstancia() {
 		if(instancia == null) {
@@ -34,7 +34,7 @@ public class AdministradorNavegacion implements IAdministradorNavegacion {
 	}
 	
 	/***
-	 * Constructor privado que crea una instancia de Administrador Navegación.
+	 * Constructor privado que crea una instancia de Administrador Navegaciï¿½n.
 	 */
 	private AdministradorNavegacion() {
 		controladores = new Hashtable<NombreRuta, RutaControlador>();
