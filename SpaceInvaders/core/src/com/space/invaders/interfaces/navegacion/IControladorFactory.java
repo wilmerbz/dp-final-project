@@ -9,8 +9,8 @@ import com.space.invaders.navegacion.RutaControlador;
 public interface IControladorFactory {
 
 	/**
-	 * Crea un nuevo controlador a partir de la información de la ruta.
-	 * @param informacionRuta Información de la ruta del controlador.
+	 * Crea un nuevo controlador a partir de la informaciï¿½n de la ruta.
+	 * @param informacionRuta Informaciï¿½n de la ruta del controlador.
 	 * @return Controlador creado.
 	 */
 	public IControlador crearControlador(RutaControlador informacionRuta);

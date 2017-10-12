@@ -17,8 +17,7 @@ public abstract class ControladorBase implements IControlador {
 	public ControladorBase() {
 		
 	}
-	
-	
+		
 	/**
 	 * Navegar a la ruta indicada.
 	 * @param nombreRuta Nombre de ruta.

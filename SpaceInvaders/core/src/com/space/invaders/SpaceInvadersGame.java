@@ -28,10 +28,11 @@ public class SpaceInvadersGame extends ApplicationAdapter {
 	}
 	
 	/**
-	 * Inicializa la navegación del juego.
+	 * Inicializa la navegaciï¿½n del juego.
 	 */
 	private void inicializarNavegacion() {
 		_controladorPrincipal = new ControladorPrincipal();
+		
 		IAdministradorNavegacion administradorNavegacion = AdministradorNavegacion.getInstancia();
 		administradorNavegacion.setControladorPrincipal(_controladorPrincipal);
 		
@@ -43,7 +44,7 @@ public class SpaceInvadersGame extends ApplicationAdapter {
 	}
 
 	/**
-	 * Inicializa la camara del juego, de acuerdo al tamaño configurado.
+	 * Inicializa la camara del juego, de acuerdo al tamaï¿½o configurado.
 	 */
 	private void inicializarCamara() {
 		WIDTH = Gdx.graphics.getWidth();
@@ -63,8 +64,7 @@ public class SpaceInvadersGame extends ApplicationAdapter {
 
 		_controladorPrincipal.actualizar(Gdx.graphics.getDeltaTime());
 		_controladorPrincipal.renderizar();
-		_controladorPrincipal.manejarEntradas();
-		
+		_controladorPrincipal.manejarEntradas();		
 	}
 	
 	@Override

@@ -6,7 +6,7 @@ import com.space.invaders.interfaces.vistas.IVista;
 import com.space.invaders.navegacion.NombreRuta;
 
 /***
- * Interfaz para Administrador de Navegación.
+ * Interfaz para Administrador de Navegaciï¿½n.
  */
 public interface IAdministradorNavegacion {
 	
@@ -17,15 +17,15 @@ public interface IAdministradorNavegacion {
 	public void setControladorPrincipal(IControladorPrincipal controladorPrincipal);
 	
 	/**
-	 * Registra la ruta en el Administrador de Navegación.
+	 * Registra la ruta en el Administrador de Navegaciï¿½n.
 	 * @param nombreRuta Nombre de ruta a registrar.
 	 * @param nombreClaseControlador Nombre de clase del controlador a ejecutar.
-	 * @param isSingleton Indica si la instancia será singleton o se creará una nueva cada vez que se navegue al controlador.
+	 * @param isSingleton Indica si la instancia serï¿½ singleton o se crearï¿½ una nueva cada vez que se navegue al controlador.
 	 */
 	public void agregarRuta(NombreRuta nombreRuta, String nombreClaseControlador, boolean isSingleton);
 	
 	/***
-	 * Remueve la ruta del administrador de navegación.
+	 * Remueve la ruta del administrador de navegaciï¿½n.
 	 * @param nombreRuta Nombre de ruta a remover.
 	 */
 	public void removerRuta(NombreRuta nombreRuta);

@@ -1,7 +1,7 @@
 package com.space.invaders.navegacion;
 
 /**
- * Nombres de rutas de navegación disponibles en la aplicación.
+ * Nombres de rutas de navegaciï¿½n disponibles en la aplicaciï¿½n.
  */
 public enum NombreRuta {
 	Bienvenida,
