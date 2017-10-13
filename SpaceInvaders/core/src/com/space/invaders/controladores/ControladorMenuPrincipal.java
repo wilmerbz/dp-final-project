@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
 import com.space.invaders.entidades.Jugador;
+import com.space.invaders.entidades.menu.ElementoMenu;
 import com.space.invaders.interfaces.controladores.IControlador;
 import com.space.invaders.interfaces.mensajes.IColega;
 import com.space.invaders.interfaces.mensajes.IMediador;
@@ -60,8 +61,16 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 
 	@Override
 	public void manejarEntradas() {
+		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 			System.out.println("ENTER Menu!");
+			
+			ElementoMenu elementoMenuActual = modeloMenuPrincipal.getElementoMenuActual();
+			
+			if(elementoMenuActual!=null && elementoMenuActual.getNombreRuta() == NombreRuta.Salir) {
+				Gdx.app.exit();
+			}
+			
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {

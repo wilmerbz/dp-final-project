@@ -34,7 +34,6 @@ public class ModeloMenuPrincipal implements IModelo{
 		elementosMenu = new ArrayList<ElementoMenu>();
 		
 		ElementoMenu jugar = new ElementoOpcionMenu(NombreRuta.SeleccionarJugador, "Seleccionar Jugador");
-		jugar.setSeleccionado(true);
 		ElementoMenu mejoresPuntajes = new ElementoOpcionMenu(NombreRuta.MejoresPuntajes, "Mejores Puntajes");
 		ElementoMenu instrucciones = new ElementoOpcionMenu(NombreRuta.Instrucciones, "Instrucciones");
 		ElementoMenu salir = new ElementoOpcionMenu(NombreRuta.Salir, "Salir");
@@ -57,6 +56,9 @@ public class ModeloMenuPrincipal implements IModelo{
 		return elementosMenu;
 	}
 
+	/**
+	 * Mueve la seleccion al siguiente elemento de menu.
+	 */
 	public void moverElementoSiguiente() {
 		if(elementosMenu!=null && indiceElementoMenuActual< elementosMenu.size()-1) {
 			indiceElementoMenuActual++;
@@ -64,6 +66,9 @@ public class ModeloMenuPrincipal implements IModelo{
 		setElementoMenuActual();
 	}
 	
+	/**
+	 * Mueve la seleccion al elemento de menu anterior.
+	 */
 	public void moverElementoAnterior() {
 		if(indiceElementoMenuActual>0) {
 			indiceElementoMenuActual--;
@@ -71,6 +76,9 @@ public class ModeloMenuPrincipal implements IModelo{
 		setElementoMenuActual();
 	}
 	
+	/**
+	 * Asigna el elemento de menu seleccionado.
+	 */
 	private void setElementoMenuActual() {
 		if(elementoMenuActual!=null) {
 			elementoMenuActual.setSeleccionado(false);
@@ -79,6 +87,13 @@ public class ModeloMenuPrincipal implements IModelo{
 		elementoMenuActual.setSeleccionado(true);
 	}
 	
+	/**
+	 * Obtiene el elemento de menu actual.
+	 * @return Elemento de menu.
+	 */
+	public ElementoMenu getElementoMenuActual() {
+		return elementoMenuActual;
+	}
 	
 	@Override
 	public void dispose() {
