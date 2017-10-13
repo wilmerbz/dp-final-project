@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeBitmapFontData;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.space.invaders.SpaceInvadersGame;
 import com.space.invaders.controladores.ControladorMenuPrincipal;
 import com.space.invaders.entidades.menu.ElementoMenu;
@@ -59,7 +60,7 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 		fuenteElementoMenu = generator.generateFont(fontParameter);
 		
 		fontParameter = new FreeTypeFontParameter();
-		fontParameter.size = 50;
+		fontParameter.size = 60;
 		fontParameter.color = Color.SCARLET;
 		fuenteElementoMenuSeleccionado = generator.generateFont(fontParameter);
 	}
@@ -86,14 +87,15 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 			float yElemento = yTitulo - tituloGlyphLayout.height - distanciaPrimerElementoMenu;
 			for(int i = 0; i< elementosMenuGlyphLayouts.length; i++) {
 				GlyphLayout layoutElemento = this.elementosMenuGlyphLayouts[i];
-				float xElemento = (SpaceInvadersGame.WIDTH-layoutElemento.width)/2;
+				
 				BitmapFont fuente = fuenteElementoMenu;
 				
 				ElementoMenu elementoMenu = elementosMenu.get(i);
 				if(elementoMenu.getSeleccionado()) {
 					fuente = fuenteElementoMenuSeleccionado;
 				}
-				
+				layoutElemento.setText(fuente, elementoMenu.getDescripcion());
+				float xElemento = (SpaceInvadersGame.WIDTH-layoutElemento.width)/2;
 				fuente.draw(spriteBatch, layoutElemento, xElemento, yElemento);
 				
 				yElemento = yElemento - layoutElemento.height - distanciaElementoMenu;

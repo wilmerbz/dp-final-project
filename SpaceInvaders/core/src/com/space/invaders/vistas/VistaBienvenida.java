@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.space.invaders.interfaces.controladores.IControlador;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
+import com.space.invaders.recursos.texturas.AdministradorTexturas;
+import com.space.invaders.recursos.texturas.NombreTextura;
 import com.space.invaders.vistas.base.VistaEstadoJuego;
 
 /**
@@ -14,8 +16,8 @@ import com.space.invaders.vistas.base.VistaEstadoJuego;
 public class VistaBienvenida extends VistaEstadoJuego {
 
 	SpriteBatch batch;
-	Texture img;
-	
+	Texture logo;
+	Texture temp;
 	
 	/**
 	 * Crea una nueva instancia del controlador del estado de Bienvenida del juego.
@@ -30,7 +32,9 @@ public class VistaBienvenida extends VistaEstadoJuego {
 	public void inicializar() {
 		// TODO Auto-generated method stub
 		batch = new SpriteBatch();
-		img = new Texture("images/logo.png");
+		
+		logo = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.LOGO);
+		temp = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.LOGO);
 	}
 
 	@Override
@@ -42,7 +46,8 @@ public class VistaBienvenida extends VistaEstadoJuego {
 	@Override
 	public void renderizar() {
 		batch.begin();
-		batch.draw(img, 0, 0);
+		batch.draw(logo, 0, 0);
+		batch.draw(temp, 0, 500);
 		
 		batch.end();
 	}
@@ -55,7 +60,7 @@ public class VistaBienvenida extends VistaEstadoJuego {
 	@Override
 	public void dispose() {
 		batch.dispose();
-		img.dispose();
+		logo.dispose();
 	}
 
 }
