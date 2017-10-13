@@ -68,6 +68,7 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 			ElementoMenu elementoMenuActual = modeloMenuPrincipal.getElementoMenuActual();
 			
 			if(elementoMenuActual!=null && elementoMenuActual.getNombreRuta() == NombreRuta.Salir) {
+				System.out.println("Salir");
 				Gdx.app.exit();
 			}
 			
