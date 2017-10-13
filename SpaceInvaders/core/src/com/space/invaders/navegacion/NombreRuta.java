@@ -12,5 +12,6 @@ public enum NombreRuta {
 	AgregarPartida,
 	MejoresPuntajes,
 	Instrucciones,
-	Juego
+	Juego,
+	Salir
 }

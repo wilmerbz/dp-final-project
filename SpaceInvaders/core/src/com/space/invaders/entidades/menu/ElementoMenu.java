@@ -12,6 +12,8 @@ public abstract class ElementoMenu {
 	
 	private NombreRuta nombreRuta;
 	
+	private boolean seleccionado = false;
+	
 	private ElementoMenu elementoMenuPadre;
 
 	/**
@@ -71,6 +73,22 @@ public abstract class ElementoMenu {
 	 */
 	public void setNombreRuta(NombreRuta nombreRuta) {
 		this.nombreRuta = nombreRuta;
+	}
+
+	/**
+	 * Asigna el valor que indica si el elemento es el elemento activo.
+	 * @param seleccionado
+	 */
+	public void setSeleccionado(boolean seleccionado) {
+		this.seleccionado = seleccionado;
+	}
+	
+	/**
+	 * Obtiene el valor que indica si el elemento es el elemento activo.
+	 * @return
+	 */
+	public boolean getSeleccionado() {
+		return seleccionado;
 	}
 	
 	

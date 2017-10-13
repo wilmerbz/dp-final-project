@@ -64,14 +64,15 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 			System.out.println("ENTER Menu!");
 		}
 		
-		if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+		if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 			System.out.println("Move menu UP!");
+			modeloMenuPrincipal.moverElementoAnterior();
 		}
 		
-		if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+		if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
 			System.out.println("Move menu DOWN!");
+			modeloMenuPrincipal.moverElementoSiguiente();
 		}
-		
 		
 	}
 
