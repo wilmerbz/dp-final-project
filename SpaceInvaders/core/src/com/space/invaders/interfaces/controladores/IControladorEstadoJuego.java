@@ -1,5 +1,8 @@
 package com.space.invaders.interfaces.controladores;
 
+import java.util.List;
+
+import com.space.invaders.actores.ElementoJuego;
 import com.space.invaders.navegacion.AdministradorNavegacion;
 
 /**
@@ -27,5 +30,6 @@ public interface IControladorEstadoJuego extends IControlador {
 	/***
 	 * Dispone del controlador del estado del juego.
 	 */
-	void dispose();	
+	void dispose();
+
 }

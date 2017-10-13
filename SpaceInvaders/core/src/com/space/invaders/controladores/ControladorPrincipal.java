@@ -11,6 +11,7 @@ public class ControladorPrincipal implements IControladorPrincipal {
 
 	private IControladorEstadoJuego _controladorEstadoJuego;
 	
+	
 	@Override
 	public void inicializar() {
 		// TODO Auto-generated method stub

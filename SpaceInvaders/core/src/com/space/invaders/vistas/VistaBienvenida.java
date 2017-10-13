@@ -17,7 +17,6 @@ public class VistaBienvenida extends VistaEstadoJuego {
 
 	SpriteBatch batch;
 	Texture logo;
-	Texture temp;
 	
 	/**
 	 * Crea una nueva instancia del controlador del estado de Bienvenida del juego.
@@ -34,7 +33,6 @@ public class VistaBienvenida extends VistaEstadoJuego {
 		batch = new SpriteBatch();
 		
 		logo = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.LOGO);
-		temp = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.LOGO);
 	}
 
 	@Override
@@ -46,8 +44,8 @@ public class VistaBienvenida extends VistaEstadoJuego {
 	@Override
 	public void renderizar() {
 		batch.begin();
-		batch.draw(logo, 0, 0);
-		batch.draw(temp, 0, 500);
+		
+		batch.draw(logo, 100, 500);
 		
 		batch.end();
 	}

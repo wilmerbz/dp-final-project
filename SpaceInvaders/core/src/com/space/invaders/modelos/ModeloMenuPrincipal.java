@@ -33,7 +33,8 @@ public class ModeloMenuPrincipal implements IModelo{
 		
 		elementosMenu = new ArrayList<ElementoMenu>();
 		
-		ElementoMenu jugar = new ElementoOpcionMenu(NombreRuta.SeleccionarJugador, "Seleccionar Jugador");
+		//ElementoMenu jugar = new ElementoOpcionMenu(NombreRuta.SeleccionarJugador, "Seleccionar Jugador");
+		ElementoMenu jugar = new ElementoOpcionMenu(NombreRuta.Juego, "Jugar");
 		ElementoMenu mejoresPuntajes = new ElementoOpcionMenu(NombreRuta.MejoresPuntajes, "Mejores Puntajes");
 		ElementoMenu instrucciones = new ElementoOpcionMenu(NombreRuta.Instrucciones, "Instrucciones");
 		ElementoMenu salir = new ElementoOpcionMenu(NombreRuta.Salir, "Salir");
