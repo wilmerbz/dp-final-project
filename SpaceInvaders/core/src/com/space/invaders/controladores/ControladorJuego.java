@@ -44,7 +44,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		// TODO Auto-generated method stub
 		System.out.println("Iniciando ControladorJuego: "+ contadorVisualizaciones);
 		
-		int contadorEnemigos = 100;
+		int contadorEnemigos = 20;
 		texturasEnemigo = new Texture[2];
 		texturasEnemigo[0] = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_0);
 		texturasEnemigo[1] = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_1);
@@ -84,6 +84,8 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	private int indiceTexturaNueva = 0;
 	private int indiceTexturaActual = 0;
 	
+	private int direccion =1;
+	
 	@Override
 	public void actualizar(float deltaTiempo) {
 		
@@ -103,6 +105,9 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		    
 		}
 		
+		float width = Gdx.graphics.getWidth();
+		boolean cambioDireccion = false;
+		
 		Texture texturaNueva = null;
 		if(indiceTexturaActual != indiceTexturaNueva) {
 			texturaNueva = texturasEnemigo[indiceTexturaNueva];
@@ -113,6 +118,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		float dx = MathUtils.cos(radians);
 		float speed = 7000;
 		
+		
 		for (int i = 0; i < navesEnemigas.size(); i++) {
 			
 			ElementoJuego elementoJuego = navesEnemigas.get(i);
@@ -120,6 +126,14 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 				elementoJuego.setDrawable(new SpriteDrawable(new Sprite(texturaNueva)));
 			}
 			float x = elementoJuego.getX()+ (dx*speed);
+			
+			if(!cambioDireccion && (x> width || x<0)) {
+				cambioDireccion = true;
+				direccion = direccion*-1;
+			}
+			
+			 x = elementoJuego.getX() + (dx * speed * direccion);
+			 
 			elementoJuego.setX(x);
 		}
 		
