@@ -32,7 +32,6 @@ public class DisparoJugadorBuilder extends DisparoBuilder {
 		texturasDisparoJugador.add(texturaDisparoJugador0);
 		texturasDisparoJugador.add(texturaDisparoJugador1);
 		disparo.setTexturasAnimacion(texturasDisparoJugador);
-		disparo.setAnimar(true);
 	}
 
 	/* (non-Javadoc)

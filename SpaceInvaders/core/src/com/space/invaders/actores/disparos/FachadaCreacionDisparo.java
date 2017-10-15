@@ -38,7 +38,6 @@ public class FachadaCreacionDisparo{
 		return construirDisparo(disparoEnemigoBuilder);
 	}
 	
-	
 	/**
 	 * Construye un disparo del jugador.
 	 * @return Disparo construido.
@@ -59,6 +58,5 @@ public class FachadaCreacionDisparo{
 		director.construirDisparo();
 		Disparo disparo = director.getDisparo();
 		return disparo;
-		
 	}
 }
