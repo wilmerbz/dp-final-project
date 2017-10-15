@@ -1,5 +1,7 @@
 package com.space.invaders.actores.naves;
 
+import java.util.List;
+
 import com.badlogic.gdx.graphics.Texture;
 
 /**
@@ -8,12 +10,20 @@ import com.badlogic.gdx.graphics.Texture;
 public class NaveJugador extends Nave {
 
 	/**
-	 * Crea una nueva nave de jugador.
-	 * @param texture
+	 * Crea una nueva instancia de NaveJugador.
+	 * @param intervaloAnimacion Intervalo de cambio de texturas para la animación.
 	 */
-	public NaveJugador(Texture texture) {
-		super(texture);
-		// TODO Auto-generated constructor stub
+	public NaveJugador(float intervaloAnimacion) {
+		super(intervaloAnimacion);
+	}
+	
+	/**
+	 * Crea una nueva instancia de NaveJugador.
+	 * @param texturas Texturas utilizadas para la animación.
+	 * @param intervaloAnimacion Intervalo de cambio de texturas para la animación.
+	 */
+	public NaveJugador(List<Texture> texturas, float intervaloAnimacion) {
+		super(texturas, intervaloAnimacion);
 	}
 
 }

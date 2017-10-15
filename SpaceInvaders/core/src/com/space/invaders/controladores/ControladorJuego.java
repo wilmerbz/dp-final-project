@@ -36,7 +36,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	private List<ElementoJuego> navesEnemigas;
 	private ElementoJuego naveJugador;
 	
-	private Texture[] texturasEnemigo;
+	private List<Texture> texturasEnemigo;
 	
 	@Override
 	public void inicializar() {
@@ -45,21 +45,27 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		System.out.println("Iniciando ControladorJuego: "+ contadorVisualizaciones);
 		
 		int contadorEnemigos = 20;
-		texturasEnemigo = new Texture[2];
-		texturasEnemigo[0] = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_0);
-		texturasEnemigo[1] = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_1);
+		texturasEnemigo = new ArrayList<Texture>();
 		
+		Texture texturCangrejo1 = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_0);
+		Texture texturCangrejo2  = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_1);
+		texturasEnemigo.add(texturCangrejo1);
+		texturasEnemigo.add(texturCangrejo2);
+		
+		float tiempoAnimacion = 0.25f;
 		for (int i = 0; i < contadorEnemigos; i++) {
 			
-			InvasorCalamar calamar = new InvasorCalamar(texturasEnemigo[0]);
+			InvasorCalamar calamar = new InvasorCalamar(texturasEnemigo, tiempoAnimacion);
+			calamar.setAnimar(true);
 			 calamar.setPosition((i+1)*40, 500);
 			 elementosJuego.add(calamar);
 			 navesEnemigas.add(calamar);
 		}
 		
 		Texture texturaNaveJugador = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_0);
-		
-		naveJugador = new NaveJugador(texturaNaveJugador);
+		List<Texture> texturasNaveJugador = new ArrayList<Texture>();
+		texturasNaveJugador.add(texturaNaveJugador);
+		naveJugador = new NaveJugador(texturasNaveJugador, tiempoAnimacion);
 		elementosJuego.add(naveJugador);
 		
 	}
@@ -77,42 +83,13 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		System.out.println("Mensaje recibido por ControladorJuego: "+ mensaje+ " - Nombre: "+jugador.getNombre() + " - Nickname: "+ jugador.getNickname());
 	}
 
-	private float timerLimit = 0.25f;
-	private float timer = 0f;
-	private long time = 0;
-	
-	private int indiceTexturaNueva = 0;
-	private int indiceTexturaActual = 0;
-	
 	private int direccion =1;
 	
 	@Override
 	public void actualizar(float deltaTiempo) {
 		
-		
-		//Cada segundo!
-		timer += deltaTiempo;
-		if (timer >= timerLimit) {
-			time++;
-		    System.out.println("Timer Execution: "+ time);
-		    timer -= timerLimit;
-		    
-		    if(indiceTexturaActual+1 < texturasEnemigo.length) {
-		    	indiceTexturaNueva = indiceTexturaActual+1;
-		    }else {
-		    	indiceTexturaNueva = 0;
-		    }
-		    
-		}
-		
 		float width = Gdx.graphics.getWidth();
 		boolean cambioDireccion = false;
-		
-		Texture texturaNueva = null;
-		if(indiceTexturaActual != indiceTexturaNueva) {
-			texturaNueva = texturasEnemigo[indiceTexturaNueva];
-			indiceTexturaActual = indiceTexturaNueva;
-		}
 		
 		float radians = 3.1415f / 2;
 		float dx = MathUtils.cos(radians);
@@ -122,9 +99,8 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		for (int i = 0; i < navesEnemigas.size(); i++) {
 			
 			ElementoJuego elementoJuego = navesEnemigas.get(i);
-			if(texturaNueva!=null) {
-				elementoJuego.setDrawable(new SpriteDrawable(new Sprite(texturaNueva)));
-			}
+			elementoJuego.actualizar(deltaTiempo);
+
 			float x = elementoJuego.getX()+ (dx*speed);
 			
 			if(!cambioDireccion && (x> width || x<0)) {

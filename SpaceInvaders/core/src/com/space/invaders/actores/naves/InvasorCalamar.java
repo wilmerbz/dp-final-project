@@ -1,5 +1,7 @@
 package com.space.invaders.actores.naves;
 
+import java.util.List;
+
 import com.badlogic.gdx.graphics.Texture;
 
 /**
@@ -8,10 +10,13 @@ import com.badlogic.gdx.graphics.Texture;
 public class InvasorCalamar extends NaveEnemiga {
 
 	/**
-	 * Crea una nueva instancia de InvasorCalamar.
+	 * Crea una nueva instancia de NaveEnemiga.
+	 * @param texturas Texturas utilizadas para la animación.
+	 * @param intervaloAnimacion Intervalo de cambio de texturas para la animación.
 	 */
-	public InvasorCalamar(Texture texture) {
-		super(texture);
-		
+	public InvasorCalamar(List<Texture> texturas, float intervaloAnimacion) {
+		super(texturas, intervaloAnimacion);
+		// TODO Auto-generated constructor stub
 	}
+
 }
