@@ -9,8 +9,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.space.invaders.actores.ElementoAnimadoJuego;
 import com.space.invaders.actores.ElementoJuego;
 import com.space.invaders.actores.naves.InvasorCalamar;
+import com.space.invaders.actores.naves.InvasorCangrejo;
+import com.space.invaders.actores.naves.InvasorPulpo;
 import com.space.invaders.actores.naves.NaveJugador;
 import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
 import com.space.invaders.entidades.Jugador;
@@ -19,6 +22,7 @@ import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
 import com.space.invaders.interfaces.mensajes.IColega;
 import com.space.invaders.interfaces.mensajes.IMediador;
 import com.space.invaders.recursos.texturas.AdministradorTexturas;
+import com.space.invaders.recursos.texturas.IAdministradorTexturas;
 import com.space.invaders.recursos.texturas.NombreTextura;
 import com.space.invaders.vistas.VistaJuego;
 
@@ -36,7 +40,6 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	private List<ElementoJuego> navesEnemigas;
 	private ElementoJuego naveJugador;
 	
-	private List<Texture> texturasEnemigo;
 	
 	@Override
 	public void inicializar() {
@@ -45,22 +48,54 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		System.out.println("Iniciando ControladorJuego: "+ contadorVisualizaciones);
 		
 		int contadorEnemigos = 20;
-		texturasEnemigo = new ArrayList<Texture>();
+		List<Texture> texturasEnemigo = new ArrayList<Texture>();
 		
-		Texture texturCangrejo1 = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_0);
-		Texture texturCangrejo2  = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_1);
-		texturasEnemigo.add(texturCangrejo1);
-		texturasEnemigo.add(texturCangrejo2);
+		IAdministradorTexturas administradorTexturas = AdministradorTexturas.getInstancia();
+		Texture textura0 = administradorTexturas.obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_0);
+		Texture textura1  = administradorTexturas.obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_1);
+		texturasEnemigo.add(textura0);
+		texturasEnemigo.add(textura1);
 		
 		float tiempoAnimacion = 0.25f;
 		for (int i = 0; i < contadorEnemigos; i++) {
 			
-			InvasorCalamar calamar = new InvasorCalamar(texturasEnemigo, tiempoAnimacion);
-			calamar.setAnimar(true);
-			 calamar.setPosition((i+1)*40, 500);
-			 elementosJuego.add(calamar);
-			 navesEnemigas.add(calamar);
+			ElementoAnimadoJuego naveEnemiga = new InvasorCalamar(texturasEnemigo, tiempoAnimacion);
+			naveEnemiga.setAnimar(true);
+			naveEnemiga.setPosition((i+1)*40, 500);
+			 elementosJuego.add(naveEnemiga);
+			 navesEnemigas.add(naveEnemiga);
 		}
+		
+		texturasEnemigo = new ArrayList<Texture>();
+		textura0 = administradorTexturas.obtenerTextura(NombreTextura.ENEMIGO_CANGREJO_0);
+		textura1  = administradorTexturas.obtenerTextura(NombreTextura.ENEMIGO_CANGREJO_1);
+		texturasEnemigo.add(textura0);
+		texturasEnemigo.add(textura1);
+		
+		for (int i = 0; i < contadorEnemigos; i++) {
+			
+			ElementoAnimadoJuego naveEnemiga = new InvasorCangrejo(texturasEnemigo, tiempoAnimacion);
+			naveEnemiga.setAnimar(true);
+			naveEnemiga.setPosition((i+1)*40, 600);
+			 elementosJuego.add(naveEnemiga);
+			 navesEnemigas.add(naveEnemiga);
+		}
+		
+		texturasEnemigo = new ArrayList<Texture>();
+		textura0 = administradorTexturas.obtenerTextura(NombreTextura.ENEMIGO_PULPO_0);
+		textura1  = administradorTexturas.obtenerTextura(NombreTextura.ENEMIGO_PULPO_1);
+		texturasEnemigo.add(textura0);
+		texturasEnemigo.add(textura1);
+		
+		for (int i = 0; i < contadorEnemigos; i++) {
+			
+			ElementoAnimadoJuego naveEnemiga = new InvasorPulpo(texturasEnemigo, tiempoAnimacion);
+			naveEnemiga.setAnimar(true);
+			naveEnemiga.setPosition((i+1)*40, 700);
+			 elementosJuego.add(naveEnemiga);
+			 navesEnemigas.add(naveEnemiga);
+		}
+		
 		
 		Texture texturaNaveJugador = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_0);
 		List<Texture> texturasNaveJugador = new ArrayList<Texture>();
