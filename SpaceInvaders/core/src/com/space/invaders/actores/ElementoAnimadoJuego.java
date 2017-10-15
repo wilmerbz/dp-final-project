@@ -25,11 +25,6 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 	 * Intervalo de la animación.
 	 */
 	private float intervaloAnimacion;
-	
-	/**
-	 * Indice de la textura nueva.
-	 */
-	private int indiceTexturaNueva = 0;
 
 	/**
 	 * Indice de la textura actual.
@@ -40,6 +35,15 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 	 * Temporizador que lleva la cuenta de tiempo para cambiar las texturas de la animación.
 	 */
 	private Temporizador temporizador;
+	
+	/**
+	 * Crea una nueva instancia de un Elemento Animado del Juego.
+	 */
+	public ElementoAnimadoJuego() {
+		super();
+		
+	}
+	
 	/**
 	 * Crea una nueva instancia de elemento de juego.
 	 * @param intervaloAnimacion Intervalo de cambio de texturas para la animación.
@@ -79,6 +83,7 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 			return;
 		}
 		
+		int indiceTexturaNueva;
 	    if(indiceTexturaActual+1 < texturasAnimacion.size()) {
 	    	indiceTexturaNueva = indiceTexturaActual+1;
 	    }else {
