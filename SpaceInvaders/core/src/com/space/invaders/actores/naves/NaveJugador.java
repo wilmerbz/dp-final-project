@@ -34,11 +34,12 @@ public class NaveJugador extends Nave {
 	 * @return Disparo creado.
 	 */
 	public Disparo disparar() {
+		if(disparo!=null) {
+			return null;
+		}
+		
 		disparo = FachadaCreacionDisparo.getInstancia().construirDisparoJugador();
-		float x = getX() + (getWidth()/2) - (disparo.getWidth()/2);
-		float y = getY() + disparo.getHeight();
-		disparo.setX(x);
-		disparo.setY(y);
+		setUbicacionInicialDisparo(disparo);
 		return disparo;
 	}
 	

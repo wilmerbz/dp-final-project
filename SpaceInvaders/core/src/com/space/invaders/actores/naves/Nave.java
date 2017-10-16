@@ -2,9 +2,11 @@ package com.space.invaders.actores.naves;
 
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.space.invaders.actores.ElementoAnimadoJuego;
+import com.space.invaders.actores.direccion.DireccionY;
 import com.space.invaders.actores.disparos.Disparo;
 
 /**
@@ -40,6 +42,9 @@ public abstract class Nave extends ElementoAnimadoJuego {
 	 * @return Retorna true si el disparo impactó la nave; de lo contrario retorna false.
 	 */
 	public boolean validarImpacto(Disparo disparo) {
+		
+		
+		
 		return false;
 	}
 
@@ -50,13 +55,30 @@ public abstract class Nave extends ElementoAnimadoJuego {
 	 */
 	public abstract Disparo disparar();
 	
+	/**
+	 * Asigna la ubicacion inicial del disparo.
+	 * @param disparo
+	 */
+	protected void setUbicacionInicialDisparo(Disparo disparo) {
+		float x = getX() + (getWidth()/2) - (disparo.getWidth()/2);
+		float y = getY() + disparo.getHeight();
+		disparo.setX(x);
+		disparo.setY(y);
+	}
 	
 	@Override
 	public void actualizar(float deltaTiempo) {
 		super.actualizar(deltaTiempo);
 		
-		if(disparo!=null) {
-			disparo.actualizar(deltaTiempo);
+		if(disparo != null) {
+
+			if(disparo.validarUbicacionLimiteY()) {
+				disparo = null;
+				System.out.println("Disparo alcanzó el límite.");
+			}else {
+				disparo.actualizar(deltaTiempo);
+			}
+				
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package com.space.invaders.actores;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -183,4 +184,31 @@ public abstract class ElementoJuego extends Image{
 		this.draw(batch, 1);
 	}
 	
+	/**
+	 * Valida si el elemento alcanzó la ubicación limite en X.
+	 * @return Retorna true si el elemento alcanzo la ubicacion limite en X.
+	 */
+	public boolean validarUbicacionLimiteX() {
+		
+		float x = getX();
+		float width = Gdx.graphics.getWidth();
+		
+		boolean alcanzoLimiteX = x < 0 || x > width;
+		return alcanzoLimiteX;
+	}
+	
+	
+	/**
+	 * Valida si el elemento alcanzó la ubicación limite en Y.
+	 * @return Retorna true si el elemento alcanzo la ubicacion limite en Y.
+	 */
+	public boolean validarUbicacionLimiteY() {
+		
+		float y = getY();
+		float height = Gdx.graphics.getHeight();
+		
+		//boolean alcanzoLimiteY = (direccionY == DireccionY.Arriba && y > height) || (direccionY == DireccionY.Abajo && y < 0);
+		boolean alcanzoLimiteY = y < 0 || y > height;
+		return alcanzoLimiteY;
+	}
 }

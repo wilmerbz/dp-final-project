@@ -142,7 +142,6 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		vistaJuego.dispose();
 	}
 
