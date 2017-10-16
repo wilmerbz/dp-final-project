@@ -9,8 +9,21 @@ import com.space.invaders.actores.ElementoJuego;
 /**
  * Clase base para las naves.
  */
-public abstract class Nave extends ElementoAnimadoJuego {
-
+public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
+	
+	/*
+	 * Implementación metodo para clonar naves
+	 *
+	 */
+	 public Nave clone(){
+	        Nave copiaNave=null;
+	        try{
+	        	copiaNave=(Nave) super.clone();
+	        }catch(CloneNotSupportedException ex){
+	            System.out.println(" no se puede duplicar");
+	        }
+	        return copiaNave;
+	    }
 	/**
 	 * Crea una nueva instancia de Nave.
 	 * @param intervaloAnimacion Intervalo de cambio de texturas para la animaciÃ³n.

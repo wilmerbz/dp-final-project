@@ -59,7 +59,6 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		 */
 		INaveFactory jugador = new NaveFactory();
 		naveJugador = jugador.crearNave(TipoNave.Jugador);
-
 		elementosJuego.add(naveJugador);
 
 	}
