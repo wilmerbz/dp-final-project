@@ -30,7 +30,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 
 	private List<ElementoJuego> elementosJuego;
 	private List<ElementoJuego> navesEnemigas;
-	private ElementoJuego naveJugador;
+	private Nave naveJugador;
 
 	@Override
 	public void inicializar() {
@@ -40,7 +40,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 
 		int contadorEnemigos = 20;
 		/**
-		 * Creación de los enemigos usando el patron Factory
+		 * Creaciï¿½n de los enemigos usando el patron Factory
 		 */
 		INaveFactory enemigos = new NaveFactory();
 		List<Nave> nave1 = enemigos.crearNaves(TipoNave.Calamar, contadorEnemigos);
@@ -55,11 +55,11 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 			navesEnemigas.add(nave3.get(i));
 		}
 		/**
-		 * Creación de la nave del jugador usando el patron Factory
+		 * Creaciï¿½n de la nave del jugador usando el patron Factory
 		 */
 		INaveFactory jugador = new NaveFactory();
 		naveJugador = jugador.crearNave(TipoNave.Jugador);
-
+		naveJugador.setVelocidadX(5);
 		elementosJuego.add(naveJugador);
 
 	}
@@ -86,23 +86,27 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		float width = Gdx.graphics.getWidth();
 		boolean cambioDireccion = false;
 
-		float radians = 3.1415f / 2;
-		float dx = MathUtils.cos(radians);
-		float speed = 7000;
+		//float radians = 3.1415f / 2;
+		//float dx = MathUtils.cos(radians);
+		//float speed = 7000;
+		
+		float dx = 1.5f;
 
 		for (int i = 0; i < navesEnemigas.size(); i++) {
 
 			ElementoJuego elementoJuego = navesEnemigas.get(i);
 			elementoJuego.actualizar(deltaTiempo);
 
-			float x = elementoJuego.getX() + (dx * speed);
+			//float x = elementoJuego.getX() + (dx * speed);
+			float x = elementoJuego.getX() + (dx * direccion);
 
 			if (!cambioDireccion && (x > width || x < 0)) {
 				cambioDireccion = true;
 				direccion = direccion * -1;
 			}
 
-			x = elementoJuego.getX() + (dx * speed * direccion);
+			//x = elementoJuego.getX() + (dx * speed * direccion);
+			x = elementoJuego.getX() + (dx * direccion);
 
 			elementoJuego.setX(x);
 		}
@@ -121,23 +125,16 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		// TODO Auto-generated method stub
 		float direccion = 0;
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			direccion = -1;
+			naveJugador.moverIzquierda();
 		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			direccion = 1;
+			naveJugador.moverDerecha();
 		}
-
-		if (direccion == 0)
-			return;
-
-		float radians = 3.1415f / 2;
-		float dx = MathUtils.cos(radians);
-		float speed = 28000 * direccion;
-
-		float x = naveJugador.getX() + (dx * speed);
-		naveJugador.setX(x);
-
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+			naveJugador.disparar();
+		}
 	}
 
 	@Override

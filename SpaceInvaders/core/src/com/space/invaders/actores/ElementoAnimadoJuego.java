@@ -139,6 +139,7 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 	 */
 	public void setTexturasAnimacion(List<Texture> texturasAnimacion) {
 		this.texturasAnimacion = texturasAnimacion;
+		setTextura(texturasAnimacion.get(0));
 	}
 
 }

@@ -3,6 +3,8 @@ package com.space.invaders.actores.naves;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.space.invaders.actores.disparos.Disparo;
+import com.space.invaders.actores.disparos.FachadaCreacionDisparo;
 
 public abstract class NaveEnemiga extends Nave {
 
@@ -22,5 +24,17 @@ public abstract class NaveEnemiga extends Nave {
 	public NaveEnemiga(List<Texture> texturas, float intervaloAnimacion) {
 		super(texturas, intervaloAnimacion);
 	}
+	
+	
+	/**
+	 * Crea un nuevo disparo para la nave enemiga.
+	 * @return Disparo creado.
+	 */
+	public Disparo disparar() {
+		disparo = FachadaCreacionDisparo.getInstancia().construirDisparoEnemigo();
+		return disparo;
+	}
+	
+	
 	
 }

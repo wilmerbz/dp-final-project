@@ -18,7 +18,7 @@ public enum DireccionX {
 	 * Obtiene el multiplicador de dirección en X.
 	 * @return Multiplicador de dirección.
 	 */
-	public int getMultiplicador() {
+	public int getMultiplicadorX() {
 		return multiplicadorX;
 	}
 	

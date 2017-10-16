@@ -40,7 +40,7 @@ public class VistaJuego extends VistaEstadoJuego {
 		
 		for (int i = 0; i < elementosJuego.size(); i++) {
 			ElementoJuego elementoJuego = elementosJuego.get(i);
-			elementoJuego.draw(batch, 1);
+			elementoJuego.renderizar(batch);
 		}
 		
 		batch.end();
