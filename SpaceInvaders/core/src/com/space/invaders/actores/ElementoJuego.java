@@ -91,13 +91,14 @@ public abstract class ElementoJuego extends Image{
 	
 	/**
 	 * Asigna la nueva textura al elemento de juego.
-	 * @param texturaNueva Nueva textura para el elemento de juego.
+	 * @param textura Nueva textura para el elemento de juego.
 	 */
-	public void setTextura(Texture texturaNueva) 
+	public void setTextura(Texture textura) 
 	{
-		Sprite sprite = new Sprite(texturaNueva);
+		Sprite sprite = new Sprite(textura);
 		SpriteDrawable spriteDrawable = new SpriteDrawable(sprite);
 		this.setDrawable(spriteDrawable);
+		this.setSize(textura.getWidth(), textura.getHeight());
 	}
 	
 	

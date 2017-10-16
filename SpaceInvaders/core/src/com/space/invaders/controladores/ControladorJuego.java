@@ -83,6 +83,8 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	@Override
 	public void actualizar(float deltaTiempo) {
 
+		vistaJuego.actualizar(deltaTiempo);
+		
 		float width = Gdx.graphics.getWidth();
 		boolean cambioDireccion = false;
 
@@ -111,7 +113,8 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 			elementoJuego.setX(x);
 		}
 
-		vistaJuego.actualizar(deltaTiempo);
+		naveJugador.actualizar(deltaTiempo);
+		
 	}
 
 	@Override

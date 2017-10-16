@@ -17,4 +17,11 @@ public class Disparo extends ElementoAnimadoJuego {
 		super();
 	}
 	
+	
+	@Override
+	public void actualizar(float deltaTiempo) {
+		super.actualizar(deltaTiempo);
+		
+		mover();
+	}
 }

@@ -3,6 +3,7 @@ package com.space.invaders.actores.naves;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.space.invaders.actores.ElementoAnimadoJuego;
 import com.space.invaders.actores.disparos.Disparo;
 
@@ -48,6 +49,25 @@ public abstract class Nave extends ElementoAnimadoJuego {
 	 * @return Disparo creado.
 	 */
 	public abstract Disparo disparar();
+	
+	
+	@Override
+	public void actualizar(float deltaTiempo) {
+		super.actualizar(deltaTiempo);
+		
+		if(disparo!=null) {
+			disparo.actualizar(deltaTiempo);
+		}
+	}
+	
+	@Override
+	public void renderizar(SpriteBatch batch) {
+		super.renderizar(batch);
+		
+		if(disparo!=null) {
+			disparo.renderizar(batch);
+		}
+	}
 	
 	
 }

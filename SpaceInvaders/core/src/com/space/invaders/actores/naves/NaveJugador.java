@@ -35,21 +35,11 @@ public class NaveJugador extends Nave {
 	 */
 	public Disparo disparar() {
 		disparo = FachadaCreacionDisparo.getInstancia().construirDisparoJugador();
-		float x = getX() + (getWidth()/2);
-		float y = getY() + disparo.getHeight()+100;
+		float x = getX() + (getWidth()/2) - (disparo.getWidth()/2);
+		float y = getY() + disparo.getHeight();
 		disparo.setX(x);
 		disparo.setY(y);
 		return disparo;
 	}
 	
-	
-	@Override
-	public void renderizar(SpriteBatch batch) {
-		super.renderizar(batch);
-		
-		if(disparo!=null) {
-			disparo.renderizar(batch);
-		}
-		
-	}
 }
