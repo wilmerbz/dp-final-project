@@ -30,7 +30,7 @@ public class NaveFactory implements INaveFactory{
 			texturasEnemigo.add(textura0);
 			texturasEnemigo.add(textura1);
 			nave = new InvasorCalamar(texturasEnemigo, tiempoAnimacion);
-			//nave.setAnimar(true);
+			nave.setAnimar(true);
 
 			break;
 		case Cangrejo:
@@ -74,49 +74,14 @@ public class NaveFactory implements INaveFactory{
 		
 
 		List<Nave> navesEnemigas = new ArrayList<Nave>();
-		switch (tipoNave) {
-		case Calamar:
-			
-			Nave naveEnemigaCalamar = crearNave(tipoNave);
-			Nave copiaNaveEnemiga;
-
-			for (int i = 0; i < contadorEnemigos; i++) {
-				copiaNaveEnemiga = (Nave)naveEnemigaCalamar.clone();
-				copiaNaveEnemiga.setPosition((i + 1) * 40, 500);
-				copiaNaveEnemiga.setAnimar(true);
-				navesEnemigas.add(copiaNaveEnemiga);
-			}
-			/*
-			for (int i = 0; i < contadorEnemigos; i++) {
-
-				Nave naveEnemiga = crearNave(tipoNave);
-				naveEnemiga.setPosition((i + 1) * 40, 500);
-				navesEnemigas.add(naveEnemiga);
-			}*/
-			break;
-		case Cangrejo:
-			for (int i = 0; i < contadorEnemigos; i++) {
-
-				Nave naveEnemiga = crearNave(tipoNave);
-				naveEnemiga.setPosition((i + 1) * 40, 600);
-				navesEnemigas.add(naveEnemiga);
-			}
-			break;
-		case Pulpo:
-			for (int i = 0; i < contadorEnemigos; i++) {
-
-				Nave naveEnemiga = crearNave(tipoNave);
-				naveEnemiga.setPosition((i + 1) * 40, 700);
-				navesEnemigas.add(naveEnemiga);
-			}
-
-			break;
-
-		default:
-			break;
-
+		Nave naveEnemiga = crearNave(tipoNave);
+		Nave copiaNaveEnemiga;
+		
+		for (int i = 0; i < contadorEnemigos; i++) {
+			copiaNaveEnemiga = (Nave)naveEnemiga.clone();		
+			navesEnemigas.add(copiaNaveEnemiga);
 		}
-
+		
 		return navesEnemigas;
 
 	}

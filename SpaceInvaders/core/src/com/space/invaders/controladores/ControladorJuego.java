@@ -48,10 +48,13 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		List<Nave> nave2 = enemigos.crearNaves(TipoNave.Cangrejo, contadorEnemigos);
 		List<Nave> nave3 = enemigos.crearNaves(TipoNave.Pulpo, contadorEnemigos);
 		for (int i = 0; i < contadorEnemigos; i++) {
+			nave1.get(i).setPosition((i + 1) * 40, 500);
 			elementosJuego.add(nave1.get(i));
 			navesEnemigas.add(nave1.get(i));
+			nave2.get(i).setPosition((i + 1) * 40, 600);			
 			elementosJuego.add(nave2.get(i));
 			navesEnemigas.add(nave2.get(i));
+			nave3.get(i).setPosition((i + 1) * 40, 700);			
 			elementosJuego.add(nave3.get(i));
 			navesEnemigas.add(nave3.get(i));
 		}
