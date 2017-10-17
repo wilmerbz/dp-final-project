@@ -15,7 +15,7 @@ public class Temporizador implements Cloneable{
 	        }catch(CloneNotSupportedException ex){
 	            System.out.println(" no se puede duplicar");
 	        }
-	        return temporizador;
+	        return temporizador; 
 	    }
 
 	/**
