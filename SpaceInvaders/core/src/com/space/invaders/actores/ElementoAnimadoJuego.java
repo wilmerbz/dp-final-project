@@ -141,5 +141,12 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 		this.texturasAnimacion = texturasAnimacion;
 		setTextura(texturasAnimacion.get(0));
 	}
+	
+	@Override
+	public void disponer() {
+		setAnimar(false);
+		texturasAnimacion.clear();
+		temporizador = null;
+	} 
 
 }

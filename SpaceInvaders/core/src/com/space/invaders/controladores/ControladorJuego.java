@@ -10,6 +10,7 @@ import com.space.invaders.actores.ElementoJuego;
 import com.space.invaders.actores.disparos.Disparo;
 import com.space.invaders.actores.naves.INaveFactory;
 import com.space.invaders.actores.naves.Nave;
+import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveFactory;
 import com.space.invaders.actores.naves.TipoNave;
 import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
@@ -114,11 +115,16 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 
 			elementoJuego.setX(x);
 			
-			if(elementoJuego instanceof Nave && disparo!=null) {
-				Nave nave = (Nave)elementoJuego;
-				boolean impacto = nave.validarImpacto(disparo);
+			if(elementoJuego instanceof Nave && disparo!=null && !disparo.isImpactado()) {
+				NaveEnemiga naveEnemiga = (NaveEnemiga)elementoJuego;
+				
+				if(naveEnemiga.isDestruida())
+					continue;
+				
+				boolean impacto = naveEnemiga.validarImpacto(disparo);
+				
 				if(impacto) {
-					
+					disparo.setImpactado(true);
 				}
 			}
 		}

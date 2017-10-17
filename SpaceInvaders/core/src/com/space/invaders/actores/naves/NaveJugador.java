@@ -20,6 +20,7 @@ public class NaveJugador extends Nave {
 		super(intervaloAnimacion);
 	}
 	
+	
 	/**
 	 * Crea una nueva instancia de NaveJugador.
 	 * @param texturas Texturas utilizadas para la animación.
@@ -34,13 +35,18 @@ public class NaveJugador extends Nave {
 	 * @return Disparo creado.
 	 */
 	public Disparo disparar() {
-		if(disparo!=null) {
+		if(disparo!=null && !disparo.isImpactado()) {
 			return null;
 		}
 		
 		disparo = FachadaCreacionDisparo.getInstancia().construirDisparoJugador();
 		setUbicacionInicialDisparo(disparo);
 		return disparo;
+	}
+	
+	@Override
+	public void impactada() {
+		
 	}
 	
 }

@@ -9,17 +9,6 @@ public class Temporizador implements Cloneable {
 	private float tiempo;
 	private float contadorTiempo;
 
-	@Override
-	public Temporizador clone() {
-		Temporizador temporizador = null;
-		try {
-			temporizador = (Temporizador) super.clone();
-		} catch (CloneNotSupportedException ex) {
-			System.out.println(" no se puede duplicar");
-		}
-		return temporizador;
-	}
-
 	/**
 	 * Crea un nuevo temporizador.
 	 * 
@@ -69,4 +58,15 @@ public class Temporizador implements Cloneable {
 		this.tiempo = tiempo;
 	}
 
+	@Override
+	public Temporizador clone() {
+		Temporizador temporizador = null;
+		try {
+			temporizador = (Temporizador) super.clone();
+		} catch (CloneNotSupportedException ex) {
+			System.out.println(" no se puede duplicar");
+		}
+		return temporizador;
+	}
+	
 }

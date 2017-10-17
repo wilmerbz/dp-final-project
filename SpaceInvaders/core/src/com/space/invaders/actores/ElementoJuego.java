@@ -14,7 +14,7 @@ import com.space.invaders.actores.naves.Nave;
 /**
  * Representa un elemento que se pinta en el juego, utilizando una imagen.
  */
-public abstract class ElementoJuego extends Image implements Cloneable{
+public abstract class ElementoJuego extends Image{
 
 	private DireccionX direccionX;
 	private float velocidadX = 1;
@@ -40,9 +40,23 @@ public abstract class ElementoJuego extends Image implements Cloneable{
 	 * Actualiza el elemento de juego de acuerdo al cambio de tiempo.
 	 * @param deltaTiempo Cambio de tiempo.
 	 */
-	public void actualizar(float deltaTiempo) {
-		
+	public abstract void actualizar(float deltaTiempo);
+	
+	/**
+	 * Renderiza el elemento.
+	 * @param batch Sprite batch a utilizar.
+	 */
+	public void renderizar(SpriteBatch batch) {
+		// TODO Auto-generated method stub
+		this.draw(batch, 1);
 	}
+	
+	/**
+	 * Dispone del elemento.
+	 */
+	public abstract void disponer();
+	
+	
 	/**
 	 * Obtiene la direccion en X.
 	 * @return Direccion en X.
@@ -176,21 +190,12 @@ public abstract class ElementoJuego extends Image implements Cloneable{
 		moverX(DireccionX.Izquierda, velocidadX);
 	}
 
-	/**
-	 * Renderiza el elemento.
-	 * @param batch Sprite batch a utilizar.
-	 */
-	public void renderizar(SpriteBatch batch) {
-		// TODO Auto-generated method stub
-		this.draw(batch, 1);
-	}
 	
 	/**
 	 * Valida si el elemento alcanzó la ubicación limite en X.
 	 * @return Retorna true si el elemento alcanzo la ubicacion limite en X.
 	 */
 	public boolean validarUbicacionLimiteX() {
-		
 		float x = getX();
 		float width = Gdx.graphics.getWidth();
 		
@@ -204,27 +209,11 @@ public abstract class ElementoJuego extends Image implements Cloneable{
 	 * @return Retorna true si el elemento alcanzo la ubicacion limite en Y.
 	 */
 	public boolean validarUbicacionLimiteY() {
-		
 		float y = getY();
 		float height = Gdx.graphics.getHeight();
 		
-		//boolean alcanzoLimiteY = (direccionY == DireccionY.Arriba && y > height) || (direccionY == DireccionY.Abajo && y < 0);
 		boolean alcanzoLimiteY = y < 0 || y > height;
 		return alcanzoLimiteY;
-	}
-	
-	/*
-	 * Implementación metodo para clonar elemento juego.
-	 */
-	@Override
-	public ElementoJuego clone() {
-		ElementoJuego copiaElemento = null;
-		try {
-			copiaElemento = (ElementoJuego) super.clone();
-		} catch (CloneNotSupportedException ex) {
-			System.out.println("No se puede duplicar");
-		}
-		return copiaElemento;
 	}
 
 }

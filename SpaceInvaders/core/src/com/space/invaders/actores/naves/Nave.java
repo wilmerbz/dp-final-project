@@ -67,12 +67,19 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 		boolean impacto = rectanguloNave.overlaps(rectanguloDisparo);
 
 		if (impacto) {
-			System.out.println("Boooommm!!!");
+			impactada();
 		}
 
 		return impacto;
 	}
 
+	
+	/**
+	 * Metodo que se llama cuando la nave ha sido impactada.
+	 */
+	public abstract void impactada();
+	
+	
 	/**
 	 * Crea un nuevo disparo para la nave.
 	 * 
@@ -125,6 +132,7 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 	public Disparo getDisparo() {
 		return disparo;
 	}
+	
 
 	/*
 	 * Implementación metodo para clonar elemento juego.
@@ -132,8 +140,13 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 	@Override
 	public Nave clone() {
 		Nave copiaElemento = null;
-		copiaElemento = (Nave) super.clone();
-		copiaElemento.temporizador = this.temporizador.clone();
+		try {
+			copiaElemento = (Nave) super.clone();
+			copiaElemento.temporizador = this.temporizador.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return copiaElemento;
 	}
