@@ -155,6 +155,10 @@ public abstract class ElementoJuego extends Image{
 	 * @param velocidad Velocidad de moviemiento.
 	 */
 	public void moverX(DireccionX direccion, float velocidad) {
+	
+		if(validarUbicacionLimiteX(direccion))
+			return;
+		
 		float x = getX() + (velocidad * direccion.getMultiplicadorX());
 		this.setX(x);
 	}
@@ -196,23 +200,40 @@ public abstract class ElementoJuego extends Image{
 	 * @return Retorna true si el elemento alcanzo la ubicacion limite en X.
 	 */
 	public boolean validarUbicacionLimiteX() {
+		return validarUbicacionLimiteX(this.direccionX);
+	}
+	
+	
+	/**
+	 * Valida si el elemento alcanzó la ubicación limite en X.
+	 * @return Retorna true si el elemento alcanzo la ubicacion limite en X.
+	 */
+	public boolean validarUbicacionLimiteX(DireccionX direccionX) {
 		float x = getX();
-		float width = Gdx.graphics.getWidth();
+		float width = getWidth();
+		float graphicsWidth = Gdx.graphics.getWidth();
 		
-		boolean alcanzoLimiteX = x < 0 || x > width;
+		boolean alcanzoLimiteX = (direccionX == DireccionX.Izquierda && x < 0) || (direccionX == DireccionX.Derecha && x > graphicsWidth-width);
 		return alcanzoLimiteX;
 	}
 	
+	/**
+	 * Valida si el elemento alcanzó la ubicación limite en X.
+	 * @return Retorna true si el elemento alcanzo la ubicacion limite en X.
+	 */
+	public boolean validarUbicacionLimiteY() {
+		return validarUbicacionLimiteY(this.direccionY);
+	}
 	
 	/**
 	 * Valida si el elemento alcanzó la ubicación limite en Y.
 	 * @return Retorna true si el elemento alcanzo la ubicacion limite en Y.
 	 */
-	public boolean validarUbicacionLimiteY() {
+	public boolean validarUbicacionLimiteY(DireccionY direccionY) {
 		float y = getY();
-		float height = Gdx.graphics.getHeight();
+		float graphicsHeight = Gdx.graphics.getWidth();
 		
-		boolean alcanzoLimiteY = y < 0 || y > height;
+		boolean alcanzoLimiteY =(direccionY == DireccionY.Abajo && y < 0) || (direccionY == DireccionY.Arriba && y > graphicsHeight);
 		return alcanzoLimiteY;
 	}
 
