@@ -3,10 +3,20 @@ package com.space.invaders.actores.util;
 /**
  * Permite llevar el conteo del tiempo y determinar si ya se ha alcanzado determinado límite.
  */
-public class Temporizador {
+public class Temporizador implements Cloneable{
 	
 	private float tiempo;
 	private float contadorTiempo;
+	
+	 public Temporizador clone(){
+		 Temporizador temporizador=null;
+	        try{
+	        	temporizador=(Temporizador) super.clone();
+	        }catch(CloneNotSupportedException ex){
+	            System.out.println(" no se puede duplicar");
+	        }
+	        return temporizador;
+	    }
 
 	/**
 	 * Crea un nuevo temporizador. 
