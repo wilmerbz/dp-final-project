@@ -27,7 +27,7 @@ public class DisparoJugadorBuilder extends DisparoBuilder {
 	public void construirTextura() {
 		IAdministradorTexturas adminTexturas = AdministradorTexturas.getInstancia();
 		Texture texturaDisparoJugador0 = adminTexturas.obtenerTextura(NombreTextura.DISPARO_JUGADOR_0);
-		Texture texturaDisparoJugador1 = adminTexturas.obtenerTextura(NombreTextura.DISPARO_JUGADOR_0);
+		Texture texturaDisparoJugador1 = adminTexturas.obtenerTextura(NombreTextura.DISPARO_JUGADOR_1);
 		List<Texture> texturasDisparoJugador = new ArrayList<Texture>();
 		texturasDisparoJugador.add(texturaDisparoJugador0);
 		texturasDisparoJugador.add(texturaDisparoJugador1);

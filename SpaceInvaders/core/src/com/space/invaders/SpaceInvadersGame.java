@@ -40,7 +40,8 @@ public class SpaceInvadersGame extends ApplicationAdapter {
 		administradorNavegacion.agregarRuta(NombreRuta.MenuPrincipal, "com.space.invaders.controladores.ControladorMenuPrincipal", true);
 		administradorNavegacion.agregarRuta(NombreRuta.Juego, "com.space.invaders.controladores.ControladorJuego", true);
 		
-		administradorNavegacion.navegar(NombreRuta.Bienvenida);
+		//administradorNavegacion.navegar(NombreRuta.Bienvenida);
+		administradorNavegacion.navegar(NombreRuta.Juego);
 	}
 
 	/**

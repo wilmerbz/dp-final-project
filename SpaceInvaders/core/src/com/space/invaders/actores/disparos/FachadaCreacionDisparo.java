@@ -10,18 +10,16 @@ import com.space.invaders.actores.disparos.builder.DisparoJugadorBuilder;
  */
 public class FachadaCreacionDisparo{
 
-	private FachadaCreacionDisparo instancia;
-	private DirectorConstruccionDisparo directorConstruccionDisparo;
+	private static FachadaCreacionDisparo instancia;
 	
 	private FachadaCreacionDisparo() {
-		directorConstruccionDisparo = new DirectorConstruccionDisparo();
 	}
 	
 	/**
 	 * Obtiene la instancia singleton de la fachada de creación de disparos.
 	 * @return
 	 */
-	public synchronized FachadaCreacionDisparo getInstancia() {
+	public static synchronized FachadaCreacionDisparo getInstancia() {
 		if(instancia == null) {
 			instancia = new FachadaCreacionDisparo();
 		}
