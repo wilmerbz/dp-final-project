@@ -15,8 +15,21 @@ import com.space.invaders.actores.disparos.Disparo;
 /**
  * Clase base para las naves.
  */
-public abstract class Nave extends ElementoAnimadoJuego {
-
+public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
+	
+	/*
+	 * Implementación metodo para clonar naves
+	 *
+	 */
+	 public Nave clone(){
+	        Nave copiaNave=null;
+	        try{
+	        	copiaNave=(Nave) super.clone();
+	        }catch(CloneNotSupportedException ex){
+	            System.out.println(" no se puede duplicar");
+	        }
+	        return copiaNave;
+	    }
 	/**
 	 * Disparo actual de la nave.
 	 */
