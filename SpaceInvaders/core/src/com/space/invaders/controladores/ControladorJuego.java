@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.MathUtils;
 import com.space.invaders.actores.ElementoJuego;
+import com.space.invaders.actores.disparos.Disparo;
 import com.space.invaders.actores.naves.INaveFactory;
 import com.space.invaders.actores.naves.Nave;
 import com.space.invaders.actores.naves.NaveFactory;
@@ -94,6 +95,8 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		
 		float dx = 1.5f;
 
+		Disparo disparo  = naveJugador.getDisparo();
+		
 		for (int i = 0; i < navesEnemigas.size(); i++) {
 
 			ElementoJuego elementoJuego = navesEnemigas.get(i);
@@ -111,6 +114,10 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 			x = elementoJuego.getX() + (dx * direccion);
 
 			elementoJuego.setX(x);
+			
+			if(elementoJuego instanceof Nave && disparo!=null) {
+				((Nave)elementoJuego).validarImpacto(disparo);
+			}
 		}
 
 		naveJugador.actualizar(deltaTiempo);

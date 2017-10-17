@@ -18,7 +18,7 @@ import com.space.invaders.actores.disparos.Disparo;
 public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 	
 	/*
-	 * Implementación metodo para clonar naves
+	 * Implementaciï¿½n metodo para clonar naves
 	 *
 	 */
 	 public Nave clone(){
@@ -118,6 +118,14 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 			disparo.renderizar(batch);
 		}
 	}
+	
+	/**
+	 * Obtiene el disparo actual de la nave.
+	 * @return Disparo.
+	 */
+	public Disparo getDisparo() {
+		return disparo;
+	} 
 	
 	
 }
