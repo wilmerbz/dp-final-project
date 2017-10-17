@@ -2,11 +2,14 @@ package com.space.invaders.actores.naves;
 
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.space.invaders.actores.ElementoAnimadoJuego;
-import com.space.invaders.actores.direccion.DireccionY;
 import com.space.invaders.actores.disparos.Disparo;
 
 /**
@@ -43,9 +46,21 @@ public abstract class Nave extends ElementoAnimadoJuego {
 	 */
 	public boolean validarImpacto(Disparo disparo) {
 		
+		SpriteDrawable spriteDrawableDisparo = (SpriteDrawable) disparo.getDrawable();
+		Sprite spriteDisparo = spriteDrawableDisparo.getSprite();
+		Rectangle rectanguloDisparo = spriteDisparo.getBoundingRectangle();
 		
+		SpriteDrawable spriteDrawableNave = (SpriteDrawable) this.getDrawable();
+		Sprite spriteNave = spriteDrawableNave.getSprite();
+		Rectangle rectanguloNave = spriteNave.getBoundingRectangle();
 		
-		return false;
+		boolean impacto = rectanguloNave.overlaps(rectanguloDisparo);
+		
+		if(impacto) {
+			System.out.println("Boooommm!!!");
+		}
+	
+		return impacto;
 	}
 
 
