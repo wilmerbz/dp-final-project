@@ -59,7 +59,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 			navesEnemigas.add(nave3.get(i));
 		}
 		/**
-		 * Creaci�n de la nave del jugador usando el patron Factory
+		 * Creación de la nave del jugador usando el patron Factory
 		 */
 		INaveFactory jugador = new NaveFactory();
 		naveJugador = jugador.crearNave(TipoNave.Jugador);
@@ -92,10 +92,6 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		float width = Gdx.graphics.getWidth();
 		boolean cambioDireccion = false;
 
-		//float radians = 3.1415f / 2;
-		//float dx = MathUtils.cos(radians);
-		//float speed = 7000;
-		
 		float dx = 1.5f;
 
 		Disparo disparo  = naveJugador.getDisparo();
@@ -119,7 +115,11 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 			elementoJuego.setX(x);
 			
 			if(elementoJuego instanceof Nave && disparo!=null) {
-				((Nave)elementoJuego).validarImpacto(disparo);
+				Nave nave = (Nave)elementoJuego;
+				boolean impacto = nave.validarImpacto(disparo);
+				if(impacto) {
+					
+				}
 			}
 		}
 
