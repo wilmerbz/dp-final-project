@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.MathUtils;
 import com.space.invaders.actores.ElementoJuego;
+import com.space.invaders.actores.disparos.Disparo;
 import com.space.invaders.actores.naves.INaveFactory;
 import com.space.invaders.actores.naves.Nave;
 import com.space.invaders.actores.naves.NaveFactory;
@@ -58,7 +59,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 			navesEnemigas.add(nave3.get(i));
 		}
 		/**
-		 * Creaci�n de la nave del jugador usando el patron Factory
+		 * Creación de la nave del jugador usando el patron Factory
 		 */
 		INaveFactory jugador = new NaveFactory();
 		naveJugador = jugador.crearNave(TipoNave.Jugador);
@@ -91,12 +92,10 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		float width = Gdx.graphics.getWidth();
 		boolean cambioDireccion = false;
 
-		//float radians = 3.1415f / 2;
-		//float dx = MathUtils.cos(radians);
-		//float speed = 7000;
-		
 		float dx = 1.5f;
 
+		Disparo disparo  = naveJugador.getDisparo();
+		
 		for (int i = 0; i < navesEnemigas.size(); i++) {
 
 			ElementoJuego elementoJuego = navesEnemigas.get(i);
@@ -114,6 +113,14 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 			x = elementoJuego.getX() + (dx * direccion);
 
 			elementoJuego.setX(x);
+			
+			if(elementoJuego instanceof Nave && disparo!=null) {
+				Nave nave = (Nave)elementoJuego;
+				boolean impacto = nave.validarImpacto(disparo);
+				if(impacto) {
+					
+				}
+			}
 		}
 
 		naveJugador.actualizar(deltaTiempo);
