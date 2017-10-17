@@ -10,7 +10,7 @@ import com.space.invaders.actores.util.Temporizador;
  * Representa un elemento animado del juego.
  */
 public abstract class ElementoAnimadoJuego extends ElementoJuego{
-
+	
 	/**
 	 * Texturas utilizadas por la animación.
 	 */
@@ -24,7 +24,7 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 	/**
 	 * Intervalo de la animación.
 	 */
-	private float intervaloAnimacion;
+	private float intervaloAnimacion = 0.25f;
 
 	/**
 	 * Indice de la textura actual.
@@ -34,7 +34,7 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 	/**
 	 * Temporizador que lleva la cuenta de tiempo para cambiar las texturas de la animación.
 	 */
-	private Temporizador temporizador;
+	protected Temporizador temporizador;
 	
 	/**
 	 * Crea una nueva instancia de un Elemento Animado del Juego.
@@ -71,7 +71,7 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 	 */
 	@Override
 	public void actualizar(float deltaTiempo) {
-		
+
 		if(!animar || temporizador == null || texturasAnimacion == null || texturasAnimacion.size() <= 1)
 		{
 			return;

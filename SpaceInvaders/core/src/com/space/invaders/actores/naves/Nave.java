@@ -13,25 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.space.invaders.actores.ElementoAnimadoJuego;
+import com.space.invaders.actores.ElementoJuego;
 import com.space.invaders.actores.disparos.Disparo;
 
 /**
  * Clase base para las naves.
  */
 public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
-
-	/*
-	 * Implementación metodo para clonar naves
-	 */
-	public Nave clone() {
-		Nave copiaNave = null;
-		try {
-			copiaNave = (Nave) super.clone();
-		} catch (CloneNotSupportedException ex) {
-			System.out.println("No se puede duplicar");
-		}
-		return copiaNave;
-	}
 
 	/**
 	 * Disparo actual de la nave.
@@ -136,6 +124,18 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 	 */
 	public Disparo getDisparo() {
 		return disparo;
+	}
+
+	/*
+	 * Implementación metodo para clonar elemento juego.
+	 */
+	@Override
+	public Nave clone() {
+		Nave copiaElemento = null;
+		copiaElemento = (Nave) super.clone();
+		copiaElemento.temporizador = this.temporizador.clone();
+		
+		return copiaElemento;
 	}
 
 }

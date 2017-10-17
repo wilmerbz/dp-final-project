@@ -78,7 +78,7 @@ public class NaveFactory implements INaveFactory{
 		Nave copiaNaveEnemiga;
 		
 		for (int i = 0; i < contadorEnemigos; i++) {
-			copiaNaveEnemiga = (Nave)naveEnemiga.clone();		
+			copiaNaveEnemiga = (Nave)naveEnemiga.clone();	
 			navesEnemigas.add(copiaNaveEnemiga);
 		}
 		

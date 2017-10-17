@@ -9,11 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.space.invaders.actores.direccion.DireccionX;
 import com.space.invaders.actores.direccion.DireccionY;
+import com.space.invaders.actores.naves.Nave;
 
 /**
  * Representa un elemento que se pinta en el juego, utilizando una imagen.
  */
-public abstract class ElementoJuego extends Image{
+public abstract class ElementoJuego extends Image implements Cloneable{
 
 	private DireccionX direccionX;
 	private float velocidadX = 1;
@@ -211,4 +212,19 @@ public abstract class ElementoJuego extends Image{
 		boolean alcanzoLimiteY = y < 0 || y > height;
 		return alcanzoLimiteY;
 	}
+	
+	/*
+	 * Implementación metodo para clonar elemento juego.
+	 */
+	@Override
+	public ElementoJuego clone() {
+		ElementoJuego copiaElemento = null;
+		try {
+			copiaElemento = (ElementoJuego) super.clone();
+		} catch (CloneNotSupportedException ex) {
+			System.out.println("No se puede duplicar");
+		}
+		return copiaElemento;
+	}
+
 }
