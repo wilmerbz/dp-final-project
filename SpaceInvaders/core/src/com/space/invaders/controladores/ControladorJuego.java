@@ -44,13 +44,12 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	public void inicializar() {
 		contadorVisualizaciones++;
 		System.out.println("Iniciando ControladorJuego: " + contadorVisualizaciones);
-		Nivel nivel = modeloNivel.getNivel(1);
+		Nivel nivel = modeloNivel.getNivel(2);
 		modeloPartidaJuego.setNivel(nivel);
 		temporizadorDisparo.setTiempo(nivel.getFrecuenciaDisparosEnemigos());
 		System.out.println("Nivel: "+ nivel.getNumero() + " - "+ nivel.getNombre());
 		modeloPartidaJuego.inicializarPartidaJuego();
 		vistaJuego.inicializar();
-		
 	}
 
 	@Override
@@ -118,15 +117,15 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		// TODO Auto-generated method stub
 		float direccion = 0;
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			modeloPartidaJuego.getJuego().getNaveJugador().moverIzquierda();
+			modeloPartidaJuego.getNaveJugador().moverIzquierda();
 		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			modeloPartidaJuego.getJuego().getNaveJugador().moverDerecha();
+			modeloPartidaJuego.getNaveJugador().moverDerecha();
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			modeloPartidaJuego.getJuego().getNaveJugador().disparar();
+			modeloPartidaJuego.getNaveJugador().disparar();
 		}
 	}
 
@@ -158,6 +157,14 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	 */
 	public int getCantidadEnemigosPorFila() {
 		return modeloPartidaJuego.getJuego().getNivel().getCantidadEnemigosPorFila();
+	}
+	
+	/**
+	 * Obtiene la nave del jugador.
+	 * @return Nave del jugador.
+	 */
+	public NaveJugador getNaveJugador() {
+		return modeloPartidaJuego.getNaveJugador();
 	}
 	
 }

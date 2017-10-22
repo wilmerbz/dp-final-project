@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.space.invaders.actores.FondoInfinito;
 import com.space.invaders.actores.naves.NaveEnemiga;
+import com.space.invaders.actores.naves.NaveJugador;
 import com.space.invaders.actores.ElementoJuego;
 import com.space.invaders.controladores.ControladorJuego;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
@@ -53,6 +54,10 @@ public class VistaJuego extends VistaEstadoJuego {
 			naveEnemiga.setPosition(x,y);
 		}
 		
+		NaveJugador naveJugador = controladorJuego.getNaveJugador();
+		float xNaveJugador = (getWidth()/2) - (naveJugador.getWidth()/2);
+		naveJugador.setX(xNaveJugador);
+		naveJugador.setY(5);		
 	}
 
 	@Override
