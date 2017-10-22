@@ -85,7 +85,11 @@ public class Juego {
 	 * @param naveJugador Nave del jugador.
 	 */
 	public void setNaveJugador(NaveJugador naveJugador) {
+		if(this.elementosJuego!=null && elementosJuego.contains(this.naveJugador)) {
+			this.elementosJuego.remove(this.naveJugador);
+		}
 		this.naveJugador = naveJugador;
+		this.elementosJuego.add(this.naveJugador);
 	}
 
 	/**

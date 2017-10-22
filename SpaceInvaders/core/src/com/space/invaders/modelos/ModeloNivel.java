@@ -44,6 +44,7 @@ public class ModeloNivel {
 		nivel1.getConfiguracionEnemigos().put(1, 20);
 		nivel1.getConfiguracionEnemigos().put(2, 10);
 		nivel1.setCantidadEnemigosPorFila(10);
+		nivel1.setFrecuenciaDisparosEnemigos(1);
 		
 		niveles.add(nivel1);
 		
@@ -55,21 +56,22 @@ public class ModeloNivel {
 		nivel2.getConfiguracionEnemigos().put(0, 20);
 		nivel2.getConfiguracionEnemigos().put(1, 40);
 		nivel2.getConfiguracionEnemigos().put(2, 20);
-		
 		nivel2.setCantidadEnemigosPorFila(20);
+		nivel2.setFrecuenciaDisparosEnemigos(0.75f);
+		
 		niveles.add(nivel2);
 		
-		
 		Nivel nivel3 = new Nivel();
-		nivel3.setNombre("It's the end!  :/");
+		nivel3.setNombre("This is the end!  X(");
 		nivel3.setNumero(3);
 		nivel3.setVelocidadEnemigos(1.5f);
 		nivel3.setVelocidadDisparos(9);
 		nivel3.getConfiguracionEnemigos().put(0, 40);
 		nivel3.getConfiguracionEnemigos().put(1, 80);
 		nivel3.getConfiguracionEnemigos().put(2, 40);
-		
 		nivel3.setCantidadEnemigosPorFila(20);
+		nivel3.setFrecuenciaDisparosEnemigos(0.5f);
+		
 		niveles.add(nivel3);
 	}
 

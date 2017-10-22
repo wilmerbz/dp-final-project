@@ -11,9 +11,17 @@ public class Temporizador implements Cloneable {
 
 	/**
 	 * Crea un nuevo temporizador.
+	 */
+	public Temporizador() {
+		this.tiempo = 0f;
+		this.contadorTiempo = 0f;
+	}
+	
+	/**
+	 * Crea un nuevo temporizador.
 	 * 
 	 * @param tiempo
-	 *            Tiempo de espera.
+	 *            Tiempo de espera en segundos.
 	 */
 	public Temporizador(float tiempo) {
 		this.tiempo = tiempo;

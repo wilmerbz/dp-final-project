@@ -42,7 +42,12 @@ public abstract class NaveEnemiga extends Nave {
 	 * @return Disparo creado.
 	 */
 	public Disparo disparar() {
+		if(disparo!=null && !disparo.isImpactado()) {
+			return null;
+		}
+		
 		disparo = FachadaCreacionDisparo.getInstancia().construirDisparoEnemigo();
+		setUbicacionInicialDisparo(disparo);
 		return disparo;
 	}
 	

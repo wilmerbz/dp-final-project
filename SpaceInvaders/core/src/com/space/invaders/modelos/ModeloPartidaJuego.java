@@ -11,6 +11,7 @@ import com.space.invaders.actores.naves.INaveFactory;
 import com.space.invaders.actores.naves.Nave;
 import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveFactory;
+import com.space.invaders.actores.naves.NaveJugador;
 import com.space.invaders.actores.naves.TipoNave;
 import com.space.invaders.entidades.Juego;
 import com.space.invaders.entidades.Nivel;
@@ -57,9 +58,19 @@ public class ModeloPartidaJuego {
 	public void inicializarPartidaJuego() {
 		
 		inicializarNavesEnemigas();
-		
+		inicializarNaveJugador();
 	}
 	
+	private void inicializarNaveJugador() {
+		/**
+		 * Creación de la nave del jugador usando el patron Factory
+		 */
+		INaveFactory naveFactory = new NaveFactory();
+		Nave naveJugador = naveFactory.crearNave(TipoNave.Jugador);
+		naveJugador.setVelocidadX(5);
+		juego.setNaveJugador((NaveJugador)naveJugador);
+	}
+
 	/**
 	 * Inicializa las naves enemigas.
 	 */
@@ -73,13 +84,13 @@ public class ModeloPartidaJuego {
 		
 		Hashtable<Integer, Integer> configuracionEnemigos = nivel.getConfiguracionEnemigos();
 		
-		
 		INaveFactory naveFactory = new NaveFactory();
 		TipoNave[] valoresTipoNave = TipoNave.values();
-		Enumeration<Integer> enumeration = configuracionEnemigos.keys();
+		Enumeration<Integer> enumeradorClavesConfiguracionEnemigos = configuracionEnemigos.keys();
 		Integer tipoNave;
-		while(enumeration.hasMoreElements()) {
-			tipoNave = enumeration.nextElement();
+		
+		while(enumeradorClavesConfiguracionEnemigos.hasMoreElements()) {
+			tipoNave = enumeradorClavesConfiguracionEnemigos.nextElement();
 			Integer contadorEnemigos = configuracionEnemigos.get(tipoNave);
 			List<Nave> navesEnemigasTipo = naveFactory.crearNaves(valoresTipoNave[tipoNave], contadorEnemigos.intValue());
 			
@@ -92,7 +103,6 @@ public class ModeloPartidaJuego {
 		}
 		
 	}
-	
 	
 	/**
 	 * Obtiene las naves enemigas del juego actual.
@@ -110,7 +120,15 @@ public class ModeloPartidaJuego {
 	public List<ElementoJuego> getElementosJuego(){
 		return juego.getElementosJuego();
 	}
-
 	
-
+	/**
+	 * Obtiene la navel del jugador.
+	 * @return Nave del jugador.
+	 */
+	public NaveJugador getNaveJugador() {
+		
+		return juego.getNaveJugador();
+		
+	}
+	
 }

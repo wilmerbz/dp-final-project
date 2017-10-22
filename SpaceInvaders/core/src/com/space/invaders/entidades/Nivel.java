@@ -8,10 +8,9 @@ public class Nivel {
 	private float velocidadEnemigos;
 	private float velocidadDisparos;
 	private int cantidadEnemigosPorFila;
-	
-
+	private float frecuenciaDisparosEnemigos;
 	Hashtable<Integer, Integer> configuracionEnemigos;
-	
+
 	/**
 	 * Crea una nueva instancia de nivel.
 	 */
@@ -20,10 +19,26 @@ public class Nivel {
 	}
 
 	/**
+	 * Obtiene la cantidad de enemigos por fila.
+	 * @return Cantidad de enemigos por fila.
+	 */
+	public int getCantidadEnemigosPorFila() {
+		return cantidadEnemigosPorFila;
+	}
+	
+	/**
 	 * @return the configuracionEnemigos
 	 */
 	public Hashtable<Integer, Integer> getConfiguracionEnemigos() {
 		return configuracionEnemigos;
+	}
+
+	/**
+	 * Obtiene la frecuencia de generacion de disparos enemigos.
+	 * @return Frecuencia de generacion de disparos enemigos.
+	 */
+	public float getFrecuenciaDisparosEnemigos() {
+		return frecuenciaDisparosEnemigos;
 	}
 
 	/**
@@ -59,11 +74,27 @@ public class Nivel {
 	}
 
 	/**
+	 * Asigna la cantidad de enemigos por fila.
+	 * @param cantidadEnemigosPorFila Cantidad de enemigos por fila.
+	 */
+	public void setCantidadEnemigosPorFila(int cantidadEnemigosPorFila) {
+		this.cantidadEnemigosPorFila = cantidadEnemigosPorFila;
+	}
+
+	/**
 	 * Obtiene la configuracion de enemigos.
 	 * @param configuracionEnemigos Configuracion enemigos.
 	 */
 	public void setConfiguracionEnemigos(Hashtable<Integer, Integer> configuracionEnemigos) {
 		this.configuracionEnemigos = configuracionEnemigos;
+	}
+
+	/**
+	 * Asigna la frecuencia de generacion de disparos enemigos.
+	 * @param frecuenciaDisparosEnemigos Frecuencia de generacion de disparos enemigos.
+	 */
+	public void setFrecuenciaDisparosEnemigos(float frecuenciaDisparosEnemigos) {
+		this.frecuenciaDisparosEnemigos = frecuenciaDisparosEnemigos;
 	}
 
 	/**
@@ -81,7 +112,8 @@ public class Nivel {
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-
+	
+	
 	/**
 	 * Asigna la velocidad de los disparos.
 	 * @param velocidadDisparos Velocidad de disparos.
@@ -96,22 +128,5 @@ public class Nivel {
 	 */
 	public void setVelocidadEnemigos(float velocidadEnemigos) {
 		this.velocidadEnemigos = velocidadEnemigos;
-	}
-	
-	
-	/**
-	 * Obtiene la cantidad de enemigos por fila.
-	 * @return Cantidad de enemigos por fila.
-	 */
-	public int getCantidadEnemigosPorFila() {
-		return cantidadEnemigosPorFila;
-	}
-
-	/**
-	 * Asigna la cantidad de enemigos por fila.
-	 * @param cantidadEnemigosPorFila Cantidad de enemigos por fila.
-	 */
-	public void setCantidadEnemigosPorFila(int cantidadEnemigosPorFila) {
-		this.cantidadEnemigosPorFila = cantidadEnemigosPorFila;
 	}
 }
