@@ -231,8 +231,7 @@ public abstract class ElementoJuego extends Image{
 	 */
 	public boolean validarUbicacionLimiteY(DireccionY direccionY) {
 		float y = getY();
-		float graphicsHeight = Gdx.graphics.getWidth();
-		
+		float graphicsHeight = Gdx.graphics.getHeight();
 		boolean alcanzoLimiteY =(direccionY == DireccionY.Abajo && y < 0) || (direccionY == DireccionY.Arriba && y > graphicsHeight);
 		return alcanzoLimiteY;
 	}

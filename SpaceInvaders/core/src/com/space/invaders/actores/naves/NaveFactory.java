@@ -53,8 +53,7 @@ public class NaveFactory implements INaveFactory{
 			break;
 		case Jugador:
 
-			Texture texturaNaveJugador = AdministradorTexturas.getInstancia()
-					.obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_0);
+			Texture texturaNaveJugador = administradorTexturas.obtenerTextura(NombreTextura.NAVE_JUGADOR_0);
 			List<Texture> texturasNaveJugador = new ArrayList<Texture>();
 			texturasNaveJugador.add(texturaNaveJugador);
 			nave = new NaveJugador(texturasNaveJugador, tiempoAnimacion);

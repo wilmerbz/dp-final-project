@@ -41,10 +41,10 @@ public class AdministradorTexturas implements IAdministradorTexturas {
 		return textura;
 	}
 	
-	private final String _formatoRutaArchivoTextura = "images/%s.png";
+	private final String _formatoRutaArchivoTextura = "images/%s/%s.png";
 	
 	private synchronized Texture cargarTextura(String nombreTextura) {
-		String rutaArchivoTextura = String.format(_formatoRutaArchivoTextura , nombreTextura);
+		String rutaArchivoTextura = String.format(_formatoRutaArchivoTextura ,NombreTextura.FOLDER, nombreTextura);
 		Texture textura = new Texture(rutaArchivoTextura);
 		
 		if(!texturas.containsKey(nombreTextura)) {

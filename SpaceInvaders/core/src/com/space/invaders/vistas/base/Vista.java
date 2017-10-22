@@ -1,5 +1,6 @@
 package com.space.invaders.vistas.base;
 
+import com.badlogic.gdx.Gdx;
 import com.space.invaders.interfaces.controladores.IControlador;
 import com.space.invaders.interfaces.vistas.IVista;
 
@@ -8,6 +9,9 @@ import com.space.invaders.interfaces.vistas.IVista;
  */
 public abstract class Vista implements IVista{
 
+	protected static int WIDTH;
+	protected static int HEIGHT;
+	
 	/**
 	 * Controlador.
 	 */
@@ -19,6 +23,9 @@ public abstract class Vista implements IVista{
 	 */
 	public Vista(IControlador controlador) {
 		this.controlador = controlador;
+		
+		WIDTH = Gdx.graphics.getWidth();
+		HEIGHT = Gdx.graphics.getHeight();
 	}
 
 }

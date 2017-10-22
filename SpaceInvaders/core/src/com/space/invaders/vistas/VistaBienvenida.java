@@ -16,7 +16,7 @@ import com.space.invaders.vistas.base.VistaEstadoJuego;
 public class VistaBienvenida extends VistaEstadoJuego {
 
 	SpriteBatch batch;
-	Texture logo;
+	Texture background;
 	
 	/**
 	 * Crea una nueva instancia del controlador del estado de Bienvenida del juego.
@@ -32,7 +32,7 @@ public class VistaBienvenida extends VistaEstadoJuego {
 		// TODO Auto-generated method stub
 		batch = new SpriteBatch();
 		
-		logo = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.LOGO);
+		background = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.GAME_BACKGROUND);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class VistaBienvenida extends VistaEstadoJuego {
 	public void renderizar() {
 		batch.begin();
 		
-		batch.draw(logo, 100, 500);
+		batch.draw(background, 0, 0);
 		
 		batch.end();
 	}
@@ -58,7 +58,7 @@ public class VistaBienvenida extends VistaEstadoJuego {
 	@Override
 	public void dispose() {
 		batch.dispose();
-		logo.dispose();
+		background.dispose();
 	}
 
 }
