@@ -45,7 +45,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	public void inicializar() {
 		contadorVisualizaciones++;
 		System.out.println("Iniciando ControladorJuego: " + contadorVisualizaciones);
-		Nivel nivel = modeloNivel.getNivel(0);
+		Nivel nivel = modeloNivel.getNivel(1);
 		modeloPartidaJuego.setNivel(nivel);
 		System.out.println("Nivel: "+ nivel.getNumero() + " - "+ nivel.getNombre());
 		modeloPartidaJuego.inicializarPartidaJuego();
