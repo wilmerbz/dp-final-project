@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.space.invaders.actores.ElementoAnimadoJuego;
 import com.space.invaders.actores.ElementoJuego;
+import com.space.invaders.actores.direccion.DireccionY;
 import com.space.invaders.actores.disparos.Disparo;
 
 /**
@@ -25,6 +26,11 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 	 * Disparo actual de la nave.
 	 */
 	protected Disparo disparo;
+	
+	/**
+	 * Velocidad de disparos.
+	 */
+	protected float velocidadDisparo;
 
 	/**
 	 * Crea una nueva instancia de Nave.
@@ -47,6 +53,92 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 	public Nave(List<Texture> texturas, float intervaloAnimacion) {
 		super(texturas, intervaloAnimacion);
 	}
+
+	@Override
+	public void actualizar(float deltaTiempo) {
+		super.actualizar(deltaTiempo);
+
+		if (disparo != null) {
+
+			if (disparo.alcanzoUbicacionLimiteY()) {
+				disparo.setVisible(false);
+				disparo = null;
+				System.out.println("Disparo alcanzó el límite.");
+			} else {
+				disparo.actualizar(deltaTiempo);
+			}
+
+		}
+	}
+
+	
+	/*
+	 * Implementación metodo para clonar elemento juego.
+	 */
+	@Override
+	public Nave clone() {
+		Nave copiaElemento = null;
+		try {
+			copiaElemento = (Nave) super.clone();
+			copiaElemento.temporizador = this.temporizador.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return copiaElemento;
+	}
+	
+	
+	/**
+	 * Crea un nuevo disparo para la nave.
+	 * 
+	 * @return Disparo creado.
+	 */
+	public abstract Disparo disparar();
+
+	/**
+	 * Obtiene el disparo actual de la nave.
+	 * 
+	 * @return Disparo.
+	 */
+	public Disparo getDisparo() {
+		return disparo;
+	}
+
+	/**
+	 * Metodo que se llama cuando la nave ha sido impactada.
+	 */
+	public abstract void impactada();
+
+	@Override
+	public void renderizar(SpriteBatch batch) {
+		super.renderizar(batch);
+
+		if (disparo != null) {
+			disparo.renderizar(batch);
+		}
+	}
+
+	/**
+	 * Asigna la ubicacion inicial del disparo.
+	 * 
+	 * @param disparo
+	 */
+	protected void setUbicacionInicialDisparo(Disparo disparo) {
+		float x = getX() + (getWidth() / 2) - (disparo.getWidth() / 2);
+		float y = getY();
+		int multiplicadorDiferenciaAlturaY = 1;
+		if (disparo.getDireccionY() == DireccionY.Abajo) {
+			multiplicadorDiferenciaAlturaY = 0;
+		}
+		
+		y+= getHeight() * multiplicadorDiferenciaAlturaY;
+		
+		disparo.setX(x);
+		disparo.setY(y);
+	}
+	
 
 	/**
 	 * Valida si el disparo dado impactó la nave.
@@ -72,83 +164,21 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 
 		return impacto;
 	}
-
 	
 	/**
-	 * Metodo que se llama cuando la nave ha sido impactada.
+	 * Obtiene la velocidad de los disparos.
+	 * @return Velocidad de disparos.
 	 */
-	public abstract void impactada();
-	
-	
-	/**
-	 * Crea un nuevo disparo para la nave.
-	 * 
-	 * @return Disparo creado.
-	 */
-	public abstract Disparo disparar();
-
-	/**
-	 * Asigna la ubicacion inicial del disparo.
-	 * 
-	 * @param disparo
-	 */
-	protected void setUbicacionInicialDisparo(Disparo disparo) {
-		float x = getX() + (getWidth() / 2) - (disparo.getWidth() / 2);
-		float y = getY() + disparo.getHeight();
-		disparo.setX(x);
-		disparo.setY(y);
-	}
-
-	@Override
-	public void actualizar(float deltaTiempo) {
-		super.actualizar(deltaTiempo);
-
-		if (disparo != null) {
-
-			if (disparo.validarUbicacionLimiteY()) {
-				disparo = null;
-				System.out.println("Disparo alcanzó el límite.");
-			} else {
-				disparo.actualizar(deltaTiempo);
-			}
-
-		}
-	}
-
-	@Override
-	public void renderizar(SpriteBatch batch) {
-		super.renderizar(batch);
-
-		if (disparo != null) {
-			disparo.renderizar(batch);
-		}
+	public float getVelocidadDisparo() {
+		return velocidadDisparo;
 	}
 
 	/**
-	 * Obtiene el disparo actual de la nave.
-	 * 
-	 * @return Disparo.
+	 * Asigna la velocidad de los disparos.
+	 * @param velocidadDisparo Velocidad de disparos.
 	 */
-	public Disparo getDisparo() {
-		return disparo;
-	}
-	
-
-	/*
-	 * Implementación metodo para clonar elemento juego.
-	 */
-	@Override
-	public Nave clone() {
-		Nave copiaElemento = null;
-		try {
-			copiaElemento = (Nave) super.clone();
-			copiaElemento.temporizador = this.temporizador.clone();
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return copiaElemento;
+	public void setVelocidadDisparo(float velocidadDisparo) {
+		this.velocidadDisparo = velocidadDisparo;
 	}
 
 }

@@ -16,10 +16,11 @@ import com.space.invaders.actores.naves.Nave;
  */
 public abstract class ElementoJuego extends Image{
 
-	private DireccionX direccionX;
-	private float velocidadX = 1;
-	private DireccionY direccionY;
-	private float velocidadY = 1;
+	protected DireccionX direccionX;
+	protected float velocidadX = 1;
+	protected DireccionY direccionY;
+	protected float velocidadY = 1;
+	protected boolean visible = true;
 
 	/**
 	 * Crea una nueva instancia de elemento de juego.
@@ -47,7 +48,10 @@ public abstract class ElementoJuego extends Image{
 	 * @param batch Sprite batch a utilizar.
 	 */
 	public void renderizar(SpriteBatch batch) {
-		// TODO Auto-generated method stub
+		if(!visible) {
+			return;
+		}
+		
 		this.draw(batch, 1);
 	}
 	
@@ -135,6 +139,23 @@ public abstract class ElementoJuego extends Image{
 	}
 	
 	/**
+	 * Indica si el elemento es visible.
+	 * @return Retorna true si el elemento es visible; de lo contrario retorna false.
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * Cambia la visibilidad del elemento.
+	 * @param visible Es visible.
+	 */
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+	
+	/**
 	 * Mueve el elemento de acuerdo a la configuración de dirección y velocidad.
 	 */
 	public void mover() {
@@ -156,7 +177,7 @@ public abstract class ElementoJuego extends Image{
 	 */
 	public void moverX(DireccionX direccion, float velocidad) {
 	
-		if(validarUbicacionLimiteX(direccion))
+		if(alcanzoUbicacionLimiteX(direccion))
 			return;
 		
 		float x = getX() + (velocidad * direccion.getMultiplicadorX());
@@ -176,6 +197,10 @@ public abstract class ElementoJuego extends Image{
 	 * @param velocidad Velocidad de moviemiento.
 	 */
 	public void moverY(DireccionY direccion, float velocidad) {
+		
+		if(alcanzoUbicacionLimiteY(direccion))
+			return;
+		
 		float y = getY() + (velocidadY * direccion.getMultiplicadorY());
 		this.setY(y);
 	}
@@ -199,8 +224,8 @@ public abstract class ElementoJuego extends Image{
 	 * Valida si el elemento alcanzó la ubicación limite en X.
 	 * @return Retorna true si el elemento alcanzo la ubicacion limite en X.
 	 */
-	public boolean validarUbicacionLimiteX() {
-		return validarUbicacionLimiteX(this.direccionX);
+	public boolean alcanzoUbicacionLimiteX() {
+		return alcanzoUbicacionLimiteX(this.direccionX);
 	}
 	
 	
@@ -208,7 +233,7 @@ public abstract class ElementoJuego extends Image{
 	 * Valida si el elemento alcanzó la ubicación limite en X.
 	 * @return Retorna true si el elemento alcanzo la ubicacion limite en X.
 	 */
-	public boolean validarUbicacionLimiteX(DireccionX direccionX) {
+	public boolean alcanzoUbicacionLimiteX(DireccionX direccionX) {
 		float x = getX();
 		float width = getWidth();
 		float graphicsWidth = Gdx.graphics.getWidth();
@@ -221,19 +246,21 @@ public abstract class ElementoJuego extends Image{
 	 * Valida si el elemento alcanzó la ubicación limite en X.
 	 * @return Retorna true si el elemento alcanzo la ubicacion limite en X.
 	 */
-	public boolean validarUbicacionLimiteY() {
-		return validarUbicacionLimiteY(this.direccionY);
+	public boolean alcanzoUbicacionLimiteY() {
+		return alcanzoUbicacionLimiteY(this.direccionY);
 	}
 	
 	/**
 	 * Valida si el elemento alcanzó la ubicación limite en Y.
 	 * @return Retorna true si el elemento alcanzo la ubicacion limite en Y.
 	 */
-	public boolean validarUbicacionLimiteY(DireccionY direccionY) {
+	public boolean alcanzoUbicacionLimiteY(DireccionY direccionY) {
 		float y = getY();
 		float graphicsHeight = Gdx.graphics.getHeight();
 		boolean alcanzoLimiteY =(direccionY == DireccionY.Abajo && y < 0) || (direccionY == DireccionY.Arriba && y > graphicsHeight);
 		return alcanzoLimiteY;
 	}
+	
+	
 
 }

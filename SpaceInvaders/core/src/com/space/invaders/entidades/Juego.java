@@ -1,107 +1,123 @@
 package com.space.invaders.entidades;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.space.invaders.actores.ElementoJuego;
 import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveJugador;
 
+/**
+ * Agrupa los elementos requeridos para la sesión de juego.
+ */
 public class Juego {
+
 	private Jugador jugador;
 	private Partida partida;
 	private Nivel nivel;
 	private NaveJugador naveJugador;
-	private ArrayList<NaveEnemiga> navesEnemigas;
-	private ArrayList<ElementoJuego> elementoJuego;
+	private List<NaveEnemiga> navesEnemigas;
+	private List<ElementoJuego> elementosJuego;
 
+	public Juego() {
+		navesEnemigas = new ArrayList<NaveEnemiga>();
+		elementosJuego = new ArrayList<ElementoJuego>();
+	}
+	
 	/**
-	 * @return the jugador
+	 * Obtiene el jugador actual.
+	 * @return Jugador actual.
 	 */
 	public Jugador getJugador() {
 		return jugador;
 	}
 
 	/**
-	 * @param jugador
-	 *            the jugador to set
+	 * Asigna el jugador actual.
+	 * @param jugador Jugador a asignar.
 	 */
 	public void setJugador(Jugador jugador) {
 		this.jugador = jugador;
 	}
 
 	/**
-	 * @return the partida
+	 * Obtiene la partida actual.
+	 * @return Partiada actual.
 	 */
 	public Partida getPartida() {
 		return partida;
 	}
 
 	/**
-	 * @param partida
-	 *            the partida to set
+	 * Asigna la partida actual.
+	 * @param partida Partida actual.
 	 */
 	public void setPartida(Partida partida) {
 		this.partida = partida;
 	}
 
 	/**
-	 * @return the nivel
+	 * OBtiene el nivel actual.
+	 * @return Nivel actual.
 	 */
 	public Nivel getNivel() {
 		return nivel;
 	}
 
 	/**
-	 * @param nivel
-	 *            the nivel to set
+	 * Asigna el nivel actual.
+	 * @param nivel Nivel.
 	 */
 	public void setNivel(Nivel nivel) {
 		this.nivel = nivel;
 	}
 
 	/**
-	 * @return the naveJugador
+	 * Obtiene la nave del jugador.
+	 * @return Nave del jugador.
 	 */
 	public NaveJugador getNaveJugador() {
 		return naveJugador;
 	}
 
 	/**
-	 * @param naveJugador
-	 *            the naveJugador to set
+	 * Asigna la nave del jugador.
+	 * @param naveJugador Nave del jugador.
 	 */
 	public void setNaveJugador(NaveJugador naveJugador) {
 		this.naveJugador = naveJugador;
 	}
 
 	/**
-	 * @return the navesEnemigas
+	 * Obtiene la lista naves enemigas.
+	 * @return Naves enemigas.
 	 */
-	public ArrayList<NaveEnemiga> getNavesEnemigas() {
+	public List<NaveEnemiga> getNavesEnemigas() {
 		return navesEnemigas;
 	}
 
 	/**
-	 * @param navesEnemigas
-	 *            the navesEnemigas to set
+	 * Asigna la lista de naves enemigas.
+	 * @param navesEnemigas Naves enemigas.
 	 */
-	public void setNavesEnemigas(ArrayList<NaveEnemiga> navesEnemigas) {
+	public void setNavesEnemigas(List<NaveEnemiga> navesEnemigas) {
 		this.navesEnemigas = navesEnemigas;
 	}
 
 	/**
-	 * @return the elementoJuego
+	 * Obtiene la lista de elementos del juego.
+	 * @return Lista de elementos del juego.
 	 */
-	public ArrayList<ElementoJuego> getElementoJuego() {
-		return elementoJuego;
+	public List<ElementoJuego> getElementosJuego() {
+		return elementosJuego;
 	}
 
 	/**
-	 * @param elementoJuego
-	 *            the elementoJuego to set
+	 * Asigna la lista de elementos del juego.
+	 * @param elementosJuego Elementos del juego.
 	 */
-	public void setElementoJuego(ArrayList<ElementoJuego> elementoJuego) {
-		this.elementoJuego = elementoJuego;
+	public void setElementosJuego(List<ElementoJuego> elementosJuego) {
+		this.elementosJuego = elementosJuego;
 	}
 
 }

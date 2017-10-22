@@ -5,26 +5,28 @@ import java.util.Hashtable;
 public class Nivel {
 	private String nombre;
 	private int numero;
-	private int velocidadEnemigos;
-	private int velocidadDisparos;
+	private float velocidadEnemigos;
+	private float velocidadDisparos;
 	
-	Hashtable<String,Integer> configuracionEnemigos =new Hashtable<String,Integer>();
+	Hashtable<Integer, Integer> configuracionEnemigos =new Hashtable<Integer, Integer>();
 
 	/**
-	 * @return the nombre
+	 * @return the configuracionEnemigos
+	 */
+	public Hashtable<Integer, Integer> getConfiguracionEnemigos() {
+		return configuracionEnemigos;
+	}
+
+	/**
+	 * Obtiene el nombre del nivel.
+	 * @return Nombre del nivel.
 	 */
 	public String getNombre() {
 		return nombre;
 	}
 
 	/**
-	 * @param nombre the nombre to set
-	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	/**
+	 * Obtiene el numero del nivel.
 	 * @return the numero
 	 */
 	public int getNumero() {
@@ -32,37 +34,58 @@ public class Nivel {
 	}
 
 	/**
-	 * @param numero the numero to set
+	 * Obtiene la velocidad de disparos.
+	 * @return Velocidad de disparos.
+	 */
+	public float getVelocidadDisparos() {
+		return velocidadDisparos;
+	}
+
+	/**
+	 * Obtiene la velocidad de los enemigos.
+	 * @return Velocidad enemigos.
+	 */
+	public float getVelocidadEnemigos() {
+		return velocidadEnemigos;
+	}
+
+	/**
+	 * Obtiene la configuracion de enemigos.
+	 * @param configuracionEnemigos Configuracion enemigos.
+	 */
+	public void setConfiguracionEnemigos(Hashtable<Integer, Integer> configuracionEnemigos) {
+		this.configuracionEnemigos = configuracionEnemigos;
+	}
+
+	/**
+	 * Asigna el nombre del nivel.
+	 * @param nombre Nombre del nivel.
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	/**
+	 * Asigna el numero del nivel.
+	 * @param numero Numero del nivel.
 	 */
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 
 	/**
-	 * @return the velocidadEnemigos
+	 * Asigna la velocidad de los disparos.
+	 * @param velocidadDisparos Velocidad de disparos.
 	 */
-	public int getVelocidadEnemigos() {
-		return velocidadEnemigos;
-	}
-
-	/**
-	 * @param velocidadEnemigos the velocidadEnemigos to set
-	 */
-	public void setVelocidadEnemigos(int velocidadEnemigos) {
-		this.velocidadEnemigos = velocidadEnemigos;
-	}
-
-	/**
-	 * @return the velocidadDisparos
-	 */
-	public int getVelocidadDisparos() {
-		return velocidadDisparos;
-	}
-
-	/**
-	 * @param velocidadDisparos the velocidadDisparos to set
-	 */
-	public void setVelocidadDisparos(int velocidadDisparos) {
+	public void setVelocidadDisparos(float velocidadDisparos) {
 		this.velocidadDisparos = velocidadDisparos;
+	}
+
+	/**
+	 * Asigna la velocidad de los enemigos.
+	 * @param velocidadEnemigos Velocidad de enemigos.
+	 */
+	public void setVelocidadEnemigos(float velocidadEnemigos) {
+		this.velocidadEnemigos = velocidadEnemigos;
 	}
 }
