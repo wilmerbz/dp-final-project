@@ -8,9 +8,6 @@ import com.space.invaders.interfaces.vistas.IVista;
  * Clase base para las vistas.
  */
 public abstract class Vista implements IVista{
-
-	protected static int WIDTH;
-	protected static int HEIGHT;
 	
 	/**
 	 * Controlador.
@@ -23,9 +20,6 @@ public abstract class Vista implements IVista{
 	 */
 	public Vista(IControlador controlador) {
 		this.controlador = controlador;
-		
-		WIDTH = Gdx.graphics.getWidth();
-		HEIGHT = Gdx.graphics.getHeight();
 	}
 
 }

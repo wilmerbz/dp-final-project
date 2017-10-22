@@ -78,8 +78,8 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 		spriteBatch.setProjectionMatrix(SpaceInvadersGame.camara.combined);
 		spriteBatch.begin();
 
-		float xTitulo = (WIDTH-tituloGlyphLayout.width)/2;
-		float yTitulo = HEIGHT - tituloGlyphLayout.height;
+		float xTitulo = (getWidth()-tituloGlyphLayout.width)/2;
+		float yTitulo = getHeight() - tituloGlyphLayout.height;
 		
 		fuenteTitulo.draw(spriteBatch, tituloGlyphLayout, xTitulo,yTitulo);
 		
@@ -95,7 +95,7 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 					fuente = fuenteElementoMenuSeleccionado;
 				}
 				layoutElemento.setText(fuente, elementoMenu.getDescripcion());
-				float xElemento = (WIDTH-layoutElemento.width)/2;
+				float xElemento = (getWidth()-layoutElemento.width)/2;
 				fuente.draw(spriteBatch, layoutElemento, xElemento, yElemento);
 				
 				yElemento = yElemento - layoutElemento.height - distanciaElementoMenu;

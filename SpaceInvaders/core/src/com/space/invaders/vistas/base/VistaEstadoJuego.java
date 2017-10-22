@@ -1,5 +1,6 @@
 package com.space.invaders.vistas.base;
 
+import com.badlogic.gdx.Gdx;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
 import com.space.invaders.interfaces.vistas.IVistaEstadoJuego;;
 
@@ -8,6 +9,7 @@ import com.space.invaders.interfaces.vistas.IVistaEstadoJuego;;
  */
 public abstract class VistaEstadoJuego extends Vista implements IVistaEstadoJuego {
 
+	
 	/**
 	 * Controlador del estado del juego.
 	 */
@@ -20,6 +22,20 @@ public abstract class VistaEstadoJuego extends Vista implements IVistaEstadoJueg
 	public VistaEstadoJuego(IControladorEstadoJuego controladorEstadoJuego) {
 		super(controladorEstadoJuego);
 		this.controladorEstadoJuego = controladorEstadoJuego;
+
 	}
+	
+	@Override
+	public float getWidth() {
+		return Gdx.graphics.getWidth();
+	}
+	
+	
+	@Override
+	public float getHeight() {
+		return Gdx.graphics.getHeight();
+	}
+	
+
 
 }

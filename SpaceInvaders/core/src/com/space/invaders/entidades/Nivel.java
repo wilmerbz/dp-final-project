@@ -7,8 +7,17 @@ public class Nivel {
 	private int numero;
 	private float velocidadEnemigos;
 	private float velocidadDisparos;
+	private int cantidadEnemigosPorFila;
 	
-	Hashtable<Integer, Integer> configuracionEnemigos =new Hashtable<Integer, Integer>();
+
+	Hashtable<Integer, Integer> configuracionEnemigos;
+	
+	/**
+	 * Crea una nueva instancia de nivel.
+	 */
+	public Nivel() {
+		configuracionEnemigos =new Hashtable<Integer, Integer>();
+	}
 
 	/**
 	 * @return the configuracionEnemigos
@@ -87,5 +96,22 @@ public class Nivel {
 	 */
 	public void setVelocidadEnemigos(float velocidadEnemigos) {
 		this.velocidadEnemigos = velocidadEnemigos;
+	}
+	
+	
+	/**
+	 * Obtiene la cantidad de enemigos por fila.
+	 * @return Cantidad de enemigos por fila.
+	 */
+	public int getCantidadEnemigosPorFila() {
+		return cantidadEnemigosPorFila;
+	}
+
+	/**
+	 * Asigna la cantidad de enemigos por fila.
+	 * @param cantidadEnemigosPorFila Cantidad de enemigos por fila.
+	 */
+	public void setCantidadEnemigosPorFila(int cantidadEnemigosPorFila) {
+		this.cantidadEnemigosPorFila = cantidadEnemigosPorFila;
 	}
 }

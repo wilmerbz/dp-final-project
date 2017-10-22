@@ -13,8 +13,8 @@ public class DesktopLauncher {
 		//https://pacoup.com/2011/06/12/list-of-true-169-resolutions/
 		config.width = 1536;
 		config.height= 864;
-		config.fullscreen= false;
-		config.resizable = true;
+		config.fullscreen= true;
+		config.resizable = false;
 		
 		new LwjglApplication(new SpaceInvadersGame(), config);
 	}

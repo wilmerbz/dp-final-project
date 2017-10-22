@@ -28,8 +28,7 @@ public class ControladorBienvenida extends ControladorEstadoJuegoBase {
 
 	@Override
 	public void actualizar(float deltaTiempo) {
-		// TODO Auto-generated method stub
-		
+		vistaBienvenida.actualizar(deltaTiempo);
 	}
 
 	@Override

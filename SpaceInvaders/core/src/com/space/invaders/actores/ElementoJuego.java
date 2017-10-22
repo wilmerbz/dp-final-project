@@ -166,8 +166,8 @@ public abstract class ElementoJuego extends Image{
 	/**
 	 * Mueve el elemento en X de acuerdo a la configuración de dirección y velocidad.
 	 */
-	public void moverX() {
-		moverX(direccionX, velocidadX);
+	public boolean moverX() {
+		return moverX(direccionX, velocidadX);
 	}
 	
 	/**
@@ -175,20 +175,21 @@ public abstract class ElementoJuego extends Image{
 	 * @param direccion Direccion en X.
 	 * @param velocidad Velocidad de moviemiento.
 	 */
-	public void moverX(DireccionX direccion, float velocidad) {
+	public boolean moverX(DireccionX direccion, float velocidad) {
 	
 		if(alcanzoUbicacionLimiteX(direccion))
-			return;
+			return false;
 		
 		float x = getX() + (velocidad * direccion.getMultiplicadorX());
 		this.setX(x);
+		return true;
 	}
 	
 	/**
 	 * Mueve el elemento en Y de acuerdo a la configuración de dirección y velocidad.
 	 */
-	public void moverY() {
-		moverY(direccionY, velocidadY);
+	public boolean moverY() {
+		return moverY(direccionY, velocidadY);
 	}
 	
 	/**
@@ -196,13 +197,14 @@ public abstract class ElementoJuego extends Image{
 	 * @param direccion Direccion en Y.
 	 * @param velocidad Velocidad de moviemiento.
 	 */
-	public void moverY(DireccionY direccion, float velocidad) {
+	public boolean moverY(DireccionY direccion, float velocidad) {
 		
 		if(alcanzoUbicacionLimiteY(direccion))
-			return;
+			return false;
 		
 		float y = getY() + (velocidadY * direccion.getMultiplicadorY());
 		this.setY(y);
+		return true;
 	}
 	
 	/**

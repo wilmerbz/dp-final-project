@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.space.invaders.actores.direccion.DireccionX;
+import com.space.invaders.actores.direccion.DireccionY;
 import com.space.invaders.recursos.texturas.AdministradorTexturas;
 import com.space.invaders.recursos.texturas.IAdministradorTexturas;
 import com.space.invaders.recursos.texturas.NombreTextura;
@@ -30,6 +32,8 @@ public class NaveFactory implements INaveFactory{
 			texturasEnemigo.add(textura0);
 			texturasEnemigo.add(textura1);
 			nave = new InvasorCalamar(texturasEnemigo, tiempoAnimacion);
+			nave.setDireccionX(DireccionX.Derecha);
+			nave.setDireccionY(DireccionY.Abajo);
 			nave.setAnimar(true);
 
 			break;
@@ -39,6 +43,8 @@ public class NaveFactory implements INaveFactory{
 			texturasEnemigo.add(textura0);
 			texturasEnemigo.add(textura1);
 			nave = new InvasorCangrejo(texturasEnemigo, tiempoAnimacion);
+			nave.setDireccionX(DireccionX.Derecha);
+			nave.setDireccionY(DireccionY.Abajo);
 			nave.setAnimar(true);
 
 			break;
@@ -48,6 +54,8 @@ public class NaveFactory implements INaveFactory{
 			texturasEnemigo.add(textura0);
 			texturasEnemigo.add(textura1);
 			nave = new InvasorPulpo(texturasEnemigo, tiempoAnimacion);
+			nave.setDireccionX(DireccionX.Derecha);
+			nave.setDireccionY(DireccionY.Abajo);
 			nave.setAnimar(true);
 
 			break;

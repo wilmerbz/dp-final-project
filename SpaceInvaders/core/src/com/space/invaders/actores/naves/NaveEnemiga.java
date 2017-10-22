@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.space.invaders.actores.direccion.DireccionX;
 import com.space.invaders.actores.disparos.Disparo;
 import com.space.invaders.actores.disparos.FachadaCreacionDisparo;
 
@@ -76,6 +77,43 @@ public abstract class NaveEnemiga extends Nave {
 	 */
 	public void setDestruida(boolean destruida) {
 		this.destruida = destruida;
+	}
+	
+	private boolean cambiandoFila = false;
+	private float cambioFilaY;
+	@Override
+	public void actualizar(float deltaTiempo) {
+		super.actualizar(deltaTiempo);
+		
+		boolean puedeMoverX = moverX();
+		
+		if(!puedeMoverX) {
+			if(!cambiandoFila) {
+				cambioFilaY = getY() - (getHeight() + 10);
+				cambiandoFila = true;
+			}
+			
+			moverY();
+			
+			if(getY() <= cambioFilaY) {
+				cambiandoFila = false;
+				DireccionX nuevaDireccionX;
+				
+				switch (getDireccionX()) {
+				case Derecha:
+					nuevaDireccionX = DireccionX.Izquierda;
+					break;
+				case Izquierda:
+					nuevaDireccionX = DireccionX.Derecha;
+					break;
+				default:
+					nuevaDireccionX = DireccionX.Ninguna;
+					break;
+				}
+				
+				setDireccionX(nuevaDireccionX);
+			}
+		}
 	}
 	
 	@Override

@@ -15,50 +15,42 @@ import com.space.invaders.actores.naves.NaveFactory;
 import com.space.invaders.actores.naves.TipoNave;
 import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
 import com.space.invaders.entidades.Jugador;
+import com.space.invaders.entidades.Nivel;
 import com.space.invaders.interfaces.mensajes.IColega;
 import com.space.invaders.interfaces.mensajes.IMediador;
+import com.space.invaders.modelos.ModeloNivel;
+import com.space.invaders.modelos.ModeloPartidaJuego;
 import com.space.invaders.vistas.VistaJuego;
 
 public class ControladorJuego extends ControladorEstadoJuegoBase implements IColega {
 	private int contadorVisualizaciones = 0;
 	private IMediador mediador;
+	private ModeloPartidaJuego modeloPartidaJuego;
+	private ModeloNivel modeloNivel;
 	private VistaJuego vistaJuego;
 
 	public ControladorJuego() {
+		modeloNivel = new ModeloNivel();
+		modeloPartidaJuego = new ModeloPartidaJuego();
 		vistaJuego = new VistaJuego(this);
 		elementosJuego = new ArrayList<ElementoJuego>();
-		navesEnemigas = new ArrayList<ElementoJuego>();
+		//navesEnemigas = new ArrayList<ElementoJuego>();
 	}
 
 	private List<ElementoJuego> elementosJuego;
-	private List<ElementoJuego> navesEnemigas;
+	//private List<ElementoJuego> navesEnemigas;
 	private Nave naveJugador;
 
 	@Override
 	public void inicializar() {
 		contadorVisualizaciones++;
-
 		System.out.println("Iniciando ControladorJuego: " + contadorVisualizaciones);
-
-		int contadorEnemigos = 20;
-		/**
-		 * Creaci�n de los enemigos usando el patron Factory
-		 */
-		INaveFactory enemigos = new NaveFactory();
-		List<Nave> nave1 = enemigos.crearNaves(TipoNave.Calamar, contadorEnemigos);
-		List<Nave> nave2 = enemigos.crearNaves(TipoNave.Cangrejo, contadorEnemigos);
-		List<Nave> nave3 = enemigos.crearNaves(TipoNave.Pulpo, contadorEnemigos);
-		for (int i = 0; i < contadorEnemigos; i++) {
-			nave1.get(i).setPosition((i + 1) * 60, 500);
-			elementosJuego.add(nave1.get(i));
-			navesEnemigas.add(nave1.get(i));
-			nave2.get(i).setPosition((i + 1) * 60, 600);			
-			elementosJuego.add(nave2.get(i));
-			navesEnemigas.add(nave2.get(i));
-			nave3.get(i).setPosition((i + 1) * 60, 700);			
-			elementosJuego.add(nave3.get(i));
-			navesEnemigas.add(nave3.get(i));
-		}
+		Nivel nivel = modeloNivel.getNivel(0);
+		modeloPartidaJuego.setNivel(nivel);
+		System.out.println("Nivel: "+ nivel.getNumero() + " - "+ nivel.getNombre());
+		modeloPartidaJuego.inicializarPartidaJuego();
+		vistaJuego.inicializar();
+	
 		/**
 		 * Creación de la nave del jugador usando el patron Factory
 		 */
@@ -96,37 +88,37 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		float dx = 1.5f;
 
 		Disparo disparo  = naveJugador.getDisparo();
-		
+		List<NaveEnemiga> navesEnemigas = modeloPartidaJuego.getNavesEnemigas();
 		for (int i = 0; i < navesEnemigas.size(); i++) {
 
 			ElementoJuego elementoJuego = navesEnemigas.get(i);
 			elementoJuego.actualizar(deltaTiempo);
-
-			//float x = elementoJuego.getX() + (dx * speed);
-			float x = elementoJuego.getX() + (dx * direccion);
-
-			if (!cambioDireccion && (x > width || x < 0)) {
-				cambioDireccion = true;
-				direccion = direccion * -1;
-			}
-
-			//x = elementoJuego.getX() + (dx * speed * direccion);
-			x = elementoJuego.getX() + (dx * direccion);
-
-			elementoJuego.setX(x);
-			
-			if(elementoJuego instanceof Nave && disparo!=null && !disparo.isImpactado()) {
-				NaveEnemiga naveEnemiga = (NaveEnemiga)elementoJuego;
-				
-				if(naveEnemiga.isDestruida())
-					continue;
-				
-				boolean impacto = naveEnemiga.validarImpacto(disparo);
-				
-				if(impacto) {
-					disparo.setImpactado(true);
-				}
-			}
+//
+//			//float x = elementoJuego.getX() + (dx * speed);
+//			float x = elementoJuego.getX() + (dx * direccion);
+//
+//			if (!cambioDireccion && (x > width || x < 0)) {
+//				cambioDireccion = true;
+//				direccion = direccion * -1;
+//			}
+//
+//			//x = elementoJuego.getX() + (dx * speed * direccion);
+//			x = elementoJuego.getX() + (dx * direccion);
+//
+//			elementoJuego.setX(x);
+//			
+//			if(elementoJuego instanceof Nave && disparo!=null && !disparo.isImpactado()) {
+//				NaveEnemiga naveEnemiga = (NaveEnemiga)elementoJuego;
+//				
+//				if(naveEnemiga.isDestruida())
+//					continue;
+//				
+//				boolean impacto = naveEnemiga.validarImpacto(disparo);
+//				
+//				if(impacto) {
+//					disparo.setImpactado(true);
+//				}
+//			}
 		}
 
 		naveJugador.actualizar(deltaTiempo);
@@ -161,8 +153,29 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		vistaJuego.dispose();
 	}
 
-	public List<ElementoJuego> obtenerElementosJuego() {
-		return elementosJuego;
+	/**
+	 * Obtiene la lista de elementos del juego.
+	 * @return
+	 */
+	public List<ElementoJuego> getElementosJuego() {
+		return modeloPartidaJuego.getElementosJuego();
+	}
+	
+	
+	/**
+	 * Obtiene la lista de naves enemigas.
+	 * @return
+	 */
+	public List<NaveEnemiga> getNavesEnemigas() {
+		return modeloPartidaJuego.getNavesEnemigas();
 	}
 
+	/**
+	 * Obtiene la cantidad de enemigos por fila.
+	 * @return
+	 */
+	public int getCantidadEnemigosPorFila() {
+		return modeloPartidaJuego.getJuego().getNivel().getCantidadEnemigosPorFila();
 	}
+	
+}

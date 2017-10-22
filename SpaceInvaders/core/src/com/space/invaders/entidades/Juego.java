@@ -95,6 +95,15 @@ public class Juego {
 	public List<NaveEnemiga> getNavesEnemigas() {
 		return navesEnemigas;
 	}
+	
+	/**
+	 * Agrega una nave enemiga.
+	 * @param Nave enemiga a agregar.
+	 */
+	public void agregaNaveEnemiga(NaveEnemiga naveEnememiga) {
+		navesEnemigas.add(naveEnememiga);
+		elementosJuego.add(naveEnememiga);
+	}
 
 	/**
 	 * Asigna la lista de naves enemigas.

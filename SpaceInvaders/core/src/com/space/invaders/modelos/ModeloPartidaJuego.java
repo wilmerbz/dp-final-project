@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
+import com.space.invaders.actores.ElementoJuego;
 import com.space.invaders.actores.naves.INaveFactory;
 import com.space.invaders.actores.naves.Nave;
 import com.space.invaders.actores.naves.NaveEnemiga;
@@ -22,7 +23,7 @@ public class ModeloPartidaJuego {
 	private Juego juego;
 	
 	public ModeloPartidaJuego() {
-		
+		juego = new Juego();
 	}
 
 	/**
@@ -42,6 +43,10 @@ public class ModeloPartidaJuego {
 	}
 	
 	
+	/**
+	 * Asigna el nivel actual al juego.
+	 * @param nivel nNivel actual.
+	 */
 	public void setNivel(Nivel nivel) {
 		juego.setNivel(nivel);
 	}
@@ -61,9 +66,14 @@ public class ModeloPartidaJuego {
 	private void inicializarNavesEnemigas() {
 		
 		Nivel nivel = juego.getNivel();
+		List<NaveEnemiga> navesEnemigas = juego.getNavesEnemigas();
+		if(navesEnemigas.size()>0) {
+			navesEnemigas.clear();
+		}
+		
 		Hashtable<Integer, Integer> configuracionEnemigos = nivel.getConfiguracionEnemigos();
 		
-		List<NaveEnemiga> navesEnemigas = new ArrayList<NaveEnemiga>();
+		
 		INaveFactory naveFactory = new NaveFactory();
 		TipoNave[] valoresTipoNave = TipoNave.values();
 		Enumeration<Integer> enumeration = configuracionEnemigos.keys();
@@ -77,24 +87,30 @@ public class ModeloPartidaJuego {
 				NaveEnemiga naveEnemiga = (NaveEnemiga)navesEnemigasTipo.get(indiceNave);
 				naveEnemiga.setVelocidadX(nivel.getVelocidadEnemigos());
 				naveEnemiga.setVelocidadDisparo(nivel.getVelocidadDisparos());
-				navesEnemigas.add(naveEnemiga);
+				juego.agregaNaveEnemiga(naveEnemiga);
 			}
 		}
 		
-		
-		juego.setNavesEnemigas(navesEnemigas);
 	}
 	
 	
+	/**
+	 * Obtiene las naves enemigas del juego actual.
+	 * @return Naves enemigas.
+	 */
+	public List<NaveEnemiga> getNavesEnemigas(){
+		return juego.getNavesEnemigas();
+	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Obtiene los elementos del juego actual.
+	 * @return Naves enemigas.
+	 */
+	public List<ElementoJuego> getElementosJuego(){
+		return juego.getElementosJuego();
+	}
+
 	
 
 }

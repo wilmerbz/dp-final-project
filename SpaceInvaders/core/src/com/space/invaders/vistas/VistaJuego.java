@@ -5,6 +5,7 @@ import java.util.List;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.space.invaders.actores.FondoInfinito;
+import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.ElementoJuego;
 import com.space.invaders.controladores.ControladorJuego;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
@@ -15,9 +16,7 @@ import com.space.invaders.vistas.base.VistaEstadoJuego;
 public class VistaJuego extends VistaEstadoJuego {
 
 	SpriteBatch batch;
-	//Texture background;
 	FondoInfinito background;
-	
 	
 	private ControladorJuego controladorJuego;
 	
@@ -26,31 +25,49 @@ public class VistaJuego extends VistaEstadoJuego {
 
 		controladorJuego = (ControladorJuego) controladorEstadoJuego;
 		batch = new SpriteBatch();
-		
-		//background = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.GAME_BACKGROUND);
 		background = new FondoInfinito(NombreTextura.GAME_BACKGROUND);
 	}
 
 	@Override
 	public void inicializar() {
-		// TODO Auto-generated method stub
+		
+		List<NaveEnemiga> navesEnemigas = controladorJuego.getNavesEnemigas();
+		int cantidadEnemigosPorFila = controladorJuego.getCantidadEnemigosPorFila();
+		float posicionInicialX = 0;
+		float posicionInicialY = getHeight() - 50;
+		float espacioX = 10;
+		float espacioY = 10;
+		
+		float x = posicionInicialX;
+		float y = posicionInicialY;
+		
+		for (int indiceNaveEnemiga = 0; indiceNaveEnemiga < navesEnemigas.size(); indiceNaveEnemiga++) {
+			NaveEnemiga naveEnemiga = navesEnemigas.get(indiceNaveEnemiga);
+			 x +=  (naveEnemiga.getWidth() + espacioX);  //posicionInicialX + ((indiceNaveEnemiga+1) * (espacioX + naveEnemiga.getWidth()));
+			 
+			 if(indiceNaveEnemiga % cantidadEnemigosPorFila == 0) {
+				 y -= ((naveEnemiga.getHeight() + espacioY) * 2); //posicionInicialY + ((indiceNaveEnemiga+1) * (espacioY + naveEnemiga.getHeight()));
+				 x = posicionInicialX;
+			 }
+			System.out.println("Nave : "+(indiceNaveEnemiga+1)+" - X: "+x+" - Y:"+y +" - CantidadFila: "+ cantidadEnemigosPorFila);
+			naveEnemiga.setPosition(x,y);
+		}
 		
 	}
 
 	@Override
 	public void actualizar(float deltaTiempo) {
-		// TODO Auto-generated method stub
 		background.act(deltaTiempo);
 	}
 
 	@Override
 	public void renderizar() {
-		// TODO Auto-generated method stub
+		
 		batch.begin();
 		//batch.draw(background, 0, 0);
 		background.draw(batch, 1);
 		
-		List<ElementoJuego> elementosJuego = controladorJuego.obtenerElementosJuego();
+		List<ElementoJuego> elementosJuego = controladorJuego.getElementosJuego();
 		
 		for (int i = 0; i < elementosJuego.size(); i++) {
 			ElementoJuego elementoJuego = elementosJuego.get(i);
