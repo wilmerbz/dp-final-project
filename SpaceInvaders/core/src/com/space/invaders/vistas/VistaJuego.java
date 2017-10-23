@@ -85,7 +85,9 @@ public class VistaJuego extends VistaEstadoJuego {
 		FreeTypeFontParameter fontParameter = new FreeTypeFontParameter();
 		fontParameter.size = 25;
 		fontParameter.color = Color.WHITE;
-		
+		fontParameter.shadowColor = Color.BLACK;
+		fontParameter.shadowOffsetX = 1;
+		fontParameter.shadowOffsetY = 1;
 		fuentePuntaje = generator.generateFont(fontParameter);
 		layoutPuntaje = new GlyphLayout();
 		puntaje = 9999;
@@ -126,7 +128,7 @@ public class VistaJuego extends VistaEstadoJuego {
 		
 		puntaje+= 11;
 		layoutPuntaje.setText(fuentePuntaje, "$" + puntaje);
-		fuentePuntaje.draw(batch, layoutPuntaje, 210,getHeight()-75);
+		fuentePuntaje.draw(batch, layoutPuntaje, 205,getHeight()-75);
 		
 		
 		layoutVidas.setText(fuenteVidas, Integer.toString(vidas));
