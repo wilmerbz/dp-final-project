@@ -6,9 +6,12 @@ import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.space.invaders.actores.ElementoJuego;
 import com.space.invaders.actores.disparos.Disparo;
+import com.space.invaders.actores.iterator.Iterator;
+import com.space.invaders.actores.iterator.IteratorElementosJuego;
 import com.space.invaders.actores.naves.INaveFactory;
 import com.space.invaders.actores.naves.Nave;
 import com.space.invaders.actores.naves.NaveEnemiga;
@@ -77,8 +80,12 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		boolean cambioDireccion = false;
 
 		List<NaveEnemiga> navesEnemigas = modeloPartidaJuego.getNavesEnemigas();
-		for (int i = 0; i < navesEnemigas.size(); i++) {
+		// test implementacion patron iterator
+		Iterator<Object> elementosJuego = new IteratorElementosJuego<Object>(navesEnemigas);
+		//int i=0;
+		for (int i = 0; i < navesEnemigas.size(); i++) {//while(elementos.hasNext()){
 
+			//elementos.next();
 			NaveEnemiga naveEnemiga = navesEnemigas.get(i);
 			naveEnemiga.actualizar(deltaTiempo);
 
@@ -91,8 +98,12 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 				
 				if(impacto) {
 					disparo.setImpactado(true);
+					Sound s = Gdx.audio.newSound(Gdx.files.internal("C:/Users/jjtello/Documents/GitHub/dp-final-project/SpaceInvaders/core/assets/sounds/explosion.mp3"));
+					s.play();
 				}
 			}
+			//i=i+1;
+			
 		}
 		
 		if(temporizadorDisparo.esTiempo(deltaTiempo)) {
@@ -126,6 +137,8 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			modeloPartidaJuego.getNaveJugador().disparar();
+			Sound s = Gdx.audio.newSound(Gdx.files.internal("C:/Users/jjtello/Documents/GitHub/dp-final-project/SpaceInvaders/core/assets/sounds/shoot.mp3"));
+			s.play();
 		}
 	}
 
