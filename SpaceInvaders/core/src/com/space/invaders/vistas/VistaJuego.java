@@ -2,8 +2,14 @@ package com.space.invaders.vistas;
 
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.space.invaders.actores.FondoInfinito;
 import com.space.invaders.actores.iterator.IteradorGenerico;
 import com.space.invaders.actores.iterator.IteradorListaGenerica;
@@ -18,10 +24,19 @@ import com.space.invaders.vistas.base.VistaEstadoJuego;
 
 public class VistaJuego extends VistaEstadoJuego {
 
-	SpriteBatch batch;
-	FondoInfinito background;
-	
 	private ControladorJuego controladorJuego;
+	private SpriteBatch batch;
+	private FondoInfinito background;
+	private Texture panel;
+	
+	private final String rutaFuente = "fonts/Hyperspace Bold.ttf";
+	private BitmapFont fuentePuntaje;
+	private static GlyphLayout layoutPuntaje;
+	private long puntaje;
+	
+	private BitmapFont fuenteVidas;
+	private static GlyphLayout layoutVidas;
+	private int vidas;
 	
 	public VistaJuego(IControladorEstadoJuego controladorEstadoJuego) {
 		super(controladorEstadoJuego);
@@ -29,6 +44,7 @@ public class VistaJuego extends VistaEstadoJuego {
 		controladorJuego = (ControladorJuego) controladorEstadoJuego;
 		batch = new SpriteBatch();
 		background = new FondoInfinito(NombreTextura.GAME_BACKGROUND);
+		panel = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.PANEL_JUGADOR_PERSONAJE_1);
 	}
 
 	@Override
@@ -62,7 +78,27 @@ public class VistaJuego extends VistaEstadoJuego {
 		NaveJugador naveJugador = controladorJuego.getNaveJugador();
 		float xNaveJugador = (getWidth()/2) - (naveJugador.getWidth()/2);
 		naveJugador.setX(xNaveJugador);
-		naveJugador.setY(5);		
+		naveJugador.setY(5);
+		
+		
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(rutaFuente));
+		FreeTypeFontParameter fontParameter = new FreeTypeFontParameter();
+		fontParameter.size = 25;
+		fontParameter.color = Color.WHITE;
+		
+		fuentePuntaje = generator.generateFont(fontParameter);
+		layoutPuntaje = new GlyphLayout();
+		puntaje = 9999;
+		layoutPuntaje.setText(fuentePuntaje, "$" + puntaje);
+		
+		
+		fontParameter.size = 30;
+		fontParameter.color = Color.WHITE;
+		
+		fuenteVidas = generator.generateFont(fontParameter);
+		layoutVidas = new GlyphLayout();
+		vidas = 10;
+		layoutVidas.setText(fuenteVidas, Integer.toString(vidas));
 	}
 
 	@Override
@@ -86,6 +122,15 @@ public class VistaJuego extends VistaEstadoJuego {
 		}
 		
 		
+		batch.draw(panel, 10, getHeight() - (panel.getHeight() + 10));
+		
+		puntaje+= 11;
+		layoutPuntaje.setText(fuentePuntaje, "$" + puntaje);
+		fuentePuntaje.draw(batch, layoutPuntaje, 210,getHeight()-75);
+		
+		
+		layoutVidas.setText(fuenteVidas, Integer.toString(vidas));
+		fuenteVidas.draw(batch, layoutVidas, 135, getHeight()-70);
 		
 		batch.end();
 		

@@ -14,6 +14,7 @@ public final class NombreTextura {
 	
 	public static final String NAVE_JUGADOR_PERSONAJE_1_0 = "jugadorKorben0";
 	public static final String NAVE_JUGADOR_PERSONAJE_1_1 = "jugadorKorben1";
+	public static final String PANEL_JUGADOR_PERSONAJE_1 = "panel-jugadorKorben";
 	
 	public static final String NAVE_JUGADOR_PERSONAJE_2_0 = "jugadorLeeloo0";
 	public static final String NAVE_JUGADOR_PERSONAJE_2_1 = "jugadorLeeloo1";
