@@ -1,26 +1,18 @@
 package com.space.invaders.controladores;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.math.MathUtils;
 import com.space.invaders.actores.ElementoJuego;
 import com.space.invaders.actores.disparos.Disparo;
-import com.space.invaders.actores.iterator.Iterator;
-import com.space.invaders.actores.iterator.IteratorElementosJuego;
-import com.space.invaders.actores.naves.INaveFactory;
-import com.space.invaders.actores.naves.Nave;
+import com.space.invaders.actores.iterator.IteradorGenerico;
+import com.space.invaders.actores.iterator.IteradorListaGenerica;
 import com.space.invaders.actores.naves.NaveEnemiga;
-import com.space.invaders.actores.naves.NaveFactory;
 import com.space.invaders.actores.naves.NaveJugador;
-import com.space.invaders.actores.naves.TipoNave;
 import com.space.invaders.actores.util.Temporizador;
 import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
-import com.space.invaders.entidades.Jugador;
 import com.space.invaders.entidades.Nivel;
 import com.space.invaders.interfaces.mensajes.IColega;
 import com.space.invaders.interfaces.mensajes.IMediador;
@@ -47,7 +39,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	public void inicializar() {
 		contadorVisualizaciones++;
 		System.out.println("Iniciando ControladorJuego: " + contadorVisualizaciones);
-		Nivel nivel = modeloNivel.getNivel(2);
+		Nivel nivel = modeloNivel.getNivel(1);
 		modeloPartidaJuego.setNivel(nivel);
 		temporizadorDisparo.setTiempo(nivel.getFrecuenciaDisparosEnemigos());
 		System.out.println("Nivel: "+ nivel.getNumero() + " - "+ nivel.getNombre());
@@ -70,51 +62,46 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	public void actualizar(float deltaTiempo) {
 
 		vistaJuego.actualizar(deltaTiempo);
-		
+
 		NaveJugador naveJugador = modeloPartidaJuego.getNaveJugador();
 		naveJugador.actualizar(deltaTiempo);
-		
+
 		Disparo disparo = naveJugador.getDisparo();
-		
+
 		float width = Gdx.graphics.getWidth();
 		boolean cambioDireccion = false;
 
 		List<NaveEnemiga> navesEnemigas = modeloPartidaJuego.getNavesEnemigas();
-		// test implementacion patron iterator
-		Iterator<Object> elementosJuego = new IteratorElementosJuego<Object>(navesEnemigas);
-		//int i=0;
-		for (int i = 0; i < navesEnemigas.size(); i++) {//while(elementos.hasNext()){
+		IteradorGenerico<NaveEnemiga> iteradorNavesEnemigas = new IteradorListaGenerica<NaveEnemiga>(navesEnemigas);
+		while (iteradorNavesEnemigas.hasNext()) {
 
-			//elementos.next();
-			NaveEnemiga naveEnemiga = navesEnemigas.get(i);
+			NaveEnemiga naveEnemiga = iteradorNavesEnemigas.next();
 			naveEnemiga.actualizar(deltaTiempo);
 
-			if(disparo!=null && !disparo.isImpactado()) {
-				
-				if(naveEnemiga.isDestruida())
+			if (disparo != null && !disparo.isImpactado()) {
+
+				if (naveEnemiga.isDestruida())
 					continue;
-				
+
 				boolean impacto = naveEnemiga.validarImpacto(disparo);
-				
-				if(impacto) {
+
+				if (impacto) {
 					disparo.setImpactado(true);
-					Sound s = Gdx.audio.newSound(Gdx.files.internal("C:/Users/jjtello/Documents/GitHub/dp-final-project/SpaceInvaders/core/assets/sounds/explosion.mp3"));
+					Sound s = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.mp3"));
 					s.play();
 				}
 			}
-			//i=i+1;
-			
 		}
-		
-		if(temporizadorDisparo.esTiempo(deltaTiempo)) {
+
+		if (temporizadorDisparo.esTiempo(deltaTiempo)) {
 			Random random = new Random();
 			int indiceNaveEnemigaDisparar = random.nextInt(navesEnemigas.size());
-			
+
 			NaveEnemiga disparar = navesEnemigas.get(indiceNaveEnemigaDisparar);
 			disparar.disparar();
-			System.out.println("Nave Dispara: "+ (indiceNaveEnemigaDisparar+1));
+			System.out.println("Nave Dispara: " + (indiceNaveEnemigaDisparar + 1));
 		}
-		
+
 	}
 
 	@Override
@@ -137,7 +124,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			modeloPartidaJuego.getNaveJugador().disparar();
-			Sound s = Gdx.audio.newSound(Gdx.files.internal("C:/Users/jjtello/Documents/GitHub/dp-final-project/SpaceInvaders/core/assets/sounds/shoot.mp3"));
+			Sound s = Gdx.audio.newSound(Gdx.files.internal("sounds/shoot.mp3"));
 			s.play();
 		}
 	}
