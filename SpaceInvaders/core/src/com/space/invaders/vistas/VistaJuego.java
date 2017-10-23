@@ -5,6 +5,8 @@ import java.util.List;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.space.invaders.actores.FondoInfinito;
+import com.space.invaders.actores.iterator.IteradorGenerico;
+import com.space.invaders.actores.iterator.IteradorListaGenerica;
 import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveJugador;
 import com.space.invaders.actores.ElementoJuego;
@@ -42,16 +44,19 @@ public class VistaJuego extends VistaEstadoJuego {
 		float x = posicionInicialX;
 		float y = posicionInicialY;
 		
-		for (int indiceNaveEnemiga = 0; indiceNaveEnemiga < navesEnemigas.size(); indiceNaveEnemiga++) {
-			NaveEnemiga naveEnemiga = navesEnemigas.get(indiceNaveEnemiga);
-			 x +=  (naveEnemiga.getWidth() + espacioX);  //posicionInicialX + ((indiceNaveEnemiga+1) * (espacioX + naveEnemiga.getWidth()));
+		IteradorGenerico<NaveEnemiga> iteradorNavesEnemigas = new IteradorListaGenerica<NaveEnemiga>(navesEnemigas);
+		int indiceNaveEnemiga = 0;
+		while (iteradorNavesEnemigas.hasNext()) {
+
+			NaveEnemiga naveEnemiga = iteradorNavesEnemigas.next();
+			 x +=  (naveEnemiga.getWidth() + espacioX);
 			 
 			 if(indiceNaveEnemiga % cantidadEnemigosPorFila == 0) {
-				 y -= ((naveEnemiga.getHeight() + espacioY) * 2); //posicionInicialY + ((indiceNaveEnemiga+1) * (espacioY + naveEnemiga.getHeight()));
+				 y -= ((naveEnemiga.getHeight() + espacioY) * 2);
 				 x = posicionInicialX;
 			 }
-			System.out.println("Nave : "+(indiceNaveEnemiga+1)+" - X: "+x+" - Y:"+y +" - CantidadFila: "+ cantidadEnemigosPorFila);
 			naveEnemiga.setPosition(x,y);
+			indiceNaveEnemiga++;
 		}
 		
 		NaveJugador naveJugador = controladorJuego.getNaveJugador();
@@ -73,9 +78,10 @@ public class VistaJuego extends VistaEstadoJuego {
 		background.draw(batch, 1);
 		
 		List<ElementoJuego> elementosJuego = controladorJuego.getElementosJuego();
+		IteradorGenerico<ElementoJuego> iteradorElementoJuego = new IteradorListaGenerica<ElementoJuego>(elementosJuego);
 		
-		for (int i = 0; i < elementosJuego.size(); i++) {
-			ElementoJuego elementoJuego = elementosJuego.get(i);
+		while (iteradorElementoJuego.hasNext()) {
+			ElementoJuego elementoJuego = iteradorElementoJuego.next();
 			elementoJuego.renderizar(batch);
 		}
 		

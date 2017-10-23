@@ -11,6 +11,10 @@ import com.space.invaders.actores.iterator.IteradorGenerico;
 import com.space.invaders.actores.iterator.IteradorListaGenerica;
 import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveJugador;
+import com.space.invaders.actores.naves.comandos.ComandoNaveDisparar;
+import com.space.invaders.actores.naves.comandos.ComandoNaveMovimientoDerecha;
+import com.space.invaders.actores.naves.comandos.ComandoNaveMovimientoIzquierda;
+import com.space.invaders.actores.naves.comandos.IComandoNave;
 import com.space.invaders.actores.util.Temporizador;
 import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
 import com.space.invaders.entidades.Nivel;
@@ -27,6 +31,10 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	private ModeloNivel modeloNivel;
 	private VistaJuego vistaJuego;
 	private Temporizador temporizadorDisparo;
+	
+	private IComandoNave comandoNaveMovimientoDerecha;
+	private IComandoNave comandoNaveMovimientoIzquierda;
+	private IComandoNave comandoNaveDisparar;
 	
 	public ControladorJuego() {
 		modeloNivel = new ModeloNivel();
@@ -45,6 +53,19 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		System.out.println("Nivel: "+ nivel.getNumero() + " - "+ nivel.getNombre());
 		modeloPartidaJuego.inicializarPartidaJuego();
 		vistaJuego.inicializar();
+		
+		inicializarComandos();
+
+	}
+	
+	/**
+	 * Inicializa los comandos para la nave del jugador.
+	 */
+	private void inicializarComandos() {
+		NaveJugador naveJugador = modeloPartidaJuego.getNaveJugador();
+		comandoNaveMovimientoDerecha = new ComandoNaveMovimientoDerecha(naveJugador);
+		comandoNaveMovimientoIzquierda = new ComandoNaveMovimientoIzquierda(naveJugador);
+		comandoNaveDisparar = new ComandoNaveDisparar(naveJugador);
 	}
 
 	@Override
@@ -112,18 +133,19 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 
 	@Override
 	public void manejarEntradas() {
-		// TODO Auto-generated method stub
+		
+		//Manejar las entradas y ejecutar los comandos correspondientes.
 		float direccion = 0;
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			modeloPartidaJuego.getNaveJugador().moverIzquierda();
+			comandoNaveMovimientoIzquierda.ejecutar();
 		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			modeloPartidaJuego.getNaveJugador().moverDerecha();
+			comandoNaveMovimientoDerecha.ejecutar();
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			modeloPartidaJuego.getNaveJugador().disparar();
+			comandoNaveDisparar.ejecutar();
 			Sound s = Gdx.audio.newSound(Gdx.files.internal("sounds/shoot.mp3"));
 			s.play();
 		}

@@ -34,7 +34,6 @@ public class NaveFactory implements INaveFactory{
 			nave = new InvasorCalamar(texturasEnemigo, tiempoAnimacion);
 			nave.setDireccionX(DireccionX.Derecha);
 			nave.setDireccionY(DireccionY.Abajo);
-			nave.setAnimar(true);
 
 			break;
 		case Cangrejo:
@@ -45,7 +44,6 @@ public class NaveFactory implements INaveFactory{
 			nave = new InvasorCangrejo(texturasEnemigo, tiempoAnimacion);
 			nave.setDireccionX(DireccionX.Derecha);
 			nave.setDireccionY(DireccionY.Abajo);
-			nave.setAnimar(true);
 
 			break;
 		case Pulpo:
@@ -56,15 +54,16 @@ public class NaveFactory implements INaveFactory{
 			nave = new InvasorPulpo(texturasEnemigo, tiempoAnimacion);
 			nave.setDireccionX(DireccionX.Derecha);
 			nave.setDireccionY(DireccionY.Abajo);
-			nave.setAnimar(true);
-
+			
 			break;
 		case Jugador:
 
-			Texture texturaNaveJugador = administradorTexturas.obtenerTextura(NombreTextura.NAVE_JUGADOR_0);
+			Texture texturaNaveJugador0 = administradorTexturas.obtenerTextura(NombreTextura.NAVE_JUGADOR_PERSONAJE_1_0);
+			Texture texturaNaveJugador1 = administradorTexturas.obtenerTextura(NombreTextura.NAVE_JUGADOR_PERSONAJE_1_1);
 			List<Texture> texturasNaveJugador = new ArrayList<Texture>();
-			texturasNaveJugador.add(texturaNaveJugador);
-			nave = new NaveJugador(texturasNaveJugador, tiempoAnimacion);
+			texturasNaveJugador.add(texturaNaveJugador0);
+			texturasNaveJugador.add(texturaNaveJugador1);
+			nave = new NaveJugador(texturasNaveJugador, tiempoAnimacion*2);
 
 			break;
 
@@ -73,6 +72,8 @@ public class NaveFactory implements INaveFactory{
 
 		}
 
+		nave.setAnimar(true);
+		
 		return nave;
 	}
 
