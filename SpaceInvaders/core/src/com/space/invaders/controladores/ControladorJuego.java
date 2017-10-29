@@ -110,14 +110,20 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 				if (naveEnemiga.isDestruida())
 					continue;
 
-				boolean impacto = naveEnemiga.validarImpacto(disparo);
+				boolean naveImpactada = naveEnemiga.validarImpacto(disparo);
 
-				if (impacto) {
-					disparo.setImpactado(true);
+				if (naveImpactada) {
 					modeloPartidaJuego.agregarPuntos(naveEnemiga.getPuntos());
 					
 					Sound s = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.mp3"));
 					s.play();
+				}
+			}
+			Disparo disparoEnemigo = naveEnemiga.getDisparo();
+			if(disparoEnemigo!= null && !disparoEnemigo.isImpactado()) {
+				boolean jugadorImpactado = naveJugador.validarImpacto(disparoEnemigo);
+				if(jugadorImpactado) {
+					modeloPartidaJuego.quitarVida();
 				}
 			}
 		}

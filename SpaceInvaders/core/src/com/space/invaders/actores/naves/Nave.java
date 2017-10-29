@@ -158,6 +158,7 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 		boolean impacto = rectanguloNave.overlaps(rectanguloDisparo);
 
 		if (impacto) {
+			disparo.setImpactado(true);
 			impactada();
 		}
 

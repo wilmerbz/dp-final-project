@@ -163,4 +163,19 @@ public class ModeloPartidaJuego {
 		long totalPuntos = partida.getPuntos() + puntos;
 		partida.setPuntos(totalPuntos);
 	}
+
+	/**
+	 * Quita una vida disponible en la partida de juego actual.
+	 */
+	public void quitarVida() {
+		Partida partida = juego.getPartida();
+		int vidas = partida.getVidas();
+		if(vidas == 0) {
+			return;
+		}
+		
+		vidas--;
+		
+		partida.setVidas(vidas);
+	}
 }

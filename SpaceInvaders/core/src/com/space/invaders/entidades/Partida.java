@@ -6,8 +6,8 @@ package com.space.invaders.entidades;
 public class Partida {
 	
 	private String nombre;
-	private long puntos;
-	private int vidas;
+	private long puntos = 0;
+	private int vidas = 10;
 
 	/**
 	 * Crea un nueva partida.
