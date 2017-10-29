@@ -14,10 +14,8 @@ public class ControladorPrincipal implements IControladorPrincipal {
 	
 	@Override
 	public void inicializar() {
-		// TODO Auto-generated method stub
 		System.out.println("Iniciando ControladorPrincipal");
 	}
-
 	
 	/**
 	 * Establece el controlador actual del estado del juego.
@@ -25,7 +23,6 @@ public class ControladorPrincipal implements IControladorPrincipal {
 	 */
 	@Override
 	public void establecerControladorEstadoJuegoActual(IControladorEstadoJuego controladorEstadoJuego){
-		System.out.println("Asignando controlador en el ControladorPrincipal: "+ controladorEstadoJuego.getClass().getName());
 		this._controladorEstadoJuego = controladorEstadoJuego;
 	}
 
@@ -42,7 +39,6 @@ public class ControladorPrincipal implements IControladorPrincipal {
 
 	@Override
 	public void manejarEntradas() {
-		// TODO Auto-generated method stub
 		_controladorEstadoJuego.manejarEntradas();
 	}
 

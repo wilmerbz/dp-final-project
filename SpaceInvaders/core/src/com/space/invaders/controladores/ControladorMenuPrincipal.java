@@ -3,22 +3,25 @@ package com.space.invaders.controladores;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
-import com.space.invaders.entidades.Jugador;
 import com.space.invaders.entidades.menu.ElementoMenu;
-import com.space.invaders.interfaces.controladores.IControlador;
 import com.space.invaders.interfaces.mensajes.IColega;
 import com.space.invaders.interfaces.mensajes.IMediador;
 import com.space.invaders.modelos.ModeloMenuPrincipal;
-import com.space.invaders.navegacion.AdministradorNavegacion;
 import com.space.invaders.navegacion.NombreRuta;
 import com.space.invaders.vistas.VistaMenuPrincipal;
 
+/**
+ * Controlador del menu principal.
+ */
 public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase implements IColega {
 	
 	private IMediador mediador;
 	private VistaMenuPrincipal vistaMenuPrincipal;
 	private ModeloMenuPrincipal modeloMenuPrincipal;
 	
+	/**
+	 * Crea un nuevo controlador de para el Menu Principal.
+	 */
 	public ControladorMenuPrincipal() {
 		vistaMenuPrincipal = new VistaMenuPrincipal(this);	
 		modeloMenuPrincipal = new ModeloMenuPrincipal();
@@ -30,11 +33,6 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 		System.out.println("Iniciando ControladorMenuPrincipal");
 		vistaMenuPrincipal.inicializar();
 		vistaMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
-		
-		//AdministradorNavegacion.getInstancia().navegar(NombreRuta.Juego);
-		
-		//Jugador jugador = new Jugador("Wilmer", "WBZ");
-		//mediador.enviarMensaje(this, "This is a test message from MenuPrincipal: ", jugador);
 	}
 
 	@Override
@@ -63,7 +61,6 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 	public void manejarEntradas() {
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-			System.out.println("ENTER Menu!");
 			
 			ElementoMenu elementoMenuActual = modeloMenuPrincipal.getElementoMenuActual();
 			
@@ -76,10 +73,8 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 					navegarControlador(NombreRuta.Juego);
 					break;
 				case Salir:
-					System.out.println("Salir");
 					Gdx.app.exit();
 					break;
-
 				default:
 					break;
 				}
@@ -89,12 +84,10 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-			System.out.println("Move menu UP!");
 			modeloMenuPrincipal.moverElementoAnterior();
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-			System.out.println("Move menu DOWN!");
 			modeloMenuPrincipal.moverElementoSiguiente();
 		}
 		
@@ -102,7 +95,6 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		vistaMenuPrincipal.dispose();
 	}
 

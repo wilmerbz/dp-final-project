@@ -24,6 +24,9 @@ import com.space.invaders.modelos.ModeloNivel;
 import com.space.invaders.modelos.ModeloPartidaJuego;
 import com.space.invaders.vistas.VistaJuego;
 
+/**
+ * Controlador de juego.
+ */
 public class ControladorJuego extends ControladorEstadoJuegoBase implements IColega {
 	private int contadorVisualizaciones = 0;
 	private IMediador mediador;
@@ -36,6 +39,9 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	private IComandoNave comandoNaveMovimientoIzquierda;
 	private IComandoNave comandoNaveDisparar;
 	
+	/**
+	 * Crea una nueva instancia de Controlador Juego.
+	 */
 	public ControladorJuego() {
 		modeloNivel = new ModeloNivel();
 		modeloPartidaJuego = new ModeloPartidaJuego();

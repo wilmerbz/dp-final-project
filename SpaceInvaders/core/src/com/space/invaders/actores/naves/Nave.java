@@ -63,7 +63,6 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 			if (disparo.alcanzoUbicacionLimiteY()) {
 				disparo.setVisible(false);
 				disparo = null;
-				System.out.println("Disparo alcanzó el límite.");
 			} else {
 				disparo.actualizar(deltaTiempo);
 			}

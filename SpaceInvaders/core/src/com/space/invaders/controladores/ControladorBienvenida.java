@@ -6,6 +6,9 @@ import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
 import com.space.invaders.navegacion.NombreRuta;
 import com.space.invaders.vistas.VistaBienvenida;
 
+/**
+ * Controlador de la bienvenida del juego.
+ */
 public class ControladorBienvenida extends ControladorEstadoJuegoBase {
 
 	protected VistaBienvenida vistaBienvenida;
