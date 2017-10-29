@@ -28,6 +28,7 @@ import com.space.invaders.vistas.VistaJuego;
  * Controlador de juego.
  */
 public class ControladorJuego extends ControladorEstadoJuegoBase implements IColega {
+	
 	private int contadorVisualizaciones = 0;
 	private IMediador mediador;
 	private ModeloPartidaJuego modeloPartidaJuego;
@@ -53,7 +54,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	public void inicializar() {
 		contadorVisualizaciones++;
 		System.out.println("Iniciando ControladorJuego: " + contadorVisualizaciones);
-		Nivel nivel = modeloNivel.getNivel(1);
+		Nivel nivel = modeloNivel.getNivel(0);
 		modeloPartidaJuego.setNivel(nivel);
 		temporizadorDisparo.setTiempo(nivel.getFrecuenciaDisparosEnemigos());
 		System.out.println("Nivel: "+ nivel.getNumero() + " - "+ nivel.getNombre());
@@ -95,9 +96,6 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 
 		Disparo disparo = naveJugador.getDisparo();
 
-		float width = Gdx.graphics.getWidth();
-		boolean cambioDireccion = false;
-
 		List<NaveEnemiga> navesEnemigas = modeloPartidaJuego.getNavesEnemigas();
 		IteradorGenerico<NaveEnemiga> iteradorNavesEnemigas = new IteradorListaGenerica<NaveEnemiga>(navesEnemigas);
 		while (iteradorNavesEnemigas.hasNext()) {
@@ -113,6 +111,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 				boolean naveImpactada = naveEnemiga.validarImpacto(disparo);
 
 				if (naveImpactada) {
+					modeloPartidaJuego.removerNaveEnemiga(naveEnemiga);
 					modeloPartidaJuego.agregarPuntos(naveEnemiga.getPuntos());
 					
 					Sound s = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.mp3"));
@@ -130,6 +129,10 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 
 		if (temporizadorDisparo.esTiempo(deltaTiempo)) {
 			Random random = new Random();
+			System.out.println("Naves enemigas: "+ navesEnemigas.size());
+			if(navesEnemigas.size() == 0){
+				return;
+			}
 			int indiceNaveEnemigaDisparar = random.nextInt(navesEnemigas.size());
 			NaveEnemiga disparar = navesEnemigas.get(indiceNaveEnemigaDisparar);
 			if(disparar.isDestruida())

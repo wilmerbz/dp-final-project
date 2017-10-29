@@ -101,6 +101,7 @@ public class ModeloPartidaJuego {
 			for (int indiceNave = 0; indiceNave < navesEnemigasTipo.size(); indiceNave++) {
 				NaveEnemiga naveEnemiga = (NaveEnemiga)navesEnemigasTipo.get(indiceNave);
 				naveEnemiga.setVelocidadX(nivel.getVelocidadEnemigos());
+				naveEnemiga.setVelocidadY(nivel.getVelocidadEnemigos());
 				naveEnemiga.setVelocidadDisparo(nivel.getVelocidadDisparos());
 				juego.agregaNaveEnemiga(naveEnemiga);
 			}
@@ -177,5 +178,13 @@ public class ModeloPartidaJuego {
 		vidas--;
 		
 		partida.setVidas(vidas);
+	}
+
+	/**
+	 * Remueve la nave enemiga.
+	 * @param naveEnemiga Nave a remover.
+	 */
+	public void removerNaveEnemiga(NaveEnemiga naveEnemiga) {
+		juego.removerNaveEnemiga(naveEnemiga);
 	}
 }

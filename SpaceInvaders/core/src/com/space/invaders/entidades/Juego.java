@@ -103,12 +103,22 @@ public class Juego {
 	
 	/**
 	 * Agrega una nave enemiga.
-	 * @param Nave enemiga a agregar.
+	 * @param naveEnememiga Nave enemiga a agregar.
 	 */
 	public void agregaNaveEnemiga(NaveEnemiga naveEnememiga) {
 		navesEnemigas.add(naveEnememiga);
 		elementosJuego.add(naveEnememiga);
 	}
+	
+	/**
+	 * Remueve una nave enemiga.
+	 * @param naveEnememiga Nave enemiga a remover.
+	 */
+	public void removerNaveEnemiga(NaveEnemiga naveEnemiga) {
+		navesEnemigas.remove(naveEnemiga);
+		elementosJuego.remove(naveEnemiga);
+	}
+	
 
 	/**
 	 * Asigna la lista de naves enemigas.
