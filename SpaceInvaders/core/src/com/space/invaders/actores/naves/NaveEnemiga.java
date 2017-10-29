@@ -8,12 +8,15 @@ import com.space.invaders.actores.direccion.DireccionX;
 import com.space.invaders.actores.disparos.Disparo;
 import com.space.invaders.actores.disparos.FachadaCreacionDisparo;
 
+/**
+ * Clase abstracta para las naves enemigas.
+ */
 public abstract class NaveEnemiga extends Nave {
 
 	/**
 	 * Puntos que proporciona la nave enemiga cuando es destruida.
 	 */
-	private int puntos;
+	private long puntos;
 	
 	/**
 	 * Indica si la nave enemiga fue destruida.
@@ -55,7 +58,7 @@ public abstract class NaveEnemiga extends Nave {
 	 * Obtener puntos.
 	 * @return Puntos.
 	 */
-	public int getPuntos() {
+	public long getPuntos() {
 		return puntos;
 	}
 	
@@ -64,7 +67,7 @@ public abstract class NaveEnemiga extends Nave {
 	 * Asigna los puntos.
 	 * @param puntos Puntos.
 	 */
-	public void setPuntos(int puntos) {
+	public void setPuntos(long puntos) {
 		this.puntos = puntos;
 	}
 

@@ -22,10 +22,7 @@ public interface IVistaEstadoJuego extends IVista{
 	 */
 	void renderizar();
 	
-	/***
-	 * Maneja entradas del usuario.
-	 */
-	void manejarEntradas();
+
 	
 	/***
 	 * Dispone de la vista del estado del juego.

@@ -1,4 +1,4 @@
-package com.space.invaders.actores.naves;
+package com.space.invaders.actores.naves.factory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,13 @@ import java.util.List;
 import com.badlogic.gdx.graphics.Texture;
 import com.space.invaders.actores.direccion.DireccionX;
 import com.space.invaders.actores.direccion.DireccionY;
+import com.space.invaders.actores.naves.InvasorCalamar;
+import com.space.invaders.actores.naves.InvasorCangrejo;
+import com.space.invaders.actores.naves.InvasorPulpo;
+import com.space.invaders.actores.naves.Nave;
+import com.space.invaders.actores.naves.NaveEnemiga;
+import com.space.invaders.actores.naves.NaveJugador;
+import com.space.invaders.actores.naves.TipoNave;
 import com.space.invaders.recursos.texturas.AdministradorTexturas;
 import com.space.invaders.recursos.texturas.IAdministradorTexturas;
 import com.space.invaders.recursos.texturas.NombreTextura;
@@ -31,30 +38,35 @@ public class NaveFactory implements INaveFactory{
 			textura1 = administradorTexturas.obtenerTextura(NombreTextura.ENEMIGO_CALAMAR_1);
 			texturasEnemigo.add(textura0);
 			texturasEnemigo.add(textura1);
-			nave = new InvasorCalamar(texturasEnemigo, tiempoAnimacion);
-			nave.setDireccionX(DireccionX.Derecha);
-			nave.setDireccionY(DireccionY.Abajo);
-
+			NaveEnemiga invasorCalamar = new InvasorCalamar(texturasEnemigo, tiempoAnimacion);
+			invasorCalamar.setDireccionX(DireccionX.Derecha);
+			invasorCalamar.setDireccionY(DireccionY.Abajo);
+			invasorCalamar.setPuntos(50);
+			nave = invasorCalamar;
+			
 			break;
 		case Cangrejo:
 			textura0 = administradorTexturas.obtenerTextura(NombreTextura.ENEMIGO_CANGREJO_0);
 			textura1 = administradorTexturas.obtenerTextura(NombreTextura.ENEMIGO_CANGREJO_1);
 			texturasEnemigo.add(textura0);
 			texturasEnemigo.add(textura1);
-			nave = new InvasorCangrejo(texturasEnemigo, tiempoAnimacion);
-			nave.setDireccionX(DireccionX.Derecha);
-			nave.setDireccionY(DireccionY.Abajo);
-
+			NaveEnemiga invasorCangrejo = new InvasorCangrejo(texturasEnemigo, tiempoAnimacion);
+			invasorCangrejo.setDireccionX(DireccionX.Derecha);
+			invasorCangrejo.setDireccionY(DireccionY.Abajo);
+			invasorCangrejo.setPuntos(100);
+			nave = invasorCangrejo;
+			
 			break;
 		case Pulpo:
 			textura0 = administradorTexturas.obtenerTextura(NombreTextura.ENEMIGO_PULPO_0);
 			textura1 = administradorTexturas.obtenerTextura(NombreTextura.ENEMIGO_PULPO_1);
 			texturasEnemigo.add(textura0);
 			texturasEnemigo.add(textura1);
-			nave = new InvasorPulpo(texturasEnemigo, tiempoAnimacion);
-			nave.setDireccionX(DireccionX.Derecha);
-			nave.setDireccionY(DireccionY.Abajo);
-			
+			NaveEnemiga invasorPulpo = new InvasorPulpo(texturasEnemigo, tiempoAnimacion);
+			invasorPulpo.setDireccionX(DireccionX.Derecha);
+			invasorPulpo.setDireccionY(DireccionY.Abajo);
+			invasorPulpo.setPuntos(200);
+			nave = invasorPulpo;
 			break;
 		case Jugador:
 

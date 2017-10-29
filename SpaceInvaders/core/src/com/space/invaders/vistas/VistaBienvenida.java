@@ -52,11 +52,6 @@ public class VistaBienvenida extends VistaEstadoJuego {
 	}
 
 	@Override
-	public void manejarEntradas() {
-
-	}
-
-	@Override
 	public void dispose() {
 		batch.dispose();
 		background = null;

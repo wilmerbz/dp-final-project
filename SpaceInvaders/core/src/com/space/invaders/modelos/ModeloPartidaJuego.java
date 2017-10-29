@@ -7,14 +7,16 @@ import java.util.Hashtable;
 import java.util.List;
 
 import com.space.invaders.actores.ElementoJuego;
-import com.space.invaders.actores.naves.INaveFactory;
 import com.space.invaders.actores.naves.Nave;
 import com.space.invaders.actores.naves.NaveEnemiga;
-import com.space.invaders.actores.naves.NaveFactory;
 import com.space.invaders.actores.naves.NaveJugador;
 import com.space.invaders.actores.naves.TipoNave;
+import com.space.invaders.actores.naves.factory.INaveFactory;
+import com.space.invaders.actores.naves.factory.NaveFactory;
 import com.space.invaders.entidades.Juego;
+import com.space.invaders.entidades.Jugador;
 import com.space.invaders.entidades.Nivel;
+import com.space.invaders.entidades.Partida;
 
 /**
  * Modelo para la partida de juego.
@@ -23,6 +25,9 @@ public class ModeloPartidaJuego {
 	
 	private Juego juego;
 	
+	/**
+	 * Crea una nueva instancia del modelo de partida de juego.
+	 */
 	public ModeloPartidaJuego() {
 		juego = new Juego();
 	}
@@ -56,7 +61,6 @@ public class ModeloPartidaJuego {
 	 * Inicializa los elementos del juego actual.
 	 */
 	public void inicializarPartidaJuego() {
-		
 		inicializarNavesEnemigas();
 		inicializarNaveJugador();
 	}
@@ -126,9 +130,37 @@ public class ModeloPartidaJuego {
 	 * @return Nave del jugador.
 	 */
 	public NaveJugador getNaveJugador() {
-		
 		return juego.getNaveJugador();
-		
+	}
+
+	/**
+	 * Obtiene los puntos de la partida actual.
+	 * @return 
+	 */
+	public long getPuntos() {
+		Partida partida = juego.getPartida();
+		long puntos = partida.getPuntos();
+		return puntos;
 	}
 	
+	/**
+	 * Obtiene las vidas disponibles en la partida actual.
+	 * @return Vidas disponibles.
+	 */
+	public int getVidas() {
+		Partida partida = juego.getPartida();
+		int vidas = partida.getVidas();
+		return vidas;
+	}
+	
+	/**
+	 * Agrega los puntos a la cuenta de puntos de la partida.
+	 * @param puntos Puntos a agregar.
+	 */
+	public void agregarPuntos(long puntos)
+	{
+		Partida partida = juego.getPartida();
+		long totalPuntos = partida.getPuntos() + puntos;
+		partida.setPuntos(totalPuntos);
+	}
 }

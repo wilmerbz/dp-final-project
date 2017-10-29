@@ -20,6 +20,7 @@ public class Juego {
 	private List<ElementoJuego> elementosJuego;
 
 	public Juego() {
+		partida = new Partida("Default");
 		navesEnemigas = new ArrayList<NaveEnemiga>();
 		elementosJuego = new ArrayList<ElementoJuego>();
 	}

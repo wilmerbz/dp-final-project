@@ -108,6 +108,8 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 
 				if (impacto) {
 					disparo.setImpactado(true);
+					modeloPartidaJuego.agregarPuntos(naveEnemiga.getPuntos());
+					
 					Sound s = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.mp3"));
 					s.play();
 				}
@@ -117,17 +119,19 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		if (temporizadorDisparo.esTiempo(deltaTiempo)) {
 			Random random = new Random();
 			int indiceNaveEnemigaDisparar = random.nextInt(navesEnemigas.size());
-
 			NaveEnemiga disparar = navesEnemigas.get(indiceNaveEnemigaDisparar);
+			if(disparar.isDestruida())
+			{	
+				return;
+			}
+			
 			disparar.disparar();
-			System.out.println("Nave Dispara: " + (indiceNaveEnemigaDisparar + 1));
 		}
 
 	}
 
 	@Override
 	public void renderizar() {
-		// TODO Auto-generated method stub
 		vistaJuego.renderizar();
 	}
 
@@ -187,6 +191,22 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	 */
 	public NaveJugador getNaveJugador() {
 		return modeloPartidaJuego.getNaveJugador();
+	}
+
+	/**
+	 * Obtiene los puntos de la partida actual.
+	 * @return Puntos.
+	 */
+	public long getPuntos() {
+		return modeloPartidaJuego.getPuntos();
+	}
+
+	/**
+	 * Obtiene las vidas disponibles en la partida actual.
+	 * @return Vidas.
+	 */
+	public int getVidas() {
+		return modeloPartidaJuego.getVidas();
 	}
 	
 }

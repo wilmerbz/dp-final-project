@@ -32,11 +32,9 @@ public class VistaJuego extends VistaEstadoJuego {
 	private final String rutaFuente = "fonts/Hyperspace Bold.ttf";
 	private BitmapFont fuentePuntaje;
 	private static GlyphLayout layoutPuntaje;
-	private long puntaje;
 	
 	private BitmapFont fuenteVidas;
 	private static GlyphLayout layoutVidas;
-	private int vidas;
 	
 	public VistaJuego(IControladorEstadoJuego controladorEstadoJuego) {
 		super(controladorEstadoJuego);
@@ -90,8 +88,6 @@ public class VistaJuego extends VistaEstadoJuego {
 		fontParameter.shadowOffsetY = 1;
 		fuentePuntaje = generator.generateFont(fontParameter);
 		layoutPuntaje = new GlyphLayout();
-		puntaje = 9999;
-		layoutPuntaje.setText(fuentePuntaje, "$" + puntaje);
 		
 		
 		fontParameter.size = 30;
@@ -99,8 +95,7 @@ public class VistaJuego extends VistaEstadoJuego {
 		
 		fuenteVidas = generator.generateFont(fontParameter);
 		layoutVidas = new GlyphLayout();
-		vidas = 10;
-		layoutVidas.setText(fuenteVidas, Integer.toString(vidas));
+
 	}
 
 	@Override
@@ -112,7 +107,7 @@ public class VistaJuego extends VistaEstadoJuego {
 	public void renderizar() {
 		
 		batch.begin();
-		//batch.draw(background, 0, 0);
+		
 		background.draw(batch, 1);
 		
 		List<ElementoJuego> elementosJuego = controladorJuego.getElementosJuego();
@@ -123,24 +118,18 @@ public class VistaJuego extends VistaEstadoJuego {
 			elementoJuego.renderizar(batch);
 		}
 		
-		
 		batch.draw(panel, 10, getHeight() - (panel.getHeight() + 10));
 		
-		puntaje+= 11;
-		layoutPuntaje.setText(fuentePuntaje, "$" + puntaje);
+		long puntos = controladorJuego.getPuntos();
+		layoutPuntaje.setText(fuentePuntaje, "$" + puntos);
 		fuentePuntaje.draw(batch, layoutPuntaje, 205,getHeight()-75);
 		
-		
+		int vidas = controladorJuego.getVidas();
 		layoutVidas.setText(fuenteVidas, Integer.toString(vidas));
 		fuenteVidas.draw(batch, layoutVidas, 135, getHeight()-70);
 		
 		batch.end();
 		
-	}
-
-	@Override
-	public void manejarEntradas() {
-
 	}
 
 	@Override

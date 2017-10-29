@@ -1,48 +1,84 @@
 package com.space.invaders.entidades;
 
+/**
+ * Representa una partida de juego.
+ */
 public class Partida {
-	private String nombre;
-	private int puntos;
 	
-	public Partida(String nombre, int puntos) {
-		super();
-		this.setNombre(nombre);
-		this.setPuntos(puntos);
+	private String nombre;
+	private long puntos;
+	private int vidas;
+
+	/**
+	 * Crea un nueva partida.
+	 */
+	public Partida() {
 	}
 
 	/**
-	 * @return the nombre
+	 * Crea un nueva partida con el nombre indicado.
+	 * @param nombre Nombre de la partida.
+	 */
+	public Partida(String nombre) {
+		this.nombre=nombre;
+	}
+
+	/**
+	 * Obtiene el nombre de la partida
+	 * @return Nombre de partida
 	 */
 	public String getNombre() {
 		return nombre;
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * Asigna el nombre de la partida.
+	 * @param nombre Nombre de la partida a asignar.
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
 	/**
-	 * @return the puntos
+	 * Obtiene los puntos de la partida.
+	 * @return Puntos de la partida.
 	 */
-	public int getPuntos() {
+	public long getPuntos() {
 		return puntos;
 	}
 
 	/**
-	 * @param puntos the puntos to set
+	 * Asigna los puntos de la partida.
+	 * @param puntos Puntos de la partida.
 	 */
-	public void setPuntos(int puntos) {
+	public void setPuntos(long puntos) {
 		this.puntos = puntos;
 	}
 	
-	public Puntaje getPuntaje ( Puntaje puntaje) {
-		
-		return puntaje;
+	/**
+	 * Obtiene una instancia de Puntaje que representa los puntos de la partida.
+	 * @return
+	 */
+	public MejorPuntaje getMejorPuntaje () {
+		MejorPuntaje mejorPuntaje = new MejorPuntaje();
+		mejorPuntaje.setPuntos(puntos);
+		return mejorPuntaje;
 	}
 
+	/**
+	 * Obtiene las vidas disponibles en la partida.
+	 * @return Vidas disponibles.
+	 */
+	public int getVidas() {
+		return vidas;
+	}
 
+	/**
+	 * Asigna la cantidad de vidas disponibles en la partida.
+	 * @param vidas Vidas.
+	 */
+	public void setVidas(int vidas) {
+		this.vidas = vidas;
+	}
 
 }

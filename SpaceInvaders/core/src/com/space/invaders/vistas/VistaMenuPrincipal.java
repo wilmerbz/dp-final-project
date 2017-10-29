@@ -107,15 +107,8 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 	}
 
 	@Override
-	public void manejarEntradas() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		spriteBatch.dispose();
 	}
 	
 	
