@@ -44,7 +44,9 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 
 	@Override
 	public void inicializar() {
+		
 		spriteBatch = new SpriteBatch();
+		spriteBatch.setProjectionMatrix(SpaceInvadersGame.camara.combined);
 		
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(rutaFuente));
 		FreeTypeFontParameter fontParameter = new FreeTypeFontParameter();
@@ -75,7 +77,7 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 	
 	@Override
 	public void renderizar() {
-		spriteBatch.setProjectionMatrix(SpaceInvadersGame.camara.combined);
+		
 		spriteBatch.begin();
 
 		float xTitulo = (getWidth()-tituloGlyphLayout.width)/2;
@@ -130,8 +132,7 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 			layoutElemento.setText(fuenteElementoMenu, elemento.getDescripcion());
 			elementosMenuGlyphLayouts[i] = layoutElemento;
 		}
-		
-		
+
 	}
 	
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
 import com.space.invaders.entidades.menu.ElementoMenu;
+import com.space.invaders.entidades.menu.SubMenu;
 import com.space.invaders.interfaces.mensajes.IColega;
 import com.space.invaders.interfaces.mensajes.IMediador;
 import com.space.invaders.modelos.ModeloMenuPrincipal;
@@ -68,16 +69,28 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 				NombreRuta nombreRuta = elementoMenuActual.getNombreRuta();
 				
 				switch (nombreRuta) {
-				case SeleccionarJugador:
-				case Juego:
-					navegarControlador(NombreRuta.Juego);
-					break;
-				case Salir:
-					Gdx.app.exit();
-					break;
-				default:
-					break;
-				}
+					case SeleccionarJugador:
+					case NuevoJuego:
+					case CargarJuego:
+						navegarControlador(NombreRuta.Juego);
+						break;
+					case Salir:
+						Gdx.app.exit();
+						break;
+					case Regresar:
+						modeloMenuPrincipal.cargarOpcionesPadre();
+						vistaMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
+						break;
+					default:
+						if(modeloMenuPrincipal.esSubMenu()) {
+							modeloMenuPrincipal.cargarOpcionesSubMenu();
+							vistaMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
+						}else {
+							navegarControlador(nombreRuta);
+						}
+						
+						break;
+					}
 				
 			}
 			
@@ -91,6 +104,10 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 			modeloMenuPrincipal.moverElementoSiguiente();
 		}
 		
+		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+			modeloMenuPrincipal.cargarOpcionesPadre();
+			vistaMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
+		}
 	}
 
 	@Override

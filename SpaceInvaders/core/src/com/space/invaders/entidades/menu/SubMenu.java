@@ -8,7 +8,7 @@ import com.space.invaders.navegacion.NombreRuta;
 /**
  * Elemento de submenu.
  */
-public class ElementoSubMenu extends ElementoMenu {
+public class SubMenu extends ElementoMenu {
 
 	private List<ElementoMenu> hijos;
 	
@@ -17,7 +17,7 @@ public class ElementoSubMenu extends ElementoMenu {
 	 * @param nombreRuta
 	 * @param descripcion
 	 */
-	public ElementoSubMenu(NombreRuta nombreRuta, String descripcion) {
+	public SubMenu(NombreRuta nombreRuta, String descripcion) {
 		super(nombreRuta, descripcion);
 		hijos = new ArrayList<ElementoMenu>();
 	}
@@ -40,6 +40,7 @@ public class ElementoSubMenu extends ElementoMenu {
 			return;
 		}
 		
+		hijo.setElementoMenuPadre(this);
 		hijos.add(hijo);
 	}
 	

@@ -13,5 +13,8 @@ public enum NombreRuta {
 	MejoresPuntajes,
 	Instrucciones,
 	Juego,
-	Salir
+	Salir, 
+	NuevoJuego, 
+	CargarJuego, 
+	Regresar
 }

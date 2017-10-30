@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.space.invaders.entidades.menu.ElementoMenu;
-import com.space.invaders.entidades.menu.ElementoOpcionMenu;
+import com.space.invaders.entidades.menu.OpcionMenu;
+import com.space.invaders.entidades.menu.SubMenu;
 import com.space.invaders.interfaces.modelos.IModelo;
 import com.space.invaders.navegacion.NombreRuta;
 
@@ -13,6 +14,7 @@ import com.space.invaders.navegacion.NombreRuta;
  */
 public class ModeloMenuPrincipal implements IModelo{
 
+	private List<ElementoMenu> elementosMenuRaiz;
 	private List<ElementoMenu> elementosMenu;
 	
 	private int indiceElementoMenuActual;
@@ -27,25 +29,31 @@ public class ModeloMenuPrincipal implements IModelo{
 	
 	@Override
 	public void inicializar() {
-		// TODO Auto-generated method stub
-		if(elementosMenu !=null)
+		if(elementosMenuRaiz != null)
 			return;
 		
-		elementosMenu = new ArrayList<ElementoMenu>();
+		elementosMenuRaiz = new ArrayList<ElementoMenu>();
 		
-		//ElementoMenu jugar = new ElementoOpcionMenu(NombreRuta.SeleccionarJugador, "Seleccionar Jugador");
-		ElementoMenu jugar = new ElementoOpcionMenu(NombreRuta.Juego, "Jugar");
-		ElementoMenu mejoresPuntajes = new ElementoOpcionMenu(NombreRuta.MejoresPuntajes, "Mejores Puntajes");
-		ElementoMenu instrucciones = new ElementoOpcionMenu(NombreRuta.Instrucciones, "Instrucciones");
-		ElementoMenu salir = new ElementoOpcionMenu(NombreRuta.Salir, "Salir");
+		SubMenu jugar = new SubMenu(NombreRuta.Juego, "Jugar");
 		
-		elementosMenu.add(jugar);
-		elementosMenu.add(mejoresPuntajes);
-		elementosMenu.add(instrucciones);
-		elementosMenu.add(salir);
+		ElementoMenu nuevoJuego = new OpcionMenu(NombreRuta.NuevoJuego, "Nuevo Juego");
+		ElementoMenu cargarJuego = new OpcionMenu(NombreRuta.CargarJuego, "Cargar Juego");
+		ElementoMenu regresar = new OpcionMenu(NombreRuta.Regresar, "< Regresar");
 		
-		indiceElementoMenuActual = 0;
-		setElementoMenuActual();
+		jugar.agregarHijo(nuevoJuego);
+		jugar.agregarHijo(cargarJuego);
+		jugar.agregarHijo(regresar);
+		
+		ElementoMenu mejoresPuntajes = new OpcionMenu(NombreRuta.MejoresPuntajes, "Mejores Puntajes");
+		ElementoMenu instrucciones = new OpcionMenu(NombreRuta.Instrucciones, "Instrucciones");
+		ElementoMenu salir = new OpcionMenu(NombreRuta.Salir, "Salir");
+		
+		elementosMenuRaiz.add(jugar);
+		elementosMenuRaiz.add(mejoresPuntajes);
+		elementosMenuRaiz.add(instrucciones);
+		elementosMenuRaiz.add(salir);
+		
+		setElementosMenu(elementosMenuRaiz);
 	}
 	
 	/**
@@ -55,6 +63,17 @@ public class ModeloMenuPrincipal implements IModelo{
 	public List<ElementoMenu> getElementosMenu()
 	{
 		return elementosMenu;
+	}
+	
+	/**
+	 * Asigna la lista de elementos de menu.
+	 * @param elementosMenu Elementos de menu.
+	 */
+	public void setElementosMenu(List<ElementoMenu> elementosMenu)
+	{
+		indiceElementoMenuActual = 0;
+		this.elementosMenu = elementosMenu;
+		setElementoMenuActual();
 	}
 
 	/**
@@ -98,8 +117,47 @@ public class ModeloMenuPrincipal implements IModelo{
 	
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		elementosMenu = null;
+		elementosMenuRaiz = null;
+	}
+	
+	/**
+	 * Valida si el elemento seleccionado actual es un submenu.
+	 * @return Retorna true si el elemento actual es un submenu; de lo contrario retorna false.
+	 */
+	public boolean esSubMenu() {
+		ElementoMenu elemento = getElementoMenuActual();
+		boolean esSubMenu = elemento!=null && elemento instanceof SubMenu;
+		return esSubMenu;
+	}
+	
+	/**
+	 * Carga las opciones del submenu seleccionado.
+	 */
+	public void cargarOpcionesSubMenu() {
 		
+		if(esSubMenu()) {
+			SubMenu subMenu = (SubMenu) getElementoMenuActual();
+			setElementosMenu(subMenu.getHijos());
+		}
+	}
+	
+	/**
+	 * Carga las opciones del submenu seleccionado.
+	 */
+	public void cargarOpcionesPadre() {
+		ElementoMenu elementoMenu = getElementoMenuActual();
+		if(elementoMenu==null || elementoMenu.getElementoMenuPadre() == null || elementoMenu.getElementoMenuPadre().getElementoMenuPadre() == null) {
+			if(elementosMenu != elementosMenuRaiz) {
+				setElementosMenu(elementosMenuRaiz);
+			}
+			return;
+		}
+		
+		SubMenu subMenu = (SubMenu) elementoMenu.getElementoMenuPadre().getElementoMenuPadre();
+		if(subMenu!=null) {
+			setElementosMenu(subMenu.getHijos());
+		}
 	}
 
 }

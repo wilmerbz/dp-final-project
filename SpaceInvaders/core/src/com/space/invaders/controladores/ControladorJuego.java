@@ -129,7 +129,6 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 
 		if (temporizadorDisparo.esTiempo(deltaTiempo)) {
 			Random random = new Random();
-			System.out.println("Naves enemigas: "+ navesEnemigas.size());
 			if(navesEnemigas.size() == 0){
 				return;
 			}
