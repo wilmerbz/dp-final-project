@@ -12,16 +12,19 @@ import com.space.invaders.actores.disparos.FachadaCreacionDisparo;
  * Clase abstracta para las naves enemigas.
  */
 public abstract class NaveEnemiga extends Nave {
-
 	/**
 	 * Puntos que proporciona la nave enemiga cuando es destruida.
 	 */
-	private long puntos;
+	public abstract long puntos();
 	
 	/**
 	 * Indica si la nave enemiga fue destruida.
 	 */
 	private boolean destruida;
+	
+	public NaveEnemiga() {
+		
+	}
 	
 	/**
 	 * Crea una nueva instancia de NaveEnemiga.
@@ -40,6 +43,8 @@ public abstract class NaveEnemiga extends Nave {
 		super(texturas, intervaloAnimacion);
 	}
 
+
+	
 	/**
 	 * Crea un nuevo disparo para la nave enemiga.
 	 * @return Disparo creado.
@@ -58,18 +63,18 @@ public abstract class NaveEnemiga extends Nave {
 	 * Obtener puntos.
 	 * @return Puntos.
 	 */
-	public long getPuntos() {
+	/*public long getPuntos() {
 		return puntos;
-	}
+	}*/
 	
 	
 	/**
 	 * Asigna los puntos.
 	 * @param puntos Puntos.
 	 */
-	public void setPuntos(long puntos) {
+	/*public void setPuntos(long puntos) {
 		this.puntos = puntos;
-	}
+	}/*
 
 	/**
 	 * Obtiene el valor que indica si la nave fue destruida.
@@ -97,13 +102,13 @@ public abstract class NaveEnemiga extends Nave {
 		
 		if(!puedeMoverX) {
 			if(!cambiandoFila) {
-				cambioFilaY = getY() - (getHeight() + 10);
+				cambioFilaY = actor.getY() - (actor.getHeight() + 10);
 				cambiandoFila = true;
 			}
 			
 			moverY();
 			
-			if(getY() <= cambioFilaY) {
+			if(actor.getY() <= cambioFilaY) {
 				cambiandoFila = false;
 				DireccionX nuevaDireccionX;
 				

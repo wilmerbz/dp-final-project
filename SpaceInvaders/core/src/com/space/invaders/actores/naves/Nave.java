@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.TextureAtlasData.Region;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -31,6 +32,10 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 	 * Velocidad de disparos.
 	 */
 	protected float velocidadDisparo;
+	
+	public Nave() {
+		
+	}
 
 	/**
 	 * Crea una nueva instancia de Nave.
@@ -52,6 +57,10 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 	 */
 	public Nave(List<Texture> texturas, float intervaloAnimacion) {
 		super(texturas, intervaloAnimacion);
+	}
+
+	public Nave(NaveEnemiga naveEnemiga) {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -77,12 +86,9 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 	@Override
 	public Nave clone() {
 		Nave copiaElemento = null;
-		try {
-			copiaElemento = (Nave) super.clone();
-			copiaElemento.temporizador = this.temporizador.clone();
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		copiaElemento = (Nave) super.clone();
+		if(this.temporizador!=null) {
+		copiaElemento.temporizador = this.temporizador.clone();
 		}
 		
 		return copiaElemento;
@@ -125,17 +131,20 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 	 * @param disparo
 	 */
 	protected void setUbicacionInicialDisparo(Disparo disparo) {
-		float x = getX() + (getWidth() / 2) - (disparo.getWidth() / 2);
-		float y = getY();
+		Image actorDisparo= disparo.getActor();
+	
+		float x = getActor().getX() + (getActor().getWidth() / 2) - (actorDisparo.getWidth() / 2);
+		float y = getActor().getY();
 		int multiplicadorDiferenciaAlturaY = 1;
 		if (disparo.getDireccionY() == DireccionY.Abajo) {
 			multiplicadorDiferenciaAlturaY = 0;
 		}
 		
-		y+= getHeight() * multiplicadorDiferenciaAlturaY;
+		y+= getActor().getHeight() * multiplicadorDiferenciaAlturaY;
 		
-		disparo.setX(x);
-		disparo.setY(y);
+		
+		actorDisparo.setX(x);
+		actorDisparo.setY(y);
 	}
 	
 
@@ -148,12 +157,12 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 	 *         false.
 	 */
 	public boolean validarImpacto(Disparo disparo) {
-
-		SpriteDrawable spriteDrawableDisparo = (SpriteDrawable) disparo.getDrawable();
+		Image actorDisparo= disparo.getActor();		
+		SpriteDrawable spriteDrawableDisparo = (SpriteDrawable) actorDisparo.getDrawable();
 		Sprite spriteDisparo = spriteDrawableDisparo.getSprite();
 		Rectangle rectanguloDisparo = spriteDisparo.getBoundingRectangle();
 
-		Rectangle rectanguloNave = new Rectangle(getX(), getY(), getWidth(), getHeight());
+		Rectangle rectanguloNave = new Rectangle(getActor().getX(), getActor().getY(), getActor().getWidth(), getActor().getHeight());
 
 		boolean impacto = rectanguloNave.overlaps(rectanguloDisparo);
 

@@ -14,8 +14,9 @@ import com.space.invaders.actores.naves.Nave;
 /**
  * Representa un elemento que se pinta en el juego, utilizando una imagen.
  */
-public abstract class ElementoJuego extends Image{
-
+public abstract class ElementoJuego {
+	
+	protected Actor actor;
 	protected DireccionX direccionX;
 	protected float velocidadX = 1;
 	protected DireccionY direccionY;
@@ -26,14 +27,14 @@ public abstract class ElementoJuego extends Image{
 	 * Crea una nueva instancia de elemento de juego.
 	 */
 	public ElementoJuego() {
-		super();
+		actor = new Actor();
 	}
 
 	/**
 	 * Crea una nueva instancia de elemento de juego.
 	 */
 	public ElementoJuego(Texture texture) {
-		super(texture);
+		actor = new Actor(texture);
 		
 	}
 
@@ -52,7 +53,7 @@ public abstract class ElementoJuego extends Image{
 			return;
 		}
 		
-		this.draw(batch, 1);
+		this.getActor().draw(batch, 1);
 	}
 	
 	/**
@@ -117,8 +118,8 @@ public abstract class ElementoJuego extends Image{
 	{
 		Sprite sprite = new Sprite(textura);
 		SpriteDrawable spriteDrawable = new SpriteDrawable(sprite);
-		this.setDrawable(spriteDrawable);
-		this.setSize(textura.getWidth(), textura.getHeight());
+		this.getActor().setDrawable(spriteDrawable);
+		this.getActor().setSize(textura.getWidth(), textura.getHeight());
 	}
 	
 	
@@ -167,7 +168,7 @@ public abstract class ElementoJuego extends Image{
 	 * Mueve el elemento en X de acuerdo a la configuración de dirección y velocidad.
 	 */
 	public boolean moverX() {
-		return moverX(direccionX, velocidadX);
+		return moverX(getDireccionX(), getVelocidadX());
 	}
 	
 	/**
@@ -180,8 +181,8 @@ public abstract class ElementoJuego extends Image{
 		if(alcanzoUbicacionLimiteX(direccion))
 			return false;
 		
-		float x = getX() + (velocidad * direccion.getMultiplicadorX());
-		this.setX(x);
+		float x = getActor().getX() + (velocidad * direccion.getMultiplicadorX());
+		this.getActor().setX(x);
 		return true;
 	}
 	
@@ -189,7 +190,7 @@ public abstract class ElementoJuego extends Image{
 	 * Mueve el elemento en Y de acuerdo a la configuración de dirección y velocidad.
 	 */
 	public boolean moverY() {
-		return moverY(direccionY, velocidadY);
+		return moverY(getDireccionY(), getVelocidadY());
 	}
 	
 	/**
@@ -202,8 +203,8 @@ public abstract class ElementoJuego extends Image{
 		if(alcanzoUbicacionLimiteY(direccion))
 			return false;
 		
-		float y = getY() + (velocidadY * direccion.getMultiplicadorY());
-		this.setY(y);
+		float y = getActor().getY() + (velocidad * direccion.getMultiplicadorY());
+		this.getActor().setY(y);
 		return true;
 	}
 	
@@ -236,8 +237,8 @@ public abstract class ElementoJuego extends Image{
 	 * @return Retorna true si el elemento alcanzo la ubicacion limite en X.
 	 */
 	public boolean alcanzoUbicacionLimiteX(DireccionX direccionX) {
-		float x = getX();
-		float width = getWidth();
+		float x = getActor().getX();
+		float width = getActor().getWidth();
 		float graphicsWidth = Gdx.graphics.getWidth();
 		
 		boolean alcanzoLimiteX = (direccionX == DireccionX.Izquierda && x < 0) || (direccionX == DireccionX.Derecha && x > graphicsWidth-width);
@@ -257,10 +258,33 @@ public abstract class ElementoJuego extends Image{
 	 * @return Retorna true si el elemento alcanzo la ubicacion limite en Y.
 	 */
 	public boolean alcanzoUbicacionLimiteY(DireccionY direccionY) {
-		float y = getY();
+		float y = getActor().getY();
 		float graphicsHeight = Gdx.graphics.getHeight();
 		boolean alcanzoLimiteY =(direccionY == DireccionY.Abajo && y < 0) || (direccionY == DireccionY.Arriba && y > graphicsHeight);
 		return alcanzoLimiteY;
+	}
+	
+	public Actor getActor() {
+		return actor;
+	}
+	
+	/*
+	 * Implementación metodo para clonar elemento juego.
+	 */
+	@Override
+	public ElementoJuego clone() {
+		ElementoJuego copiaElemento = null;
+		try {
+			copiaElemento = (ElementoJuego) super.clone();
+			if(this.actor!=null) {
+			copiaElemento.actor = this.getActor().clone();
+			}
+			
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		
+		return copiaElemento;
 	}
 	
 	

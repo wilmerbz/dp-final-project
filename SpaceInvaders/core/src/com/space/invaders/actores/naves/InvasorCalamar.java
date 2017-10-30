@@ -19,4 +19,10 @@ public class InvasorCalamar extends NaveEnemiga {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public long puntos() {
+		// TODO Auto-generated method stub
+		return 15;
+	}
+
 }

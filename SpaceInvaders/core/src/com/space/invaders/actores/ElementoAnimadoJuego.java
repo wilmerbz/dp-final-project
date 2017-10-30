@@ -34,8 +34,7 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 	/**
 	 * Temporizador que lleva la cuenta de tiempo para cambiar las texturas de la animación.
 	 */
-	protected Temporizador temporizador;
-	
+	protected Temporizador temporizador;	
 	/**
 	 * Crea una nueva instancia de un Elemento Animado del Juego.
 	 */

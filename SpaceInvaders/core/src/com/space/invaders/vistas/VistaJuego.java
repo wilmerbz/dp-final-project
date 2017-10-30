@@ -73,20 +73,20 @@ public class VistaJuego extends VistaEstadoJuego {
 		while (iteradorNavesEnemigas.hasNext()) {
 
 			NaveEnemiga naveEnemiga = iteradorNavesEnemigas.next();
-			 x +=  (naveEnemiga.getWidth() + espacioX);
+			 x +=  (naveEnemiga.getActor().getWidth() + espacioX);
 			 
 			 if(indiceNaveEnemiga % cantidadEnemigosPorFila == 0) {
-				 y -= ((naveEnemiga.getHeight() + espacioY) * 2);
+				 y -= ((naveEnemiga.getActor().getHeight() + espacioY) * 2);
 				 x = posicionInicialX;
 			 }
-			naveEnemiga.setPosition(x,y);
+			naveEnemiga.getActor().setPosition(x,y);
 			indiceNaveEnemiga++;
 		}
 		
 		NaveJugador naveJugador = controladorJuego.getNaveJugador();
-		float xNaveJugador = (getWidth()/2) - (naveJugador.getWidth()/2);
-		naveJugador.setX(xNaveJugador);
-		naveJugador.setY(5);
+		float xNaveJugador = (getWidth()/2) - (naveJugador.getActor().getWidth()/2);
+		naveJugador.getActor().setX(xNaveJugador);
+		naveJugador.getActor().setY(5);
 		
 		
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(rutaFuente));

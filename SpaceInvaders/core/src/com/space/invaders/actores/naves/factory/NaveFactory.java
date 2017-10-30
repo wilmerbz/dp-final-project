@@ -13,6 +13,7 @@ import com.space.invaders.actores.naves.Nave;
 import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveJugador;
 import com.space.invaders.actores.naves.TipoNave;
+import com.space.invaders.actores.naves.decorator.NaveEnemigaPuntosNivel2;
 import com.space.invaders.recursos.texturas.AdministradorTexturas;
 import com.space.invaders.recursos.texturas.IAdministradorTexturas;
 import com.space.invaders.recursos.texturas.NombreTextura;
@@ -39,9 +40,15 @@ public class NaveFactory implements INaveFactory{
 			texturasEnemigo.add(textura0);
 			texturasEnemigo.add(textura1);
 			NaveEnemiga invasorCalamar = new InvasorCalamar(texturasEnemigo, tiempoAnimacion);
+			//Prueba decoracion doble invasorCalamar
+			NaveEnemigaPuntosNivel2 test = new NaveEnemigaPuntosNivel2(new NaveEnemigaPuntosNivel2(invasorCalamar));
+			System.out.println("el valor del decorador de puntos es: "+test.puntos());
+			
 			invasorCalamar.setDireccionX(DireccionX.Derecha);
 			invasorCalamar.setDireccionY(DireccionY.Abajo);
-			invasorCalamar.setPuntos(50);
+			//Prueba decorador en invasorCalamar
+			//invasorCalamar = new NaveEnemigaPuntosNivel2(invasorCalamar);
+			invasorCalamar.puntos();
 			nave = invasorCalamar;
 			
 			break;
@@ -53,7 +60,7 @@ public class NaveFactory implements INaveFactory{
 			NaveEnemiga invasorCangrejo = new InvasorCangrejo(texturasEnemigo, tiempoAnimacion);
 			invasorCangrejo.setDireccionX(DireccionX.Derecha);
 			invasorCangrejo.setDireccionY(DireccionY.Abajo);
-			invasorCangrejo.setPuntos(100);
+			invasorCangrejo.puntos();
 			nave = invasorCangrejo;
 			
 			break;
@@ -65,7 +72,7 @@ public class NaveFactory implements INaveFactory{
 			NaveEnemiga invasorPulpo = new InvasorPulpo(texturasEnemigo, tiempoAnimacion);
 			invasorPulpo.setDireccionX(DireccionX.Derecha);
 			invasorPulpo.setDireccionY(DireccionY.Abajo);
-			invasorPulpo.setPuntos(200);
+			invasorPulpo.puntos();
 			nave = invasorPulpo;
 			break;
 		case Jugador:
@@ -96,8 +103,8 @@ public class NaveFactory implements INaveFactory{
 		List<Nave> navesEnemigas = new ArrayList<Nave>();
 		Nave naveEnemiga = crearNave(tipoNave);
 		Nave copiaNaveEnemiga;
-		
 		for (int i = 0; i < contadorEnemigos; i++) {
+			System.out.println("Entra al for de enemigos");
 			copiaNaveEnemiga = (Nave)naveEnemiga.clone();	
 			navesEnemigas.add(copiaNaveEnemiga);
 		}

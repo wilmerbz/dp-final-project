@@ -112,7 +112,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 
 				if (naveImpactada) {
 					modeloPartidaJuego.removerNaveEnemiga(naveEnemiga);
-					modeloPartidaJuego.agregarPuntos(naveEnemiga.getPuntos());
+					modeloPartidaJuego.agregarPuntos(naveEnemiga.puntos());
 					
 					Sound s = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.mp3"));
 					s.play();
