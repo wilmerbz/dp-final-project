@@ -17,7 +17,6 @@ public class Actor extends Image implements Cloneable {
 	 */
 	public Actor(Texture texture) {
 		super(texture);
-
 	}
 
 	/*
@@ -25,13 +24,13 @@ public class Actor extends Image implements Cloneable {
 	 */
 	@Override
 	public Actor clone() {
-		Actor copiaElemento = null;
+		Actor copiaActor = null;
 		try {
-			copiaElemento = (Actor) super.clone();
+			copiaActor = (Actor) super.clone();
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
 
-		return copiaElemento;
+		return copiaActor;
 	}
 }

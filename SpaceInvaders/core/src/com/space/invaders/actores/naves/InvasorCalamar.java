@@ -16,13 +16,8 @@ public class InvasorCalamar extends NaveEnemiga {
 	 */
 	public InvasorCalamar(List<Texture> texturas, float intervaloAnimacion) {
 		super(texturas, intervaloAnimacion);
-		// TODO Auto-generated constructor stub
-	}
 
-	@Override
-	public long puntos() {
-		// TODO Auto-generated method stub
-		return 15;
+		this.puntos = 200;
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.space.invaders.actores.direccion.DireccionX;
+import com.space.invaders.actores.direccion.DireccionY;
 import com.space.invaders.actores.disparos.Disparo;
 import com.space.invaders.actores.disparos.FachadaCreacionDisparo;
 
@@ -12,15 +13,17 @@ import com.space.invaders.actores.disparos.FachadaCreacionDisparo;
  * Clase abstracta para las naves enemigas.
  */
 public abstract class NaveEnemiga extends Nave {
-	/**
-	 * Puntos que proporciona la nave enemiga cuando es destruida.
-	 */
-	public abstract long puntos();
+
 	
 	/**
 	 * Indica si la nave enemiga fue destruida.
 	 */
 	private boolean destruida;
+	
+	/**
+	 * Puntos que se obtienen al destruir la nave enemiga.
+	 */
+	protected long puntos;
 	
 	public NaveEnemiga() {
 		
@@ -41,6 +44,8 @@ public abstract class NaveEnemiga extends Nave {
 	 */
 	public NaveEnemiga(List<Texture> texturas, float intervaloAnimacion) {
 		super(texturas, intervaloAnimacion);
+		setDireccionX(DireccionX.Derecha);
+		setDireccionY(DireccionY.Abajo);
 	}
 
 
@@ -60,21 +65,21 @@ public abstract class NaveEnemiga extends Nave {
 	}
 	
 	/**
-	 * Obtener puntos.
+	 * Obtiene los puntos que se otorgan cuando la nave es destruida.
 	 * @return Puntos.
 	 */
-	/*public long getPuntos() {
+	public long getPuntos() {
 		return puntos;
-	}*/
+	}
 	
 	
 	/**
 	 * Asigna los puntos.
 	 * @param puntos Puntos.
 	 */
-	/*public void setPuntos(long puntos) {
+	public void setPuntos(long puntos) {
 		this.puntos = puntos;
-	}/*
+	}
 
 	/**
 	 * Obtiene el valor que indica si la nave fue destruida.

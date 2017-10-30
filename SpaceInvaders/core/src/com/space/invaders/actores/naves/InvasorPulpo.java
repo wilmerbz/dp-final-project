@@ -16,15 +16,7 @@ public class InvasorPulpo extends NaveEnemiga {
 	 */
 	public InvasorPulpo(List<Texture> texturas, float intervaloAnimacion) {
 		super(texturas, intervaloAnimacion);
-		// TODO Auto-generated constructor stub
-	}
-	
-
-	@Override
-	public long puntos() {
-		// TODO Auto-generated method stub
-		return 20;
+		this.puntos = 300;
 	}
 
-	
 }

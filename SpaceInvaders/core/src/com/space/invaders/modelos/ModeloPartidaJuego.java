@@ -11,6 +11,7 @@ import com.space.invaders.actores.naves.Nave;
 import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveJugador;
 import com.space.invaders.actores.naves.TipoNave;
+import com.space.invaders.actores.naves.decorador.DecoradorNaveEnemigaNivel2;
 import com.space.invaders.actores.naves.factory.INaveFactory;
 import com.space.invaders.actores.naves.factory.NaveFactory;
 import com.space.invaders.entidades.Juego;
@@ -103,6 +104,13 @@ public class ModeloPartidaJuego {
 				naveEnemiga.setVelocidadX(nivel.getVelocidadEnemigos());
 				naveEnemiga.setVelocidadY(nivel.getVelocidadEnemigos());
 				naveEnemiga.setVelocidadDisparo(nivel.getVelocidadDisparos());
+				
+				// Prueba Decorador Nave Enemiga.
+//				naveEnemiga = new DecoradorNaveEnemigaNivel2(naveEnemiga);
+//				naveEnemiga = new DecoradorNaveEnemigaNivel2(naveEnemiga);
+//				naveEnemiga = new DecoradorNaveEnemigaNivel2(naveEnemiga);
+//				naveEnemiga = new DecoradorNaveEnemigaNivel2(naveEnemiga);
+				
 				juego.agregaNaveEnemiga(naveEnemiga);
 			}
 		}

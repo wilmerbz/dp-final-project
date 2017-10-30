@@ -16,12 +16,7 @@ public class InvasorCangrejo extends NaveEnemiga {
 	 */
 	public InvasorCangrejo(List<Texture> texturas, float intervaloAnimacion) {
 		super(texturas, intervaloAnimacion);
-		// TODO Auto-generated constructor stub
+		this.puntos = 100;
 	}
 
-	@Override
-	public long puntos() {
-		// TODO Auto-generated method stub
-		return 10;
-	}
 }
