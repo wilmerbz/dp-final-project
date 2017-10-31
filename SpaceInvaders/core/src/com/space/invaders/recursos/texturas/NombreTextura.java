@@ -1,7 +1,7 @@
 package com.space.invaders.recursos.texturas;
 
 /**
- * Provee los nombres de las texturas disponibles en el juego.
+ * Contiene los nombres de las texturas disponibles en el juego.
  */
 public final class NombreTextura {
 
@@ -40,6 +40,9 @@ public final class NombreTextura {
 	public static final String DISPARO_ENEMIGO_0 = "disparo-enemigo0";
 	
 	public static final String DISPARO_ENEMIGO_1 = "disparo-enemigo1";
+	
+	public static final String ESCUDO_ENEMIGO_0 = "escudo-enemigo0";
+	public static final String ESCUDO_ENEMIGO_1 = "escudo-enemigo1";
 	
 	
 }

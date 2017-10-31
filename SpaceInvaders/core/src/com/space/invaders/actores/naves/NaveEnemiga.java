@@ -8,6 +8,8 @@ import com.space.invaders.actores.direccion.DireccionX;
 import com.space.invaders.actores.direccion.DireccionY;
 import com.space.invaders.actores.disparos.Disparo;
 import com.space.invaders.actores.disparos.FachadaCreacionDisparo;
+import com.space.invaders.recursos.sonido.AdministradorSonidos;
+import com.space.invaders.recursos.sonido.NombreSonido;
 
 /**
  * Clase abstracta para las naves enemigas.
@@ -145,6 +147,7 @@ public abstract class NaveEnemiga extends Nave {
 	
 	@Override
 	public void impactada() {
+		AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.IMPACTO_NAVE_ENEMIGA);
 		setDestruida(true);
 	}
 }

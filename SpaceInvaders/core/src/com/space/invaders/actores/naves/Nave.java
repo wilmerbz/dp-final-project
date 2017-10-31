@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.space.invaders.actores.Actor;
 import com.space.invaders.actores.ElementoAnimadoJuego;
 import com.space.invaders.actores.ElementoJuego;
 import com.space.invaders.actores.direccion.DireccionY;
@@ -111,11 +112,6 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 		return disparo;
 	}
 
-	/**
-	 * Metodo que se llama cuando la nave ha sido impactada.
-	 */
-	public abstract void impactada();
-
 	@Override
 	public void renderizar(SpriteBatch batch) {
 		super.renderizar(batch);
@@ -157,12 +153,17 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 	 *         false.
 	 */
 	public boolean validarImpacto(Disparo disparo) {
+		return validarImpacto(getActor(), disparo);
+	}
+	
+	
+	protected boolean validarImpacto(Actor actor, Disparo disparo) {
 		Image actorDisparo= disparo.getActor();		
 		SpriteDrawable spriteDrawableDisparo = (SpriteDrawable) actorDisparo.getDrawable();
 		Sprite spriteDisparo = spriteDrawableDisparo.getSprite();
 		Rectangle rectanguloDisparo = spriteDisparo.getBoundingRectangle();
 
-		Rectangle rectanguloNave = new Rectangle(getActor().getX(), getActor().getY(), getActor().getWidth(), getActor().getHeight());
+		Rectangle rectanguloNave = new Rectangle(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 
 		boolean impacto = rectanguloNave.overlaps(rectanguloDisparo);
 
@@ -173,6 +174,11 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 
 		return impacto;
 	}
+	
+	/**
+	 * Metodo que se llama cuando la nave ha sido impactada.
+	 */
+	public abstract void impactada();
 	
 	/**
 	 * Obtiene la velocidad de los disparos.

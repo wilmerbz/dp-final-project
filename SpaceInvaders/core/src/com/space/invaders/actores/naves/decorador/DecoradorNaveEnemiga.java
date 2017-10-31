@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.space.invaders.actores.Actor;
 import com.space.invaders.actores.direccion.DireccionX;
 import com.space.invaders.actores.direccion.DireccionY;
+import com.space.invaders.actores.disparos.Disparo;
 import com.space.invaders.actores.naves.NaveEnemiga;
 
 /**
@@ -25,15 +26,27 @@ public abstract class DecoradorNaveEnemiga extends NaveEnemiga{
 	public Actor getActor() {		
 		return naveEnemiga.getActor();
 	}
+	
+	protected Actor getActorDecorador() {		
+		return actor;
+	}
 
 	@Override
 	public void actualizar(float deltaTiempo) {
 		naveEnemiga.actualizar(deltaTiempo);
 	}
+	
+	protected void actualizarDecorador(float deltaTiempo) {
+		super.actualizar(deltaTiempo);
+	}
 
 	@Override
 	public void renderizar(SpriteBatch batch) {
 		naveEnemiga.renderizar(batch);
+	}
+	
+	protected void renderizarDecorador(SpriteBatch batch) {
+		super.renderizar(batch);
 	}
 
 	@Override	
@@ -62,7 +75,6 @@ public abstract class DecoradorNaveEnemiga extends NaveEnemiga{
 		this.naveEnemiga.setDireccionX(direccionX);
 	}
 	
-
 	@Override
 	public void setDireccionY(DireccionY direccionY) {
 		this.naveEnemiga.setDireccionY(direccionY);
@@ -90,5 +102,24 @@ public abstract class DecoradorNaveEnemiga extends NaveEnemiga{
 	@Override
 	public long getPuntos() {
 		return this.naveEnemiga.getPuntos();
+	}
+	
+	@Override
+	public boolean validarImpacto(Disparo disparo) {
+		return this.naveEnemiga.validarImpacto(disparo);
+	}
+	
+	@Override
+	public void impactada() {
+		this.naveEnemiga.impactada();
+	}
+	@Override
+	public Disparo disparar() {
+		return naveEnemiga.disparar();
+	}
+	
+	@Override
+	public Disparo getDisparo() {
+		return naveEnemiga.getDisparo();
 	}
 }

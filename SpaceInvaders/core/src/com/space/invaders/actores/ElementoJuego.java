@@ -116,12 +116,21 @@ public abstract class ElementoJuego {
 	 */
 	public void setTextura(Texture textura) 
 	{
-		Sprite sprite = new Sprite(textura);
-		SpriteDrawable spriteDrawable = new SpriteDrawable(sprite);
-		this.getActor().setDrawable(spriteDrawable);
-		this.getActor().setSize(textura.getWidth(), textura.getHeight());
+		setTextura(this.getActor(), textura);
 	}
 	
+	/**
+	 * Assigns the texture to the actor.
+	 * @param actor Actor.
+	 * @param textura Texture.
+	 */
+	protected void setTextura(Actor actor, Texture textura) 
+	{
+		Sprite sprite = new Sprite(textura);
+		SpriteDrawable spriteDrawable = new SpriteDrawable(sprite);
+		actor.setDrawable(spriteDrawable);
+		actor.setSize(textura.getWidth(), textura.getHeight());
+	}
 	
 	/**
 	 * Asigna la velocidad en X del elemento.

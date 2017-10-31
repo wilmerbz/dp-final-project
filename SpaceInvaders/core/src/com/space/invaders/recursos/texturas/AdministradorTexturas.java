@@ -1,5 +1,6 @@
 package com.space.invaders.recursos.texturas;
 
+import java.util.HashMap;
 import java.util.Hashtable;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -10,17 +11,21 @@ import com.badlogic.gdx.graphics.Texture;
 public class AdministradorTexturas implements IAdministradorTexturas {
 
 	
-	private Hashtable<String, Texture> texturas;
+	private HashMap<String, Texture> texturas;
 	
-	private static AdministradorTexturas _instancia;
+	private static IAdministradorTexturas _instancia;
 	
 	/**
 	 * Crea una nueva instancia del administrador de texturas.
 	 */
 	private AdministradorTexturas() {
-		texturas = new Hashtable<String, Texture>();
+		texturas = new HashMap<String, Texture>();
 	}
 	
+	/**
+	 * Obtiene la instancia unica del administrador de texturas.	
+	 * @return Administrador de texturas.
+	 */
 	public static IAdministradorTexturas getInstancia() {
 		if(_instancia == null) {
 			_instancia = new AdministradorTexturas();

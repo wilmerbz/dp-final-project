@@ -70,6 +70,11 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 	 */
 	@Override
 	public void actualizar(float deltaTiempo) {
+		actualizar(getActor(), deltaTiempo);
+	}
+
+	
+	protected void actualizar(Actor actor, float deltaTiempo) {
 
 		if(!animar || temporizador == null || texturasAnimacion == null || texturasAnimacion.size() <= 1)
 		{
@@ -93,10 +98,9 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 	    texturaNueva = texturasAnimacion.get(indiceTexturaNueva);
 		indiceTexturaActual = indiceTexturaNueva;
 		
-		setTextura(texturaNueva);
-
+		setTextura(actor, texturaNueva);
 	}
-
+	
 	/**
 	 * Obtiene la intervalo de animación.
 	 */

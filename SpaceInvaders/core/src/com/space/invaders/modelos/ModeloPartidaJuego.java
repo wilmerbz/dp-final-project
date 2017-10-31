@@ -5,13 +5,14 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Random;
 
 import com.space.invaders.actores.ElementoJuego;
 import com.space.invaders.actores.naves.Nave;
 import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveJugador;
 import com.space.invaders.actores.naves.TipoNave;
-import com.space.invaders.actores.naves.decorador.DecoradorNaveEnemigaNivel2;
+import com.space.invaders.actores.naves.decorador.DecoradorNaveEnemigaEscudo;
 import com.space.invaders.actores.naves.factory.INaveFactory;
 import com.space.invaders.actores.naves.factory.NaveFactory;
 import com.space.invaders.entidades.Juego;
@@ -94,6 +95,15 @@ public class ModeloPartidaJuego {
 		Enumeration<Integer> enumeradorClavesConfiguracionEnemigos = configuracionEnemigos.keys();
 		Integer tipoNave;
 		
+		Random random = new Random();
+		
+//		List<Integer> indicesEscudo = new ArrayList<Integer>();
+//		int numeroNavesEscudo = 10;
+//		for (int i = 0; i < numeroNavesEscudo; i++) {
+//			indicesEscudo.add(random.nextInt(navesEnemigas.size()));
+//		}
+		
+		
 		while(enumeradorClavesConfiguracionEnemigos.hasMoreElements()) {
 			tipoNave = enumeradorClavesConfiguracionEnemigos.nextElement();
 			Integer contadorEnemigos = configuracionEnemigos.get(tipoNave);
@@ -105,11 +115,11 @@ public class ModeloPartidaJuego {
 				naveEnemiga.setVelocidadY(nivel.getVelocidadEnemigos());
 				naveEnemiga.setVelocidadDisparo(nivel.getVelocidadDisparos());
 				
-				// Prueba Decorador Nave Enemiga.
-//				naveEnemiga = new DecoradorNaveEnemigaNivel2(naveEnemiga);
-//				naveEnemiga = new DecoradorNaveEnemigaNivel2(naveEnemiga);
-//				naveEnemiga = new DecoradorNaveEnemigaNivel2(naveEnemiga);
-//				naveEnemiga = new DecoradorNaveEnemigaNivel2(naveEnemiga);
+				int aleatorio = random.nextInt(20);
+				
+				if(aleatorio%10 == 0) {
+					naveEnemiga = new DecoradorNaveEnemigaEscudo(naveEnemiga);
+				}
 				
 				juego.agregaNaveEnemiga(naveEnemiga);
 			}

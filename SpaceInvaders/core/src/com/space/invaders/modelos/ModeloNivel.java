@@ -23,7 +23,7 @@ public class ModeloNivel {
 	
 	
 	/**
-	 * Ctea una nueva instancia del modelo de nivel.
+	 * Crea una nueva instancia del modelo de nivel.
 	 */
 	public 	ModeloNivel() {
 		cargarNiveles();

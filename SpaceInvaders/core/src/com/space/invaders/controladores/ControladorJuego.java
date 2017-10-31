@@ -22,6 +22,8 @@ import com.space.invaders.interfaces.mensajes.IColega;
 import com.space.invaders.interfaces.mensajes.IMediador;
 import com.space.invaders.modelos.ModeloNivel;
 import com.space.invaders.modelos.ModeloPartidaJuego;
+import com.space.invaders.recursos.sonido.AdministradorSonidos;
+import com.space.invaders.recursos.sonido.NombreSonido;
 import com.space.invaders.vistas.VistaJuego;
 
 /**
@@ -113,9 +115,6 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 				if (naveImpactada) {
 					modeloPartidaJuego.removerNaveEnemiga(naveEnemiga);
 					modeloPartidaJuego.agregarPuntos(naveEnemiga.getPuntos());
-					
-					Sound s = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.mp3"));
-					s.play();
 				}
 			}
 			Disparo disparoEnemigo = naveEnemiga.getDisparo();
@@ -164,8 +163,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			comandoNaveDisparar.ejecutar();
-			Sound s = Gdx.audio.newSound(Gdx.files.internal("sounds/shoot.mp3"));
-			s.play();
+			AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.DISPARO_JUGADOR);
 		}
 	}
 

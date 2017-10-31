@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.space.invaders.actores.disparos.Disparo;
 import com.space.invaders.actores.disparos.FachadaCreacionDisparo;
+import com.space.invaders.recursos.sonido.AdministradorSonidos;
+import com.space.invaders.recursos.sonido.NombreSonido;
 
 /**
  * Representa la nave del jugador.
@@ -46,7 +48,7 @@ public class NaveJugador extends Nave {
 	
 	@Override
 	public void impactada() {
-		
+		AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.IMPACTO_NAVE_JUGADOR);
 	}
 	
 }
