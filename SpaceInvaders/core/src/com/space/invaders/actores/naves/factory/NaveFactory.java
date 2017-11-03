@@ -75,12 +75,12 @@ public class NaveFactory implements INaveFactory{
 	}
 
 	@Override
-	public List<Nave> crearNaves(TipoNave tipoNave, int contadorEnemigos) {
+	public List<Nave> crearNaves(TipoNave tipoNave, int cantidadNaves) {
 		
 		List<Nave> navesEnemigas = new ArrayList<Nave>();
 		Nave naveEnemiga = crearNave(tipoNave);
 		Nave copiaNaveEnemiga;
-		for (int i = 0; i < contadorEnemigos; i++) {
+		for (int i = 0; i < cantidadNaves; i++) {
 			copiaNaveEnemiga = (Nave)naveEnemiga.clone();	
 			navesEnemigas.add(copiaNaveEnemiga);
 		}

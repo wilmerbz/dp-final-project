@@ -57,6 +57,10 @@ public class DecoradorNaveEnemigaEscudo extends DecoradorNaveEnemiga {
 	public void actualizar(float deltaTiempo) {
 		naveEnemiga.actualizar(deltaTiempo);
 
+		actualizarEscudo(deltaTiempo);
+	}
+	
+	private void actualizarEscudo(float deltaTiempo) {
 		actualizar(getActorDecorador(), deltaTiempo);
 		this.actor.setX(naveEnemiga.getActor().getX());
 		this.actor.setY(naveEnemiga.getActor().getY());
@@ -70,6 +74,10 @@ public class DecoradorNaveEnemigaEscudo extends DecoradorNaveEnemiga {
 	@Override
 	public void renderizar(SpriteBatch batch) {
 		naveEnemiga.renderizar(batch);
+		renderizarEscudo(batch);
+	}
+	
+	private void renderizarEscudo(SpriteBatch batch) {
 		if (!escudoImpactado) {
 			getActorDecorador().draw(batch, 1);
 		}
