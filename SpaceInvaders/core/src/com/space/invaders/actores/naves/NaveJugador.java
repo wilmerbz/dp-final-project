@@ -38,11 +38,13 @@ public class NaveJugador extends Nave {
 	 */
 	public Disparo disparar() {
 		if(disparo!=null && !disparo.isImpactado()) {
+			AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.NO_DISPARO_JUGADOR);
 			return null;
 		}
 		
 		disparo = FachadaCreacionDisparo.getInstancia().construirDisparoJugador();
 		setUbicacionInicialDisparo(disparo);
+		AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.DISPARO_JUGADOR);
 		return disparo;
 	}
 	

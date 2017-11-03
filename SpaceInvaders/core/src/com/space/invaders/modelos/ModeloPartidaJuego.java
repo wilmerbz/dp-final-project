@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Random;
 
 import com.space.invaders.actores.ElementoJuego;
+import com.space.invaders.actores.disparos.Disparo;
+import com.space.invaders.actores.iterator.IteradorGenerico;
+import com.space.invaders.actores.iterator.IteradorListaGenerica;
 import com.space.invaders.actores.naves.Nave;
 import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveJugador;
@@ -117,8 +120,9 @@ public class ModeloPartidaJuego {
 				
 				int aleatorio = random.nextInt(20);
 				
-				if(aleatorio%10 == 0) {
+				if(aleatorio%5 == 0) {
 					naveEnemiga = new DecoradorNaveEnemigaEscudo(naveEnemiga);
+					//naveEnemiga = new DecoradorNaveEnemigaEscudo(naveEnemiga);
 				}
 				
 				juego.agregaNaveEnemiga(naveEnemiga);
@@ -205,4 +209,60 @@ public class ModeloPartidaJuego {
 	public void removerNaveEnemiga(NaveEnemiga naveEnemiga) {
 		juego.removerNaveEnemiga(naveEnemiga);
 	}
+	
+	/**
+	 * Genera un disparo enemigo, seleccionando una de las naves de manera aleatoria.
+	 */
+	public void generarDisparoEnemigo() {
+		List<NaveEnemiga> navesEnemigas = getNavesEnemigas();
+		Random random = new Random();
+		if(navesEnemigas.size() == 0){
+			return;
+		}
+		int indiceNaveEnemigaDisparar = random.nextInt(navesEnemigas.size());
+		NaveEnemiga disparar = navesEnemigas.get(indiceNaveEnemigaDisparar);
+		if(disparar.isDestruida())
+		{	
+			return;
+		}
+		
+		disparar.disparar();
+	}
+	
+	/**
+	 * Actualiza los actores de la partida de juego actual.
+	 */
+	public void actualizar(float deltaTiempo) {
+		NaveJugador naveJugador = getNaveJugador();
+		naveJugador.actualizar(deltaTiempo);
+
+		Disparo disparo = naveJugador.getDisparo();
+
+		List<NaveEnemiga> navesEnemigas = getNavesEnemigas();
+		IteradorGenerico<NaveEnemiga> iteradorNavesEnemigas = new IteradorListaGenerica<NaveEnemiga>(navesEnemigas);
+		while (iteradorNavesEnemigas.hasNext()) {
+
+			NaveEnemiga naveEnemiga = iteradorNavesEnemigas.next();
+			naveEnemiga.actualizar(deltaTiempo);
+
+			if (disparo != null && !disparo.isImpactado() && !naveEnemiga.isDestruida()) {
+
+				boolean naveImpactada = naveEnemiga.validarImpacto(disparo);
+
+				if (naveImpactada) {
+					removerNaveEnemiga(naveEnemiga);
+					agregarPuntos(naveEnemiga.getPuntos());
+				}
+			}
+			
+			Disparo disparoEnemigo = naveEnemiga.getDisparo();
+			if(disparoEnemigo!= null && !disparoEnemigo.isImpactado()) {
+				boolean jugadorImpactado = naveJugador.validarImpacto(disparoEnemigo);
+				if(jugadorImpactado) {
+					quitarVida();
+				}
+			}
+		}
+	}
+	
 }

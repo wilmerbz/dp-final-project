@@ -36,7 +36,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	private ModeloPartidaJuego modeloPartidaJuego;
 	private ModeloNivel modeloNivel;
 	private VistaJuego vistaJuego;
-	private Temporizador temporizadorDisparo;
+	private Temporizador temporizadorDisparoEnemigo;
 	
 	private IComandoNave comandoNaveMovimientoDerecha;
 	private IComandoNave comandoNaveMovimientoIzquierda;
@@ -49,7 +49,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		modeloNivel = new ModeloNivel();
 		modeloPartidaJuego = new ModeloPartidaJuego();
 		vistaJuego = new VistaJuego(this);
-		temporizadorDisparo = new Temporizador();
+		temporizadorDisparoEnemigo = new Temporizador();
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		System.out.println("Iniciando ControladorJuego: " + contadorVisualizaciones);
 		Nivel nivel = modeloNivel.getNivel(0);
 		modeloPartidaJuego.setNivel(nivel);
-		temporizadorDisparo.setTiempo(nivel.getFrecuenciaDisparosEnemigos());
+		temporizadorDisparoEnemigo.setTiempo(nivel.getFrecuenciaDisparosEnemigos());
 		System.out.println("Nivel: "+ nivel.getNumero() + " - "+ nivel.getNombre());
 		modeloPartidaJuego.inicializarPartidaJuego();
 		vistaJuego.inicializar();
@@ -91,56 +91,12 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	@Override
 	public void actualizar(float deltaTiempo) {
 
+		modeloPartidaJuego.actualizar(deltaTiempo);
 		vistaJuego.actualizar(deltaTiempo);
-
-		NaveJugador naveJugador = modeloPartidaJuego.getNaveJugador();
-		naveJugador.actualizar(deltaTiempo);
-
-		Disparo disparo = naveJugador.getDisparo();
-
-		List<NaveEnemiga> navesEnemigas = modeloPartidaJuego.getNavesEnemigas();
-		IteradorGenerico<NaveEnemiga> iteradorNavesEnemigas = new IteradorListaGenerica<NaveEnemiga>(navesEnemigas);
-		while (iteradorNavesEnemigas.hasNext()) {
-
-			NaveEnemiga naveEnemiga = iteradorNavesEnemigas.next();
-			naveEnemiga.actualizar(deltaTiempo);
-
-			if (disparo != null && !disparo.isImpactado()) {
-
-				if (naveEnemiga.isDestruida())
-					continue;
-
-				boolean naveImpactada = naveEnemiga.validarImpacto(disparo);
-
-				if (naveImpactada) {
-					modeloPartidaJuego.removerNaveEnemiga(naveEnemiga);
-					modeloPartidaJuego.agregarPuntos(naveEnemiga.getPuntos());
-				}
-			}
-			Disparo disparoEnemigo = naveEnemiga.getDisparo();
-			if(disparoEnemigo!= null && !disparoEnemigo.isImpactado()) {
-				boolean jugadorImpactado = naveJugador.validarImpacto(disparoEnemigo);
-				if(jugadorImpactado) {
-					modeloPartidaJuego.quitarVida();
-				}
-			}
+		
+		if (temporizadorDisparoEnemigo.esTiempo(deltaTiempo)) {
+			modeloPartidaJuego.generarDisparoEnemigo();
 		}
-
-		if (temporizadorDisparo.esTiempo(deltaTiempo)) {
-			Random random = new Random();
-			if(navesEnemigas.size() == 0){
-				return;
-			}
-			int indiceNaveEnemigaDisparar = random.nextInt(navesEnemigas.size());
-			NaveEnemiga disparar = navesEnemigas.get(indiceNaveEnemigaDisparar);
-			if(disparar.isDestruida())
-			{	
-				return;
-			}
-			
-			disparar.disparar();
-		}
-
 	}
 
 	@Override
@@ -163,7 +119,6 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			comandoNaveDisparar.ejecutar();
-			AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.DISPARO_JUGADOR);
 		}
 	}
 

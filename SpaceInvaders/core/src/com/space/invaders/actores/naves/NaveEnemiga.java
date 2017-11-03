@@ -60,9 +60,9 @@ public abstract class NaveEnemiga extends Nave {
 		if(disparo!=null && !disparo.isImpactado()) {
 			return null;
 		}
-		
 		disparo = FachadaCreacionDisparo.getInstancia().construirDisparoEnemigo();
 		setUbicacionInicialDisparo(disparo);
+		AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.DISPARO_ENEMIGO);
 		return disparo;
 	}
 	

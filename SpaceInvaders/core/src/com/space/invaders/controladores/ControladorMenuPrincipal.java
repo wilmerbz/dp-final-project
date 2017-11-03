@@ -9,6 +9,8 @@ import com.space.invaders.interfaces.mensajes.IColega;
 import com.space.invaders.interfaces.mensajes.IMediador;
 import com.space.invaders.modelos.ModeloMenuPrincipal;
 import com.space.invaders.navegacion.NombreRuta;
+import com.space.invaders.recursos.sonido.AdministradorSonidos;
+import com.space.invaders.recursos.sonido.NombreSonido;
 import com.space.invaders.vistas.VistaMenuPrincipal;
 
 /**
@@ -72,22 +74,30 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 					case SeleccionarJugador:
 					case NuevoJuego:
 					case CargarJuego:
+						AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.MENU_SELECCIONAR);
 						navegarControlador(NombreRuta.Juego);
 						break;
 					case Salir:
 						Gdx.app.exit();
 						break;
 					case Regresar:
+						AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.MENU_REGRESAR);
 						modeloMenuPrincipal.cargarOpcionesPadre();
 						vistaMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
 						break;
 					default:
-						if(modeloMenuPrincipal.esSubMenu()) {
-							modeloMenuPrincipal.cargarOpcionesSubMenu();
-							vistaMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
-						}else {
-							navegarControlador(nombreRuta);
+						AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.MENU_SELECCIONAR);
+						try {
+							if(modeloMenuPrincipal.esSubMenu()) {
+								modeloMenuPrincipal.cargarOpcionesSubMenu();
+								vistaMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
+							}else {
+								navegarControlador(nombreRuta);
+							}
+						} catch (Exception e) {
+							
 						}
+						
 						
 						break;
 					}
@@ -97,14 +107,17 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+			AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.MENU_MOVER);
 			modeloMenuPrincipal.moverElementoAnterior();
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+			AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.MENU_MOVER);
 			modeloMenuPrincipal.moverElementoSiguiente();
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+			AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.MENU_REGRESAR);
 			modeloMenuPrincipal.cargarOpcionesPadre();
 			vistaMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
 		}

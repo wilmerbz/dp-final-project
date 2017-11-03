@@ -1,5 +1,6 @@
 package com.space.invaders.recursos.sonido;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Hashtable;
 
@@ -12,7 +13,8 @@ import com.badlogic.gdx.audio.Sound;
 public class AdministradorSonidos  implements IAdministradorSonidos{
 
 	private HashMap<String, Sound> sonidos; 
-	private final String _formatoRutaArchivoSonido = "sounds/%s.mp3";
+	private final String _formatoRutaArchivoSonidoMp3 = "sounds/%s.mp3";
+	private final String _formatoRutaArchivoSonidoWav = "sounds/%s.wav";
 	
 	private static IAdministradorSonidos _instancia;
 	
@@ -73,7 +75,12 @@ public class AdministradorSonidos  implements IAdministradorSonidos{
 			if(sonidos.containsKey(nombre)) {
 				sonido = sonidos.get(nombre);
 			}else{
-				String rutaArchivo = String.format(_formatoRutaArchivoSonido , nombre);
+				String rutaArchivo = String.format(_formatoRutaArchivoSonidoMp3 , nombre);
+				File f = new File(rutaArchivo);
+				if(!f.exists()) { 
+					rutaArchivo = String.format(_formatoRutaArchivoSonidoWav , nombre);
+				}
+				
 				sonido = Gdx.audio.newSound(Gdx.files.internal(rutaArchivo));
 				sonidos.put(nombre, sonido);
 			}
