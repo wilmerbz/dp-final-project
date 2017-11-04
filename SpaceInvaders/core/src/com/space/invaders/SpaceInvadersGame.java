@@ -2,14 +2,12 @@ package com.space.invaders;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.space.invaders.controladores.ControladorPrincipal;
 import com.space.invaders.interfaces.controladores.IControladorPrincipal;
 import com.space.invaders.interfaces.estados.IAdministradorEstados;
 import com.space.invaders.navegacion.AdministradorEstados;
-
 import com.space.invaders.navegacion.NombreEstado;
 
 public class SpaceInvadersGame extends ApplicationAdapter {
