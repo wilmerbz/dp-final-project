@@ -4,29 +4,28 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
 import com.space.invaders.entidades.menu.ElementoMenu;
-import com.space.invaders.entidades.menu.SubMenu;
 import com.space.invaders.interfaces.mensajes.IColega;
 import com.space.invaders.interfaces.mensajes.IMediador;
 import com.space.invaders.modelos.ModeloMenuPrincipal;
-import com.space.invaders.navegacion.NombreRuta;
+import com.space.invaders.navegacion.NombreEstado;
 import com.space.invaders.recursos.sonido.AdministradorSonidos;
 import com.space.invaders.recursos.sonido.NombreSonido;
-import com.space.invaders.vistas.VistaMenuPrincipal;
+import com.space.invaders.vistas.VistaEstadoMenuPrincipal;
 
 /**
  * Controlador del menu principal.
  */
-public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase implements IColega {
+public class ControladorEstadoMenuPrincipal extends ControladorEstadoJuegoBase implements IColega {
 	
 	private IMediador mediador;
-	private VistaMenuPrincipal vistaMenuPrincipal;
+	private VistaEstadoMenuPrincipal vistaEstadoMenuPrincipal;
 	private ModeloMenuPrincipal modeloMenuPrincipal;
 	
 	/**
 	 * Crea un nuevo controlador de para el Menu Principal.
 	 */
-	public ControladorMenuPrincipal() {
-		vistaMenuPrincipal = new VistaMenuPrincipal(this);	
+	public ControladorEstadoMenuPrincipal() {
+		vistaEstadoMenuPrincipal = new VistaEstadoMenuPrincipal(this);	
 		modeloMenuPrincipal = new ModeloMenuPrincipal();
 	}
 	
@@ -34,8 +33,8 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 	public void inicializar() {
 
 		System.out.println("Iniciando ControladorMenuPrincipal");
-		vistaMenuPrincipal.inicializar();
-		vistaMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
+		vistaEstadoMenuPrincipal.inicializar();
+		vistaEstadoMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
 	}
 
 	@Override
@@ -57,7 +56,7 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 	@Override
 	public void renderizar() {
 		// TODO Auto-generated method stub
-		vistaMenuPrincipal.renderizar();
+		vistaEstadoMenuPrincipal.renderizar();
 	}
 
 	@Override
@@ -68,14 +67,14 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 			ElementoMenu elementoMenuActual = modeloMenuPrincipal.getElementoMenuActual();
 			
 			if(elementoMenuActual!=null) {
-				NombreRuta nombreRuta = elementoMenuActual.getNombreRuta();
+				NombreEstado nombreEstado = elementoMenuActual.getNombreRuta();
 				
-				switch (nombreRuta) {
+				switch (nombreEstado) {
 					case SeleccionarJugador:
 					case NuevoJuego:
 					case CargarJuego:
 						AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.MENU_SELECCIONAR);
-						navegarControlador(NombreRuta.Juego);
+						navegarControlador(NombreEstado.Juego);
 						break;
 					case Salir:
 						Gdx.app.exit();
@@ -83,16 +82,16 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 					case Regresar:
 						AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.MENU_REGRESAR);
 						modeloMenuPrincipal.cargarOpcionesPadre();
-						vistaMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
+						vistaEstadoMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
 						break;
 					default:
 						AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.MENU_SELECCIONAR);
 						try {
 							if(modeloMenuPrincipal.esSubMenu()) {
 								modeloMenuPrincipal.cargarOpcionesSubMenu();
-								vistaMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
+								vistaEstadoMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
 							}else {
-								navegarControlador(nombreRuta);
+								navegarControlador(nombreEstado);
 							}
 						} catch (Exception e) {
 							
@@ -119,13 +118,13 @@ public class ControladorMenuPrincipal extends ControladorEstadoJuegoBase impleme
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
 			AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.MENU_REGRESAR);
 			modeloMenuPrincipal.cargarOpcionesPadre();
-			vistaMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
+			vistaEstadoMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
 		}
 	}
 
 	@Override
 	public void dispose() {
-		vistaMenuPrincipal.dispose();
+		vistaEstadoMenuPrincipal.dispose();
 	}
 
 }

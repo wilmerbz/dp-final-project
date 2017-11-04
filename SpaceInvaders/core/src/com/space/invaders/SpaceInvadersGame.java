@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.space.invaders.controladores.ControladorPrincipal;
 import com.space.invaders.interfaces.controladores.IControladorPrincipal;
-import com.space.invaders.interfaces.navegacion.IAdministradorNavegacion;
-import com.space.invaders.navegacion.AdministradorNavegacion;
+import com.space.invaders.interfaces.estados.IAdministradorEstados;
+import com.space.invaders.navegacion.AdministradorEstados;
 
-import com.space.invaders.navegacion.NombreRuta;
+import com.space.invaders.navegacion.NombreEstado;
 
 public class SpaceInvadersGame extends ApplicationAdapter {
 
@@ -33,14 +33,14 @@ public class SpaceInvadersGame extends ApplicationAdapter {
 	private void inicializarNavegacion() {
 		_controladorPrincipal = new ControladorPrincipal();
 		
-		IAdministradorNavegacion administradorNavegacion = AdministradorNavegacion.getInstancia();
+		IAdministradorEstados administradorNavegacion = AdministradorEstados.getInstancia();
 		administradorNavegacion.setControladorPrincipal(_controladorPrincipal);
 		
-		administradorNavegacion.agregarRuta(NombreRuta.Bienvenida, "com.space.invaders.controladores.ControladorBienvenida", true);
-		administradorNavegacion.agregarRuta(NombreRuta.MenuPrincipal, "com.space.invaders.controladores.ControladorMenuPrincipal", true);
-		administradorNavegacion.agregarRuta(NombreRuta.Juego, "com.space.invaders.controladores.ControladorJuego", true);
+		administradorNavegacion.agregarEstado(NombreEstado.Bienvenida, "com.space.invaders.controladores.ControladorEstadoBienvenida", true);
+		administradorNavegacion.agregarEstado(NombreEstado.MenuPrincipal, "com.space.invaders.controladores.ControladorEstadoMenuPrincipal", true);
+		administradorNavegacion.agregarEstado(NombreEstado.Juego, "com.space.invaders.controladores.ControladorEstadoJuego", true);
 		
-		administradorNavegacion.navegar(NombreRuta.Bienvenida);
+		administradorNavegacion.navegar(NombreEstado.Bienvenida);
 		//administradorNavegacion.navegar(NombreRuta.Juego);
 	}
 
@@ -58,8 +58,7 @@ public class SpaceInvadersGame extends ApplicationAdapter {
 	
 	@Override
 	public void render () {
-		
-		//Limpia la pantalla utilizando el color negro.
+		//Limpia la pantalla pintando el color negro.
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

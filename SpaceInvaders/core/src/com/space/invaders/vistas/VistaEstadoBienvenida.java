@@ -14,7 +14,7 @@ import com.space.invaders.vistas.base.VistaEstadoJuego;
 /**
  * Estado de Bienvenida del Juego.
  */
-public class VistaBienvenida extends VistaEstadoJuego {
+public class VistaEstadoBienvenida extends VistaEstadoJuego {
 
 	SpriteBatch batch;
 	//Texture background;
@@ -23,7 +23,7 @@ public class VistaBienvenida extends VistaEstadoJuego {
 	 * Crea una nueva instancia del controlador del estado de Bienvenida del juego.
 	 * @param controlador
 	 */
-	public VistaBienvenida(IControladorEstadoJuego controlador) {
+	public VistaEstadoBienvenida(IControladorEstadoJuego controlador) {
 		super(controlador);
 		// TODO Auto-generated constructor stub
 	}

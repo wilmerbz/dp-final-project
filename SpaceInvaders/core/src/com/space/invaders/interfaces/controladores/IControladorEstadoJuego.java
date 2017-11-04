@@ -3,10 +3,10 @@ package com.space.invaders.interfaces.controladores;
 import java.util.List;
 
 import com.space.invaders.actores.ElementoJuego;
-import com.space.invaders.navegacion.AdministradorNavegacion;
+import com.space.invaders.navegacion.AdministradorEstados;
 
 /**
- * Define la interfaz para los controladores del juego.
+ * Define la interfaz para los controladores de estado del juego.
  */
 public interface IControladorEstadoJuego extends IControlador {
 

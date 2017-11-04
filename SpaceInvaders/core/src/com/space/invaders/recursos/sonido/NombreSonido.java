@@ -3,7 +3,7 @@ package com.space.invaders.recursos.sonido;
 /**
  * Contiene los nombres de los sonidos disponibles en el juego.
  */
-public class NombreSonido {
+public final class NombreSonido {
 	public static final String DISPARO_JUGADOR = "disparo-jugador";
 	public static final String NO_DISPARO_JUGADOR = "no-disparo-jugador";
 	public static final String DISPARO_ENEMIGO = "disparo-enemigo";

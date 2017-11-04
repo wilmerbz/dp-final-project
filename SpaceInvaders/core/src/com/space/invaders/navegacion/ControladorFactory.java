@@ -4,8 +4,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import com.space.invaders.interfaces.controladores.IControlador;
+import com.space.invaders.interfaces.estados.IControladorFactory;
 import com.space.invaders.interfaces.mensajes.IColega;
-import com.space.invaders.interfaces.navegacion.IControladorFactory;
 import com.space.invaders.mensajes.MediadorPrincipal;
 
 /**
@@ -14,7 +14,7 @@ import com.space.invaders.mensajes.MediadorPrincipal;
 public class ControladorFactory implements IControladorFactory{
 
 	@Override
-	public IControlador crearControlador(RutaControlador informacionRuta) {
+	public IControlador crearControlador(ConfiguracionControladorEstado informacionRuta) {
 		// TODO Auto-generated method stub
 		if(informacionRuta.getIsSingleton() && informacionRuta.getInstanciaControlador() != null) {
 			return informacionRuta.getInstanciaControlador();

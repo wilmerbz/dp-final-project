@@ -26,7 +26,7 @@ public class AdministradorTexturas implements IAdministradorTexturas {
 	 * Obtiene la instancia unica del administrador de texturas.	
 	 * @return Administrador de texturas.
 	 */
-	public static IAdministradorTexturas getInstancia() {
+	public synchronized static IAdministradorTexturas getInstancia() {
 		if(_instancia == null) {
 			_instancia = new AdministradorTexturas();
 		}

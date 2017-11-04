@@ -8,21 +8,22 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeBitmapFontData;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.space.invaders.SpaceInvadersGame;
-import com.space.invaders.controladores.ControladorMenuPrincipal;
+import com.space.invaders.controladores.ControladorEstadoMenuPrincipal;
 import com.space.invaders.entidades.menu.ElementoMenu;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
+import com.space.invaders.recursos.texto.AdministradorTexto;
+import com.space.invaders.recursos.texto.IAdministradorTexto;
+import com.space.invaders.recursos.texto.NombreFuente;
 import com.space.invaders.vistas.base.VistaEstadoJuego;
 
 /**
  * Vista del menu principal del juego.
  */
-public class VistaMenuPrincipal extends VistaEstadoJuego {
+public class VistaEstadoMenuPrincipal extends VistaEstadoJuego {
 
-	private ControladorMenuPrincipal controlador;
+	private ControladorEstadoMenuPrincipal controlador;
 	
 	private List<ElementoMenu> elementosMenu;
 	private final String titulo = "Space Invaders";
@@ -36,10 +37,13 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 	private SpriteBatch spriteBatch;
 	
 	
-	
-	public VistaMenuPrincipal(IControladorEstadoJuego controladorEstadoJuego) {
+	/**
+	 * Crea una nueva instancia del estado del Menu Principal del juego.
+	 * @param controladorEstadoJuego Controlador del estado del juego.
+	 */
+	public VistaEstadoMenuPrincipal(IControladorEstadoJuego controladorEstadoJuego) {
 		super(controladorEstadoJuego);
-		controlador = (ControladorMenuPrincipal)  controladorEstadoJuego;
+		controlador = (ControladorEstadoMenuPrincipal)  controladorEstadoJuego;
 	}
 
 	@Override
@@ -48,23 +52,15 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 		spriteBatch = new SpriteBatch();
 		spriteBatch.setProjectionMatrix(SpaceInvadersGame.camara.combined);
 		
-		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(rutaFuente));
-		FreeTypeFontParameter fontParameter = new FreeTypeFontParameter();
-		fontParameter.size = 100;
-		fontParameter.color = Color.WHITE;
+		IAdministradorTexto administradorTexto = AdministradorTexto.getInstancia();
 		
-		fuenteTitulo = generator.generateFont(fontParameter);
-		tituloGlyphLayout.setText(fuenteTitulo, titulo);
+		fuenteTitulo = administradorTexto.obtenerFuente(NombreFuente.HYPER_SPACE, 100, Color.WHITE);
+		tituloGlyphLayout = administradorTexto.crearGlifoTexto(titulo, fuenteTitulo);
+
+		fuenteElementoMenu = administradorTexto.obtenerFuente(NombreFuente.HYPER_SPACE, 50, Color.WHITE);
+
+		fuenteElementoMenuSeleccionado = administradorTexto.obtenerFuente(NombreFuente.HYPER_SPACE, 60, Color.SCARLET);
 		
-		fontParameter = new FreeTypeFontParameter();
-		fontParameter.size = 50;
-		fontParameter.color = Color.WHITE;
-		fuenteElementoMenu = generator.generateFont(fontParameter);
-		
-		fontParameter = new FreeTypeFontParameter();
-		fontParameter.size = 60;
-		fontParameter.color = Color.SCARLET;
-		fuenteElementoMenuSeleccionado = generator.generateFont(fontParameter);
 	}
 
 	@Override
@@ -125,11 +121,14 @@ public class VistaMenuPrincipal extends VistaEstadoJuego {
 			elementosMenuGlyphLayouts =null;
 			return;
 		}
+		
+		IAdministradorTexto administradorTexto = AdministradorTexto.getInstancia();
+		
+		
 		elementosMenuGlyphLayouts = new GlyphLayout[elementosMenu.size()];
 		for(int i = 0; i< elementosMenu.size(); i++) {
 			ElementoMenu elemento = this.elementosMenu.get(i);
-			GlyphLayout layoutElemento = new GlyphLayout();
-			layoutElemento.setText(fuenteElementoMenu, elemento.getDescripcion());
+			GlyphLayout layoutElemento = administradorTexto.crearGlifoTexto(elemento.getDescripcion(), fuenteElementoMenu);
 			elementosMenuGlyphLayouts[i] = layoutElemento;
 		}
 

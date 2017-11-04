@@ -1,6 +1,6 @@
 package com.space.invaders.entidades.menu;
 
-import com.space.invaders.navegacion.NombreRuta;
+import com.space.invaders.navegacion.NombreEstado;
 
 /**
  * Representa un elemento de menu.
@@ -10,7 +10,7 @@ public abstract class ElementoMenu {
 
 	private String descripcion;
 	
-	private NombreRuta nombreRuta;
+	private NombreEstado nombreEstado;
 	
 	private boolean seleccionado = false;
 	
@@ -18,12 +18,12 @@ public abstract class ElementoMenu {
 
 	/**
 	 * Crea una nueva instancia de Elemento Menu.
-	 * @param nombreRuta Nombre de la ruta del controlador a ejecutar.
+	 * @param nombreEstado Nombre del estado a ejecutar.
 	 * @param descripcion Descripcion de la opción.
 	 */
-	public ElementoMenu(NombreRuta nombreRuta, String descripcion) {
+	public ElementoMenu(NombreEstado nombreEstado, String descripcion) {
 		super();
-		this.nombreRuta = nombreRuta;
+		this.nombreEstado = nombreEstado;
 		this.descripcion = descripcion;
 	}
 
@@ -44,11 +44,11 @@ public abstract class ElementoMenu {
 	}
 
 	/**
-	 * Obtiene el nombre de la ruta del controlador a ejecutar.
-	 * @return Nombre de la ruta.
+	 * Obtiene el nombre del estado a ejecutar.
+	 * @return Nombre del estado.
 	 */
-	public NombreRuta getNombreRuta() {
-		return nombreRuta;
+	public NombreEstado getNombreRuta() {
+		return nombreEstado;
 	}
 
 	/**
@@ -68,11 +68,11 @@ public abstract class ElementoMenu {
 	}
 
 	/**
-	 * Asigna el nombre de la ruta del controlador a ejecutar.
-	 * @param nombreRuta Nombre de la ruta.
+	 * Asigna el nombre del estado a ejecutar.
+	 * @param nombreEstado Nombre del estado.
 	 */
-	public void setNombreRuta(NombreRuta nombreRuta) {
-		this.nombreRuta = nombreRuta;
+	public void setNombreRuta(NombreEstado nombreEstado) {
+		this.nombreEstado = nombreEstado;
 	}
 
 	/**

@@ -6,9 +6,9 @@ package com.space.invaders.interfaces.controladores;
 public interface IControladorPrincipal extends IControlador, IControladorEstadoJuego {
 	
 	/**
-	 * Establece el controlador actual del estado juego.
+	 * Asigna el controlador actual del estado juego.
 	 * @param controladorEstadoJuego Controlador del estado juego.
 	 */
-	void establecerControladorEstadoJuegoActual(IControladorEstadoJuego controladorEstadoJuego);
+	void setControladorEstadoJuegoActual(IControladorEstadoJuego controladorEstadoJuego);
 	
 }

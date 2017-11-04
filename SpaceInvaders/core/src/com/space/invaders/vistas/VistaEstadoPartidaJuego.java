@@ -19,15 +19,18 @@ import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveJugador;
 import com.space.invaders.SpaceInvadersGame;
 import com.space.invaders.actores.ElementoJuego;
-import com.space.invaders.controladores.ControladorJuego;
+import com.space.invaders.controladores.ControladorEstadoJuego;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
+import com.space.invaders.recursos.texto.AdministradorTexto;
+import com.space.invaders.recursos.texto.IAdministradorTexto;
+import com.space.invaders.recursos.texto.NombreFuente;
 import com.space.invaders.recursos.texturas.AdministradorTexturas;
 import com.space.invaders.recursos.texturas.NombreTextura;
 import com.space.invaders.vistas.base.VistaEstadoJuego;
 
-public class VistaJuego extends VistaEstadoJuego {
+public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 
-	private ControladorJuego controladorJuego;
+	private ControladorEstadoJuego controladorJuego;
 	private SpriteBatch batch;
 	private FondoInfinito background;
 	private Texture panel;
@@ -41,10 +44,10 @@ public class VistaJuego extends VistaEstadoJuego {
 	
 	ShapeRenderer shapeRenderer;
 	
-	public VistaJuego(IControladorEstadoJuego controladorEstadoJuego) {
+	public VistaEstadoPartidaJuego(IControladorEstadoJuego controladorEstadoJuego) {
 		super(controladorEstadoJuego);
 
-		controladorJuego = (ControladorJuego) controladorEstadoJuego;
+		controladorJuego = (ControladorEstadoJuego) controladorEstadoJuego;
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(SpaceInvadersGame.camara.combined);
 		
@@ -88,22 +91,13 @@ public class VistaJuego extends VistaEstadoJuego {
 		naveJugador.getActor().setX(xNaveJugador);
 		naveJugador.getActor().setY(5);
 		
+		IAdministradorTexto administradorTexto = AdministradorTexto.getInstancia();
 		
-		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(rutaFuente));
-		FreeTypeFontParameter fontParameter = new FreeTypeFontParameter();
-		fontParameter.size = 25;
-		fontParameter.color = Color.WHITE;
-		fontParameter.shadowColor = Color.BLACK;
-		fontParameter.shadowOffsetX = 1;
-		fontParameter.shadowOffsetY = 1;
-		fuentePuntaje = generator.generateFont(fontParameter);
+		fuentePuntaje = administradorTexto.obtenerFuente(NombreFuente.HYPER_SPACE, 25, Color.WHITE, Color.BLACK);
+		
 		layoutPuntaje = new GlyphLayout();
-		
-		
-		fontParameter.size = 30;
-		fontParameter.color = Color.WHITE;
-		
-		fuenteVidas = generator.generateFont(fontParameter);
+
+		fuenteVidas = administradorTexto.obtenerFuente(NombreFuente.HYPER_SPACE, 30, Color.WHITE, Color.BLACK);
 		layoutVidas = new GlyphLayout();
 
 	}

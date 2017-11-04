@@ -3,41 +3,41 @@ package com.space.invaders.navegacion;
 import com.space.invaders.interfaces.controladores.IControlador;
 
 /**
- * Representa la información de una ruta de controlador.
+ * Representa la informacion de una ruta de controlador.
  */
- public class RutaControlador {
+ public class ConfiguracionControladorEstado {
 	
-	private NombreRuta nombreRuta;
+	private NombreEstado nombreEstado;
 	private String nombreClaseControlador;
 	private Boolean isSingleton;
 	private IControlador instanciaControlador;
 	
 	/**
-	 * Crea una nueva instancia de la ruta de controlador.
-	 * @param nombreRuta Nombre de la ruta.
+	 * Crea una nueva instancia del estado de controlador.
+	 * @param nombreEstado Nombre del estado.
 	 * @param nombreClaseControlador Nombre de la clase del controlador.
 	 * @param isSingleton Indica si la instancia del controlador es singleton.
 	 */
-	public RutaControlador(NombreRuta nombreRuta, String nombreClaseControlador, boolean isSingleton) {
-		this.nombreRuta = nombreRuta;
+	public ConfiguracionControladorEstado(NombreEstado nombreEstado, String nombreClaseControlador, boolean isSingleton) {
+		this.nombreEstado = nombreEstado;
 		this.nombreClaseControlador = nombreClaseControlador;
 		this.isSingleton = isSingleton;
 	}
 	
 	/**
-	 * Obtiene el nombre de la ruta.
-	 * @return Nombre de la ruta.
+	 * Obtiene el nombre del estado.
+	 * @return Nombre del estado.
 	 */
-	public NombreRuta getNombreRuta() {
-		return nombreRuta;
+	public NombreEstado getNombreEstado() {
+		return nombreEstado;
 	}
 	
 	/**
-	 * Asigna el nombre de la ruta.
-	 * @param nombreRuta Nombre de la ruta.
+	 * Asigna el nombre del estado.
+	 * @param nombreEstado Nombre del estado.
 	 */
-	public void setNombreRuta(NombreRuta nombreRuta) {
-		this.nombreRuta = nombreRuta;
+	public void setNombreRuta(NombreEstado nombreEstado) {
+		this.nombreEstado = nombreEstado;
 	}
 	
 	/**
@@ -52,12 +52,12 @@ import com.space.invaders.interfaces.controladores.IControlador;
 	 * Asigna el nombre de la clase del controlador.
 	 * @param nombreClaseControlador Nombre de la clase del controlador.
 	 */
-	public void setNombreClaseControlador(String nombreClaseControlador) {
-		this.nombreClaseControlador = nombreClaseControlador;
+	public void setNombreClaseControladorEstado(String nombreClaseControladorEstado) {
+		this.nombreClaseControlador = nombreClaseControladorEstado;
 	}
 	
 	/**
-	 * Indica si el la instancia del controlador es unica o se crea una nueva en cada navegación.
+	 * Indica si el la instancia del controlador es unica o se crea una nueva en cada vez que se cambie al este estado.
 	 * @return Retorna true si la instancia es singleton; de lo contrario false. 
 	 */
 	public Boolean getIsSingleton() {
@@ -65,7 +65,7 @@ import com.space.invaders.interfaces.controladores.IControlador;
 	}
 	
 	/**
-	 * Asigna el valor que indica si el la instancia del controlador es unica o se crea una nueva en cada navegación.
+	 * Asigna el valor que indica si el la instancia del controlador es unica o se crea una nueva en cada navegaciï¿½n.
 	 * @param isSingleton true si la instancia es singleton; de lo contrario false.
 	 */
 	public void setIsSingleton(Boolean isSingleton) {

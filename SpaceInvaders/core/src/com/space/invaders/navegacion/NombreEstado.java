@@ -1,9 +1,9 @@
 package com.space.invaders.navegacion;
 
 /**
- * Nombres de rutas de navegaci�n disponibles en la aplicaci�n.
+ * Nombres de los estados disponibles en el juego.
  */
-public enum NombreRuta {
+public enum NombreEstado {
 	Bienvenida,
 	MenuPrincipal,
 	SeleccionarJugador,

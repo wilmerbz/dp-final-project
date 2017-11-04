@@ -7,7 +7,7 @@ import com.space.invaders.entidades.menu.ElementoMenu;
 import com.space.invaders.entidades.menu.OpcionMenu;
 import com.space.invaders.entidades.menu.SubMenu;
 import com.space.invaders.interfaces.modelos.IModelo;
-import com.space.invaders.navegacion.NombreRuta;
+import com.space.invaders.navegacion.NombreEstado;
 
 /**
  * Modelo del Menu Principal.
@@ -34,19 +34,19 @@ public class ModeloMenuPrincipal implements IModelo{
 		
 		elementosMenuRaiz = new ArrayList<ElementoMenu>();
 		
-		SubMenu jugar = new SubMenu(NombreRuta.Juego, "Jugar");
+		SubMenu jugar = new SubMenu(NombreEstado.Juego, "Jugar");
 		
-		ElementoMenu nuevoJuego = new OpcionMenu(NombreRuta.NuevoJuego, "Nuevo Juego");
-		ElementoMenu cargarJuego = new OpcionMenu(NombreRuta.CargarJuego, "Cargar Juego");
-		ElementoMenu regresar = new OpcionMenu(NombreRuta.Regresar, "< Regresar");
+		ElementoMenu nuevoJuego = new OpcionMenu(NombreEstado.NuevoJuego, "Nuevo Juego");
+		ElementoMenu cargarJuego = new OpcionMenu(NombreEstado.CargarJuego, "Cargar Juego");
+		ElementoMenu regresar = new OpcionMenu(NombreEstado.Regresar, "< Regresar");
 		
 		jugar.agregarHijo(nuevoJuego);
 		jugar.agregarHijo(cargarJuego);
 		jugar.agregarHijo(regresar);
 		
-		ElementoMenu mejoresPuntajes = new OpcionMenu(NombreRuta.MejoresPuntajes, "Mejores Puntajes");
-		ElementoMenu instrucciones = new OpcionMenu(NombreRuta.Instrucciones, "Instrucciones");
-		ElementoMenu salir = new OpcionMenu(NombreRuta.Salir, "Salir");
+		ElementoMenu mejoresPuntajes = new OpcionMenu(NombreEstado.MejoresPuntajes, "Mejores Puntajes");
+		ElementoMenu instrucciones = new OpcionMenu(NombreEstado.Instrucciones, "Instrucciones");
+		ElementoMenu salir = new OpcionMenu(NombreEstado.Salir, "Salir");
 		
 		elementosMenuRaiz.add(jugar);
 		elementosMenuRaiz.add(mejoresPuntajes);

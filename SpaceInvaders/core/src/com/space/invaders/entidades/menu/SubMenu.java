@@ -3,7 +3,7 @@ package com.space.invaders.entidades.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.space.invaders.navegacion.NombreRuta;
+import com.space.invaders.navegacion.NombreEstado;
 
 /**
  * Elemento de submenu.
@@ -14,11 +14,11 @@ public class SubMenu extends ElementoMenu {
 	
 	/**
 	 * Crea una nueva instancia del elemento de tipo submenu.	
-	 * @param nombreRuta
+	 * @param nombreEstado
 	 * @param descripcion
 	 */
-	public SubMenu(NombreRuta nombreRuta, String descripcion) {
-		super(nombreRuta, descripcion);
+	public SubMenu(NombreEstado nombreEstado, String descripcion) {
+		super(nombreEstado, descripcion);
 		hijos = new ArrayList<ElementoMenu>();
 	}
 

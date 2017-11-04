@@ -24,18 +24,18 @@ import com.space.invaders.modelos.ModeloNivel;
 import com.space.invaders.modelos.ModeloPartidaJuego;
 import com.space.invaders.recursos.sonido.AdministradorSonidos;
 import com.space.invaders.recursos.sonido.NombreSonido;
-import com.space.invaders.vistas.VistaJuego;
+import com.space.invaders.vistas.VistaEstadoPartidaJuego;
 
 /**
  * Controlador de juego.
  */
-public class ControladorJuego extends ControladorEstadoJuegoBase implements IColega {
+public class ControladorEstadoJuego extends ControladorEstadoJuegoBase implements IColega {
 	
 	private int contadorVisualizaciones = 0;
 	private IMediador mediador;
 	private ModeloPartidaJuego modeloPartidaJuego;
 	private ModeloNivel modeloNivel;
-	private VistaJuego vistaJuego;
+	private VistaEstadoPartidaJuego vistaEstadoPartidaJuego;
 	private Temporizador temporizadorDisparoEnemigo;
 	
 	private IComandoNave comandoNaveMovimientoDerecha;
@@ -45,10 +45,10 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	/**
 	 * Crea una nueva instancia de Controlador Juego.
 	 */
-	public ControladorJuego() {
+	public ControladorEstadoJuego() {
 		modeloNivel = new ModeloNivel();
 		modeloPartidaJuego = new ModeloPartidaJuego();
-		vistaJuego = new VistaJuego(this);
+		vistaEstadoPartidaJuego = new VistaEstadoPartidaJuego(this);
 		temporizadorDisparoEnemigo = new Temporizador();
 	}
 
@@ -61,7 +61,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 		temporizadorDisparoEnemigo.setTiempo(nivel.getFrecuenciaDisparosEnemigos());
 		System.out.println("Nivel: "+ nivel.getNumero() + " - "+ nivel.getNombre());
 		modeloPartidaJuego.inicializarPartidaJuego();
-		vistaJuego.inicializar();
+		vistaEstadoPartidaJuego.inicializar();
 		
 		inicializarComandos();
 
@@ -92,7 +92,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 	public void actualizar(float deltaTiempo) {
 
 		modeloPartidaJuego.actualizar(deltaTiempo);
-		vistaJuego.actualizar(deltaTiempo);
+		vistaEstadoPartidaJuego.actualizar(deltaTiempo);
 		
 		if (temporizadorDisparoEnemigo.esTiempo(deltaTiempo)) {
 			modeloPartidaJuego.generarDisparoEnemigo();
@@ -101,7 +101,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 
 	@Override
 	public void renderizar() {
-		vistaJuego.renderizar();
+		vistaEstadoPartidaJuego.renderizar();
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class ControladorJuego extends ControladorEstadoJuegoBase implements ICol
 
 	@Override
 	public void dispose() {
-		vistaJuego.dispose();
+		vistaEstadoPartidaJuego.dispose();
 	}
 
 	/**

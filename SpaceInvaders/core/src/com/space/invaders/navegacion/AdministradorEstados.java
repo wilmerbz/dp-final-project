@@ -5,29 +5,29 @@ import java.util.Hashtable;
 import com.space.invaders.interfaces.controladores.IControlador;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
 import com.space.invaders.interfaces.controladores.IControladorPrincipal;
-import com.space.invaders.interfaces.navegacion.IAdministradorNavegacion;
-import com.space.invaders.interfaces.navegacion.IControladorFactory;
+import com.space.invaders.interfaces.estados.IAdministradorEstados;
+import com.space.invaders.interfaces.estados.IControladorFactory;
 import com.space.invaders.interfaces.vistas.IVista;
 
 /***
  * Administrador de navegaci�n que permite navegar entre controladores, sin que tengan referencia entre ellos.
  */
-public class AdministradorNavegacion implements IAdministradorNavegacion {
+public class AdministradorEstados implements IAdministradorEstados {
 	
 	private IControladorFactory controladorFactory;
 	private IControladorPrincipal controladorPrincipal;
-	private Hashtable<NombreRuta, RutaControlador> controladores;
+	private Hashtable<NombreEstado, ConfiguracionControladorEstado> controladores;
 	
 	///#region Singleton
-	private static AdministradorNavegacion instancia;
+	private static AdministradorEstados instancia;
 	
 	/***
-	 * Obtiene la instancia singleton del administrador de navegaci�n.
-	 * @return IAdministradorNavegacion Administrador de Navegaci�n.
+	 * Obtiene la instancia singleton del administrador de Estados.
+	 * @return IAdministradorNavegacion Administrador de Estados.
 	 */
-	public static IAdministradorNavegacion getInstancia() {
+	public static IAdministradorEstados getInstancia() {
 		if(instancia == null) {
-			instancia = new AdministradorNavegacion();
+			instancia = new AdministradorEstados();
 		}
 		
 		return instancia;
@@ -36,8 +36,8 @@ public class AdministradorNavegacion implements IAdministradorNavegacion {
 	/***
 	 * Constructor privado que crea una instancia de Administrador Navegaci�n.
 	 */
-	private AdministradorNavegacion() {
-		controladores = new Hashtable<NombreRuta, RutaControlador>();
+	private AdministradorEstados() {
+		controladores = new Hashtable<NombreEstado, ConfiguracionControladorEstado>();
 		controladorFactory = new ControladorFactory();
 	}
 	
@@ -49,31 +49,31 @@ public class AdministradorNavegacion implements IAdministradorNavegacion {
 	}
 	
 	@Override
-	public void agregarRuta(NombreRuta nombreRuta, String nombreClaseControlador, boolean isSingleton) {
+	public void agregarEstado(NombreEstado nombreEstado, String nombreClaseControlador, boolean isSingleton) {
 		
-		removerRuta(nombreRuta);
+		removerEstado(nombreEstado);
 		
-		RutaControlador informacionRuta = new RutaControlador(nombreRuta, nombreClaseControlador, isSingleton);
-		controladores.put(nombreRuta, informacionRuta);
+		ConfiguracionControladorEstado informacionRuta = new ConfiguracionControladorEstado(nombreEstado, nombreClaseControlador, isSingleton);
+		controladores.put(nombreEstado, informacionRuta);
 		
 	}
 	
 	@Override
-	public void removerRuta(NombreRuta nombreRuta) {
+	public void removerEstado(NombreEstado nombreEstado) {
 		
-		if(controladores.containsKey(nombreRuta)) {
-			controladores.remove(nombreRuta);
+		if(controladores.containsKey(nombreEstado)) {
+			controladores.remove(nombreEstado);
 		}
 	}
 	
 	@Override
-	public void navegar(NombreRuta nombreRuta) {
+	public void navegar(NombreEstado nombreEstado) {
 		
-		IControlador controlador = getControlador(nombreRuta);
+		IControlador controlador = getControlador(nombreEstado);
 		controlador.inicializar();
 		
 		if(controlador instanceof IControladorEstadoJuego) {
-			controladorPrincipal.establecerControladorEstadoJuegoActual((IControladorEstadoJuego)controlador);
+			controladorPrincipal.setControladorEstadoJuegoActual((IControladorEstadoJuego)controlador);
 		}
 		
 	}
@@ -85,13 +85,13 @@ public class AdministradorNavegacion implements IAdministradorNavegacion {
 	 */
 	@Override
 	public void establecerControladorEstadoJuegoActual(IControladorEstadoJuego controladorEstadoJuego) {
-		controladorPrincipal.establecerControladorEstadoJuegoActual(controladorEstadoJuego);
+		controladorPrincipal.setControladorEstadoJuegoActual(controladorEstadoJuego);
 	}
 	
 	
-	protected IControlador getControlador(NombreRuta nombreRuta) {
+	protected IControlador getControlador(NombreEstado nombreEstado) {
 		
-		RutaControlador informacionControlador = getInformacionControlador(nombreRuta);
+		ConfiguracionControladorEstado informacionControlador = getInformacionControlador(nombreEstado);
 		
 		if(informacionControlador == null) {
 			throw new InvalidParameterException("No se ha registrado una ruta con el nombre indicado.");
@@ -103,12 +103,12 @@ public class AdministradorNavegacion implements IAdministradorNavegacion {
 	}
 	
 	
-	protected RutaControlador getInformacionControlador(NombreRuta nombreRuta) {
-		if(!controladores.containsKey(nombreRuta)) {
+	protected ConfiguracionControladorEstado getInformacionControlador(NombreEstado nombreEstado) {
+		if(!controladores.containsKey(nombreEstado)) {
 			return null;
 		}
 		
-		RutaControlador informacionRuta =   controladores.get(nombreRuta);
+		ConfiguracionControladorEstado informacionRuta =   controladores.get(nombreEstado);
 		return informacionRuta;
 	}
 	

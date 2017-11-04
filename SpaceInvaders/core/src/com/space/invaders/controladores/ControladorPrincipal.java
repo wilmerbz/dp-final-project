@@ -5,7 +5,7 @@ import com.space.invaders.interfaces.controladores.IControladorPrincipal;
 import com.space.invaders.interfaces.vistas.IVista;
 
 /**
- * Controlador principal del juego.
+ * Controlador principal del juego. Representa el contexto para los diferentes estados del juego.
  */
 public class ControladorPrincipal implements IControladorPrincipal {
 
@@ -22,7 +22,7 @@ public class ControladorPrincipal implements IControladorPrincipal {
 	 * @param controladorEstadoJuego Controlador del juego.
 	 */
 	@Override
-	public void establecerControladorEstadoJuegoActual(IControladorEstadoJuego controladorEstadoJuego){
+	public void setControladorEstadoJuegoActual(IControladorEstadoJuego controladorEstadoJuego){
 		this._controladorEstadoJuego = controladorEstadoJuego;
 	}
 

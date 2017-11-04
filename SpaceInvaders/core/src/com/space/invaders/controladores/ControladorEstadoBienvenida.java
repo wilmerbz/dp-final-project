@@ -3,21 +3,21 @@ package com.space.invaders.controladores;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
-import com.space.invaders.navegacion.NombreRuta;
-import com.space.invaders.vistas.VistaBienvenida;
+import com.space.invaders.navegacion.NombreEstado;
+import com.space.invaders.vistas.VistaEstadoBienvenida;
 
 /**
  * Controlador de la bienvenida del juego.
  */
-public class ControladorBienvenida extends ControladorEstadoJuegoBase {
+public class ControladorEstadoBienvenida extends ControladorEstadoJuegoBase {
 
-	protected VistaBienvenida vistaBienvenida;
+	protected VistaEstadoBienvenida vistaEstadoBienvenida;
 	
 	/**
 	 * Crea una nueva instancia del controlador de la bienvenida del juego.
 	 */
-	public ControladorBienvenida() {
-		vistaBienvenida = new VistaBienvenida(this);
+	public ControladorEstadoBienvenida() {
+		vistaEstadoBienvenida = new VistaEstadoBienvenida(this);
 		
 	}
 	
@@ -25,18 +25,18 @@ public class ControladorBienvenida extends ControladorEstadoJuegoBase {
 	public void inicializar() {
 		// TODO Auto-generated method stub
 		System.out.println("Iniciando ControladorBienvenida");
-		vistaBienvenida.inicializar();
+		vistaEstadoBienvenida.inicializar();
 		
 	}
 
 	@Override
 	public void actualizar(float deltaTiempo) {
-		vistaBienvenida.actualizar(deltaTiempo);
+		vistaEstadoBienvenida.actualizar(deltaTiempo);
 	}
 
 	@Override
 	public void renderizar() {
-		vistaBienvenida.renderizar();
+		vistaEstadoBienvenida.renderizar();
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class ControladorBienvenida extends ControladorEstadoJuegoBase {
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 			System.out.println("Enter! Navigate to Main Menu!");
-			navegarControlador(NombreRuta.MenuPrincipal);
+			navegarControlador(NombreEstado.MenuPrincipal);
 		}
 		
 	}
@@ -53,7 +53,7 @@ public class ControladorBienvenida extends ControladorEstadoJuegoBase {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		vistaBienvenida.dispose();
+		vistaEstadoBienvenida.dispose();
 	}
 
 }

@@ -36,6 +36,18 @@ public abstract class VistaEstadoJuego extends Vista implements IVistaEstadoJueg
 		return Gdx.graphics.getHeight();
 	}
 	
+	
+	/***
+	 * Renderiza el estado del juego.
+	 */
+	public abstract void renderizar();
+	
+
+	
+	/***
+	 * Dispone de la vista del estado del juego.
+	 */
+	public abstract void dispose();
 
 
 }

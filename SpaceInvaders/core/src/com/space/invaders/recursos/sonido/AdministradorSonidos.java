@@ -29,7 +29,7 @@ public class AdministradorSonidos  implements IAdministradorSonidos{
 	 * Obtiene la instancia unica del administrador de sonidos.
 	 * @return Administrador de sonidos.
 	 */
-	public static IAdministradorSonidos getInstancia() {
+	public synchronized static IAdministradorSonidos getInstancia() {
 		if(_instancia == null) {
 			_instancia = new AdministradorSonidos();
 		}
