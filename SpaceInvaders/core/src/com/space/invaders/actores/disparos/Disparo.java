@@ -38,7 +38,6 @@ public class Disparo extends ElementoSecuenciaImagen {
 		
 		super.renderizar(batch);
 		
-		mover();
 	}
 	
 	/**

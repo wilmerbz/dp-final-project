@@ -16,5 +16,6 @@ public enum NombreEstado {
 	Salir, 
 	NuevoJuego, 
 	CargarJuego, 
-	Regresar
+	Regresar,
+	Continuar
 }

@@ -8,25 +8,25 @@ import com.space.invaders.navegacion.NombreEstado;
 /**
  * Elemento de submenu.
  */
-public class SubMenu extends ElementoMenu {
+public class OpcionSubMenu extends OpcionMenu {
 
-	private List<ElementoMenu> hijos;
+	private List<OpcionMenu> hijos;
 	
 	/**
 	 * Crea una nueva instancia del elemento de tipo submenu.	
 	 * @param nombreEstado
 	 * @param descripcion
 	 */
-	public SubMenu(NombreEstado nombreEstado, String descripcion) {
+	public OpcionSubMenu(NombreEstado nombreEstado, String descripcion) {
 		super(nombreEstado, descripcion);
-		hijos = new ArrayList<ElementoMenu>();
+		hijos = new ArrayList<OpcionMenu>();
 	}
 
 	/**
 	 * Obtiene la lista de hijos del elemento de menú.
 	 * @return Hijos.
 	 */
-	public List<ElementoMenu> getHijos(){
+	public List<OpcionMenu> getHijos(){
 		return hijos;
 	}
 	
@@ -34,13 +34,13 @@ public class SubMenu extends ElementoMenu {
 	 * Agregar el elemento hijo.
 	 * @param hijo Elemento hijo.
 	 */
-	public void agregarHijo(ElementoMenu hijo) {
+	public void agregarHijo(OpcionMenu hijo) {
 		if(hijos.contains(hijo)) 
 		{
 			return;
 		}
 		
-		hijo.setElementoMenuPadre(this);
+		hijo.setOpcionMenuPadre(this);
 		hijos.add(hijo);
 	}
 	
@@ -48,7 +48,7 @@ public class SubMenu extends ElementoMenu {
 	 * Remueve el elemento hijo.
 	 * @param hijo Elemento hijo.
 	 */
-	public void removerHijo(ElementoMenu hijo) {
+	public void removerHijo(OpcionMenu hijo) {
 		if(!hijos.contains(hijo)) 
 		{
 			return;

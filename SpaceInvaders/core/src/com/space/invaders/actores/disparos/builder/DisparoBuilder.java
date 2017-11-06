@@ -35,7 +35,7 @@ public abstract class DisparoBuilder {
 	public void construirConfiguracionAnimacion(float intervaloAnimacion) {
 		disparo.setAnimar(true);
 		disparo.setIntervaloAnimacion(intervaloAnimacion);
-		disparo.setVelocidadY(3);
+		disparo.setVelocidadY(5);
 	}
 	
 	/**

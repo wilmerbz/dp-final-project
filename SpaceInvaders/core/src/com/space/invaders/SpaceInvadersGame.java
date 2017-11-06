@@ -80,7 +80,6 @@ public class SpaceInvadersGame extends ApplicationAdapter {
 		administradorEstados.agregarEstado(NombreEstado.Juego, "com.space.invaders.controladores.ControladorEstadoPartidaJuego", true);
 		
 		administradorEstados.setEstado(NombreEstado.Bienvenida);
-		//administradorNavegacion.navegar(NombreRuta.Juego);
 	}
 	
 	@Override

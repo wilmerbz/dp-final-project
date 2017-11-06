@@ -19,7 +19,9 @@ import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveJugador;
 import com.space.invaders.SpaceInvadersGame;
 import com.space.invaders.actores.ElementoImagen;
+import com.space.invaders.actores.ElementoTexto;
 import com.space.invaders.controladores.ControladorEstadoPartidaJuego;
+import com.space.invaders.entidades.menu.OpcionMenu;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
 import com.space.invaders.recursos.texto.AdministradorTexto;
 import com.space.invaders.recursos.texto.IAdministradorTexto;
@@ -32,14 +34,12 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 
 	private ControladorEstadoPartidaJuego controladorJuego;
 	private FondoInfinito background;
-	private Texture panel;
+	private Texture panelJugador;
+	private ElementoTexto puntaje;
+	private ElementoTexto vidas;
 	
-	private BitmapFont fuentePuntaje;
-	private static GlyphLayout layoutPuntaje;
-	
-	private BitmapFont fuenteVidas;
-	private static GlyphLayout layoutVidas;
-	
+	private VistaMenu vistaMenu;
+	private final String textoTituloPausa = "Pausa";
 	ShapeRenderer shapeRenderer;
 	
 	public VistaEstadoPartidaJuego(IControladorEstadoJuego controladorEstadoJuego) {
@@ -47,16 +47,19 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 
 		controladorJuego = (ControladorEstadoPartidaJuego) controladorEstadoJuego;
 
-		//shapeRenderer = new ShapeRenderer();
-		//shapeRenderer.setProjectionMatrix(SpaceInvadersGame.camara.combined);
+		shapeRenderer = new ShapeRenderer();
+		shapeRenderer.setProjectionMatrix(SpaceInvadersGame.getCamara().combined);
 		
 		background = new FondoInfinito(NombreTextura.GAME_BACKGROUND);
-		panel = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.PANEL_JUGADOR_PERSONAJE_1);
+		panelJugador = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.PANEL_JUGADOR_PERSONAJE_1);
+		
+		vistaMenu = new VistaMenu(this, textoTituloPausa);
 	}
 
 	@Override
 	public void inicializar() {
 		super.inicializar();
+		
 		List<NaveEnemiga> navesEnemigas = controladorJuego.getNavesEnemigas();
 		int cantidadEnemigosPorFila = controladorJuego.getCantidadEnemigosPorFila();
 		float posicionInicialX = 0;
@@ -89,20 +92,30 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 		naveJugador.setX(xNaveJugador);
 		naveJugador.setY(5);
 		
-		IAdministradorTexto administradorTexto = AdministradorTexto.getInstancia();
+		puntaje = new ElementoTexto("0", NombreFuente.HYPER_SPACE, 25, Color.WHITE, Color.BLACK);
+		puntaje.setX(205);
+		puntaje.setY(getHeight()-75);
 		
-		fuentePuntaje = administradorTexto.obtenerFuente(NombreFuente.HYPER_SPACE, 25, Color.WHITE, Color.BLACK);
-		
-		layoutPuntaje = new GlyphLayout();
+		vidas = new ElementoTexto("0", NombreFuente.HYPER_SPACE, 30, Color.WHITE, Color.BLACK);
+		vidas.setX(135);
+		vidas.setY(getHeight()-70);
 
-		fuenteVidas = administradorTexto.obtenerFuente(NombreFuente.HYPER_SPACE, 30, Color.WHITE, Color.BLACK);
-		layoutVidas = new GlyphLayout();
-
+		vistaMenu.inicializar();
 	}
 
 	@Override
 	public void actualizar(float deltaTiempo) {
 		background.act(deltaTiempo);
+		
+		long puntos = controladorJuego.getPuntos();
+		puntaje.setTexto("$" + puntos);
+		
+		int cantidadVidas = controladorJuego.getVidas();
+		vidas.setTexto(Integer.toString(cantidadVidas));
+		
+		if(controladorJuego.isPausado()) {
+			vistaMenu.actualizar(deltaTiempo);
+		}
 	}
 
 	@Override
@@ -120,30 +133,45 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 			elementoJuego.renderizar(spriteBatch);
 		}
 		
-		spriteBatch.draw(panel, 10, getHeight() - (panel.getHeight() + 10));
+		spriteBatch.draw(panelJugador, 10, getHeight() - (panelJugador.getHeight() + 10));
 		
-		long puntos = controladorJuego.getPuntos();
-		layoutPuntaje.setText(fuentePuntaje, "$" + puntos);
-		fuentePuntaje.draw(spriteBatch, layoutPuntaje, 205,getHeight()-75);
-		
-		int vidas = controladorJuego.getVidas();
-		layoutVidas.setText(fuenteVidas, Integer.toString(vidas));
-		fuenteVidas.draw(spriteBatch, layoutVidas, 135, getHeight()-70);
+		puntaje.renderizar(spriteBatch);
+		vidas.renderizar(spriteBatch);
 		
 		spriteBatch.end();
 		
-		//Menu pausa
-//		Gdx.gl.glEnable(GL30.GL_BLEND);
-//		Gdx.gl.glBlendFunc(GL30.GL_SRC_ALPHA, GL30.GL_ONE_MINUS_SRC_ALPHA);
-//		
-//		shapeRenderer.begin(com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType.Filled);
-//		Color color = new Color(0, 0, 0, 0.5f);
-//		shapeRenderer.setColor(color);
-//		
-//		shapeRenderer.rect(0,0,getWidth(),getHeight());
-//		
-//		shapeRenderer.end();
-//		Gdx.gl.glDisable(GL30.GL_BLEND);
+		if(controladorJuego.isPausado()) {
+			//Menu pausa			
+			Gdx.gl.glEnable(GL30.GL_BLEND);
+			Gdx.gl.glBlendFunc(GL30.GL_SRC_ALPHA, GL30.GL_ONE_MINUS_SRC_ALPHA);
+			
+			shapeRenderer.begin(com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType.Filled);
+			Color color = new Color(0, 0, 0, 0.5f);
+			shapeRenderer.setColor(color);
+			
+			shapeRenderer.rect(0,0,getWidth(),getHeight());
+			
+			shapeRenderer.end();
+			Gdx.gl.glDisable(GL30.GL_BLEND);
+			
+			spriteBatch.begin();
+			if(controladorJuego.isPausado()) {
+				vistaMenu.renderizar();
+			}
+			spriteBatch.end();
+		}
+		
+
+	}
+	
+	/**
+	 * Asigna las opciones del menu.
+	 * 
+	 * @param opcionesMenu
+	 *            Opciones de menu.
+	 */
+	public void setOpcionesMenu(List<OpcionMenu> opcionesMenu) {
+		vistaMenu.setOpcionesMenu(opcionesMenu);
 	}
 
 	@Override

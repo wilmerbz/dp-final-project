@@ -63,5 +63,13 @@ public abstract class VistaEstadoJuego extends Vista implements IVistaEstadoJueg
 	 */
 	public abstract void dispose();
 
-
+	/**
+	 * Obtiene el sprite batch de la vista de estado del juego.
+	 * @return Sprite batch.
+	 */
+	@Override
+	public SpriteBatch getSpriteBatch() {
+		return spriteBatch;
+	}
+	
 }

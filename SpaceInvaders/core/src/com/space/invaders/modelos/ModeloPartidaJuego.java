@@ -28,6 +28,7 @@ import com.space.invaders.entidades.Partida;
  */
 public class ModeloPartidaJuego {
 	
+	private boolean pausado;
 	private Juego juego;
 	
 	/**
@@ -99,13 +100,6 @@ public class ModeloPartidaJuego {
 		Integer tipoNave;
 		
 		Random random = new Random();
-		
-//		List<Integer> indicesEscudo = new ArrayList<Integer>();
-//		int numeroNavesEscudo = 10;
-//		for (int i = 0; i < numeroNavesEscudo; i++) {
-//			indicesEscudo.add(random.nextInt(navesEnemigas.size()));
-//		}
-		
 		
 		while(enumeradorClavesConfiguracionEnemigos.hasMoreElements()) {
 			tipoNave = enumeradorClavesConfiguracionEnemigos.nextElement();
@@ -233,6 +227,12 @@ public class ModeloPartidaJuego {
 	 * Actualiza los actores de la partida de juego actual.
 	 */
 	public void actualizar(float deltaTiempo) {
+		
+		if(pausado) 
+		{
+			return;
+		}
+		
 		NaveJugador naveJugador = getNaveJugador();
 		naveJugador.actualizar(deltaTiempo);
 
@@ -263,6 +263,32 @@ public class ModeloPartidaJuego {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Obtiene el valor que indica si el juego se encuentra pausado.
+	 * @return Retorna true si el juego se encuentra pausado; de lo contrario retorna false.
+	 */
+	public boolean isPausado() {
+		return pausado;
+	}
+
+	/**
+	 * Asigna el valor que indica si el juego se encuentra pausado.
+	 * @param pausado Valor que indica si el juego se encuentra pausado.
+	 */
+	public void setPausado(boolean pausado) {
+		this.pausado = pausado;
+	}
+
+	/**
+	 * Alterna la pausa del juego.
+	 */
+	public void alternarPausa() {
+		boolean isPausado = isPausado();
+		isPausado = !isPausado;
+
+		setPausado(isPausado);
 	}
 	
 }
