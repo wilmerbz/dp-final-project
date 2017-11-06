@@ -13,16 +13,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.space.invaders.actores.Actor;
-import com.space.invaders.actores.ElementoAnimadoJuego;
-import com.space.invaders.actores.ElementoJuego;
+import com.space.invaders.actores.ActorImagen;
+import com.space.invaders.actores.ElementoSecuenciaImagen;
+import com.space.invaders.actores.ElementoImagen;
 import com.space.invaders.actores.direccion.DireccionY;
 import com.space.invaders.actores.disparos.Disparo;
 
 /**
  * Clase base para las naves.
  */
-public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
+public abstract class Nave extends ElementoSecuenciaImagen implements Cloneable {
 
 	/**
 	 * Disparo actual de la nave.
@@ -157,7 +157,7 @@ public abstract class Nave extends ElementoAnimadoJuego implements Cloneable {
 	}
 	
 	
-	protected boolean validarImpacto(Actor actor, Disparo disparo) {
+	protected boolean validarImpacto(ActorImagen actor, Disparo disparo) {
 		Image actorDisparo= disparo.getActor();		
 		SpriteDrawable spriteDrawableDisparo = (SpriteDrawable) actorDisparo.getDrawable();
 		Sprite spriteDisparo = spriteDrawableDisparo.getSprite();

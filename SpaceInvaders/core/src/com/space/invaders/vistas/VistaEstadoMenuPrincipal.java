@@ -1,5 +1,6 @@
 package com.space.invaders.vistas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.space.invaders.SpaceInvadersGame;
+import com.space.invaders.actores.ElementoTexto;
 import com.space.invaders.controladores.ControladorEstadoMenuPrincipal;
 import com.space.invaders.entidades.menu.ElementoMenu;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
@@ -24,83 +26,81 @@ import com.space.invaders.vistas.base.VistaEstadoJuego;
 public class VistaEstadoMenuPrincipal extends VistaEstadoJuego {
 
 	private ControladorEstadoMenuPrincipal controlador;
-	
+
 	private List<ElementoMenu> elementosMenu;
-	private final String titulo = "Space Invaders";
-	private final String rutaFuente = "fonts/Hyperspace Bold.ttf"; 
-	private static GlyphLayout tituloGlyphLayout = new GlyphLayout();
-	private GlyphLayout[] elementosMenuGlyphLayouts;
+	private final String textoTitulo = "Space Invaders";
+	private List<ElementoTexto> elementosTextoMenu;
 	private BitmapFont fuenteTitulo;
 	private BitmapFont fuenteElementoMenu;
 	private BitmapFont fuenteElementoMenuSeleccionado;
+
+	private ElementoTexto titulo;
 	
-	private SpriteBatch spriteBatch;
-	
-	
+	private final int distanciaPrimerElementoMenu = 200;
+	private final int distanciaElementoMenu = 50;
+
 	/**
 	 * Crea una nueva instancia del estado del Menu Principal del juego.
-	 * @param controladorEstadoJuego Controlador del estado del juego.
+	 * 
+	 * @param controladorEstadoJuego
+	 *            Controlador del estado del juego.
 	 */
 	public VistaEstadoMenuPrincipal(IControladorEstadoJuego controladorEstadoJuego) {
 		super(controladorEstadoJuego);
-		controlador = (ControladorEstadoMenuPrincipal)  controladorEstadoJuego;
+		controlador = (ControladorEstadoMenuPrincipal) controladorEstadoJuego;
 	}
 
 	@Override
 	public void inicializar() {
+		super.inicializar();
 		
-		spriteBatch = new SpriteBatch();
-		spriteBatch.setProjectionMatrix(SpaceInvadersGame.camara.combined);
-		
+		titulo = new ElementoTexto(textoTitulo, NombreFuente.HYPER_SPACE, 100, Color.WHITE);
+		float xTitulo = (getWidth() - titulo.getWidth()) / 2;
+		float yTitulo = getHeight() - titulo.getHeight();
+		titulo.setX(xTitulo);
+		titulo.setY(yTitulo);
+
 		IAdministradorTexto administradorTexto = AdministradorTexto.getInstancia();
-		
-		fuenteTitulo = administradorTexto.obtenerFuente(NombreFuente.HYPER_SPACE, 100, Color.WHITE);
-		tituloGlyphLayout = administradorTexto.crearGlifoTexto(titulo, fuenteTitulo);
-
 		fuenteElementoMenu = administradorTexto.obtenerFuente(NombreFuente.HYPER_SPACE, 50, Color.WHITE);
-
 		fuenteElementoMenuSeleccionado = administradorTexto.obtenerFuente(NombreFuente.HYPER_SPACE, 60, Color.SCARLET);
-		
 	}
 
 	@Override
 	public void actualizar(float deltaTiempo) {
-		
+
 	}
 
-	private final int distanciaPrimerElementoMenu = 200;
-	private final int distanciaElementoMenu= 50;
-	
 	@Override
 	public void renderizar() {
-		
+
 		spriteBatch.begin();
 
-		float xTitulo = (getWidth()-tituloGlyphLayout.width)/2;
-		float yTitulo = getHeight() - tituloGlyphLayout.height;
-		
-		fuenteTitulo.draw(spriteBatch, tituloGlyphLayout, xTitulo,yTitulo);
-		
-		if(elementosMenuGlyphLayouts!=null && elementosMenuGlyphLayouts.length > 0) {
-			float yElemento = yTitulo - tituloGlyphLayout.height - distanciaPrimerElementoMenu;
-			for(int i = 0; i< elementosMenuGlyphLayouts.length; i++) {
-				GlyphLayout layoutElemento = this.elementosMenuGlyphLayouts[i];
-				
-				BitmapFont fuente = fuenteElementoMenu;
-				
-				ElementoMenu elementoMenu = elementosMenu.get(i);
-				if(elementoMenu.getSeleccionado()) {
-					fuente = fuenteElementoMenuSeleccionado;
-				}
-				layoutElemento.setText(fuente, elementoMenu.getDescripcion());
-				float xElemento = (getWidth()-layoutElemento.width)/2;
-				fuente.draw(spriteBatch, layoutElemento, xElemento, yElemento);
-				
-				yElemento = yElemento - layoutElemento.height - distanciaElementoMenu;
+		titulo.renderizar(spriteBatch);
+
+		if (elementosTextoMenu == null || elementosTextoMenu.size() == 0) {
+			return;
+		}
+
+		for (int i = 0; i < elementosTextoMenu.size(); i++) {
+			ElementoMenu elementoMenu = elementosMenu.get(i);
+			ElementoTexto elementoTexto = this.elementosTextoMenu.get(i);
+
+			BitmapFont fuente = fuenteElementoMenu;
+
+			if (elementoMenu.isSeleccionado()) {
+				fuente = fuenteElementoMenuSeleccionado;
 			}
 			
+			if(fuente != elementoTexto.getFuente()) {
+				elementoTexto.setFuente(fuente);
+				
+				float xElemento = (getWidth() - elementoTexto.getWidth()) / 2;
+				elementoTexto.setX(xElemento);
+			}
+
+			elementoTexto.renderizar(spriteBatch);
 		}
-		
+
 		spriteBatch.end();
 	}
 
@@ -108,30 +108,33 @@ public class VistaEstadoMenuPrincipal extends VistaEstadoJuego {
 	public void dispose() {
 		spriteBatch.dispose();
 	}
-	
-	
+
 	/**
 	 * Asigna la lista de elementos de menú.
+	 * 
 	 * @param elementosMenu
 	 */
 	public void setElementosMenu(List<ElementoMenu> elementosMenu) {
 		this.elementosMenu = elementosMenu;
-		if(elementosMenu==null)
-		{
-			elementosMenuGlyphLayouts =null;
+		elementosTextoMenu = new ArrayList<ElementoTexto>();
+		
+		if (elementosMenu == null) {
 			return;
 		}
 		
-		IAdministradorTexto administradorTexto = AdministradorTexto.getInstancia();
-		
-		
-		elementosMenuGlyphLayouts = new GlyphLayout[elementosMenu.size()];
-		for(int i = 0; i< elementosMenu.size(); i++) {
+		float yElemento = titulo.getY() - titulo.getHeight() - distanciaPrimerElementoMenu;
+		for (int i = 0; i < elementosMenu.size(); i++) {
 			ElementoMenu elemento = this.elementosMenu.get(i);
-			GlyphLayout layoutElemento = administradorTexto.crearGlifoTexto(elemento.getDescripcion(), fuenteElementoMenu);
-			elementosMenuGlyphLayouts[i] = layoutElemento;
+
+			ElementoTexto elementoTexto = new ElementoTexto(elemento.getDescripcion(), fuenteElementoMenu);
+			float xElemento = (getWidth() - elementoTexto.getWidth()) / 2;
+			elementoTexto.setX(xElemento);
+			elementoTexto.setY(yElemento);
+			elementosTextoMenu.add(elementoTexto);
+			
+			yElemento = yElemento - elementoTexto.getHeight() - distanciaElementoMenu;
 		}
 
 	}
-	
+
 }

@@ -9,7 +9,7 @@ import com.space.invaders.actores.util.Temporizador;
 /**
  * Representa un elemento animado del juego.
  */
-public abstract class ElementoAnimadoJuego extends ElementoJuego{
+public abstract class ElementoSecuenciaImagen extends ElementoImagen{
 	
 	/**
 	 * Texturas utilizadas por la animación.
@@ -38,7 +38,7 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 	/**
 	 * Crea una nueva instancia de un Elemento Animado del Juego.
 	 */
-	public ElementoAnimadoJuego() {
+	public ElementoSecuenciaImagen() {
 		super();
 		
 	}
@@ -47,7 +47,7 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 	 * Crea una nueva instancia de elemento de juego.
 	 * @param intervaloAnimacion Intervalo de cambio de texturas para la animación.
 	 */
-	public ElementoAnimadoJuego(float intervaloAnimacion) {
+	public ElementoSecuenciaImagen(float intervaloAnimacion) {
 		super();
 		texturasAnimacion = new ArrayList<Texture>();
 		this.setIntervaloAnimacion(intervaloAnimacion);
@@ -58,7 +58,7 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 	 * @param texturas Texturas utilizadas para la animación.
 	 * @param intervaloAnimacion Intervalo de cambio de texturas para la animación.
 	 */
-	public ElementoAnimadoJuego(List<Texture> texturas, float intervaloAnimacion) {
+	public ElementoSecuenciaImagen(List<Texture> texturas, float intervaloAnimacion) {
 		super(texturas.get(0));
 		texturasAnimacion = texturas;
 		this.setIntervaloAnimacion(intervaloAnimacion);
@@ -74,7 +74,7 @@ public abstract class ElementoAnimadoJuego extends ElementoJuego{
 	}
 
 	
-	protected void actualizar(Actor actor, float deltaTiempo) {
+	protected void actualizar(ActorImagen actor, float deltaTiempo) {
 
 		if(!animar || temporizador == null || texturasAnimacion == null || texturasAnimacion.size() <= 1)
 		{

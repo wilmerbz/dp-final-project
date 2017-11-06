@@ -1,5 +1,7 @@
 package com.space.invaders.controladores;
 
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
@@ -31,7 +33,6 @@ public class ControladorEstadoMenuPrincipal extends ControladorEstadoJuegoBase i
 	
 	@Override
 	public void inicializar() {
-
 		System.out.println("Iniciando ControladorMenuPrincipal");
 		vistaEstadoMenuPrincipal.inicializar();
 		vistaEstadoMenuPrincipal.setElementosMenu(modeloMenuPrincipal.getElementosMenu());
@@ -55,7 +56,6 @@ public class ControladorEstadoMenuPrincipal extends ControladorEstadoJuegoBase i
 
 	@Override
 	public void renderizar() {
-		// TODO Auto-generated method stub
 		vistaEstadoMenuPrincipal.renderizar();
 	}
 
@@ -125,6 +125,14 @@ public class ControladorEstadoMenuPrincipal extends ControladorEstadoJuegoBase i
 	@Override
 	public void dispose() {
 		vistaEstadoMenuPrincipal.dispose();
+	}
+
+	/**
+	 * Obtiene los elementos del menu.
+	 * @return Elementos menu.
+	 */
+	public List<ElementoMenu> getElementosMenu() {
+		return modeloMenuPrincipal.getElementosMenu();
 	}
 
 }

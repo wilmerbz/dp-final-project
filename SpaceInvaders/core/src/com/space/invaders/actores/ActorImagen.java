@@ -3,19 +3,22 @@ package com.space.invaders.actores;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-public class Actor extends Image implements Cloneable {
+/**
+ * Actor de tipo Imagen.
+ */
+public class ActorImagen extends Image implements Cloneable {
 
 	/**
 	 * Crea una nueva instancia de elemento de juego.
 	 */
-	public Actor() {
+	public ActorImagen() {
 		super();
 	}
 
 	/**
 	 * Crea una nueva instancia de elemento de juego.
 	 */
-	public Actor(Texture texture) {
+	public ActorImagen(Texture texture) {
 		super(texture);
 	}
 
@@ -23,14 +26,14 @@ public class Actor extends Image implements Cloneable {
 	 * Implementación metodo para clonar un actor.
 	 */
 	@Override
-	public Actor clone() {
-		Actor copiaActor = null;
+	public ActorImagen clone() {
+		ActorImagen copiaActorImagen = null;
 		try {
-			copiaActor = (Actor) super.clone();
+			copiaActorImagen = (ActorImagen) super.clone();
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
 
-		return copiaActor;
+		return copiaActorImagen;
 	}
 }

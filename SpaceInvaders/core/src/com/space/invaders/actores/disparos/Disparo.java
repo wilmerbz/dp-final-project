@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.space.invaders.actores.ElementoAnimadoJuego;
+import com.space.invaders.actores.ElementoSecuenciaImagen;
 
 /**
  * Representa un disparo.
  */
-public class Disparo extends ElementoAnimadoJuego {
+public class Disparo extends ElementoSecuenciaImagen {
 
 	private boolean impactado;
 	

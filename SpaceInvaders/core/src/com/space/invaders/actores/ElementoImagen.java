@@ -10,13 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.space.invaders.actores.direccion.DireccionX;
 import com.space.invaders.actores.direccion.DireccionY;
 import com.space.invaders.actores.naves.Nave;
+import com.space.invaders.interfaces.actores.IElementoJuego;
 
 /**
  * Representa un elemento que se pinta en el juego, utilizando una imagen.
  */
-public abstract class ElementoJuego {
+public abstract class ElementoImagen implements IElementoJuego {
 	
-	protected Actor actor;
+	protected ActorImagen actor;
 	protected DireccionX direccionX;
 	protected float velocidadX = 1;
 	protected DireccionY direccionY;
@@ -26,15 +27,15 @@ public abstract class ElementoJuego {
 	/**
 	 * Crea una nueva instancia de elemento de juego.
 	 */
-	public ElementoJuego() {
-		actor = new Actor();
+	public ElementoImagen() {
+		actor = new ActorImagen();
 	}
 
 	/**
 	 * Crea una nueva instancia de elemento de juego.
 	 */
-	public ElementoJuego(Texture texture) {
-		actor = new Actor(texture);
+	public ElementoImagen(Texture texture) {
+		actor = new ActorImagen(texture);
 		
 	}
 
@@ -124,7 +125,7 @@ public abstract class ElementoJuego {
 	 * @param actor Actor.
 	 * @param textura Texture.
 	 */
-	protected void setTextura(Actor actor, Texture textura) 
+	protected void setTextura(ActorImagen actor, Texture textura) 
 	{
 		Sprite sprite = new Sprite(textura);
 		SpriteDrawable spriteDrawable = new SpriteDrawable(sprite);
@@ -273,18 +274,62 @@ public abstract class ElementoJuego {
 		return alcanzoLimiteY;
 	}
 	
-	public Actor getActor() {
+	/**
+	 * Obtiene el actor de tipo imagen del elemento.
+	 * @return Actor imagen.
+	 */
+	public ActorImagen getActor() {
 		return actor;
 	}
 	
+	@Override
+	public float getX() {
+		return actor.getX();
+	}
+
+	@Override
+	public void setX(float x) {
+		actor.setX(x);
+	}
+
+	@Override
+	public float getY() {
+		return actor.getY();
+	}
+
+	@Override
+	public void setY(float y) {
+		actor.setY(y);
+	}
+	
+	@Override
+	public float getWidth() {
+		return actor.getWidth();
+	}
+	
+	@Override
+	public float getHeight() {
+		return actor.getHeight();
+	}
+	
+	@Override
+	public void setWidth(float width) {
+		actor.setWidth(width);
+	}
+	
+	@Override
+	public void setHeight(float height) {
+		actor.setHeight(height);
+	}
+		
 	/*
 	 * Implementación metodo para clonar elemento juego.
 	 */
 	@Override
-	public ElementoJuego clone() {
-		ElementoJuego copiaElemento = null;
+	public ElementoImagen clone() {
+		ElementoImagen copiaElemento = null;
 		try {
-			copiaElemento = (ElementoJuego) super.clone();
+			copiaElemento = (ElementoImagen) super.clone();
 			if(this.actor!=null) {
 			copiaElemento.actor = this.getActor().clone();
 			}

@@ -2,6 +2,7 @@ package com.space.invaders;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.space.invaders.controladores.ControladorPrincipal;
@@ -12,34 +13,45 @@ import com.space.invaders.navegacion.NombreEstado;
 
 public class SpaceInvadersGame extends ApplicationAdapter {
 
-	
-	public static int WIDTH;
-	public static int HEIGHT;
-	public static OrthographicCamera camara;
-	
+	protected static int WIDTH;
+	protected static int HEIGHT;
+	protected static OrthographicCamera camara;
 	private IControladorPrincipal _controladorPrincipal;
+
+	/**
+	 * Obtiene la camara principal del juego.
+	 * @return Camara del juego.
+	 */
+	public static Camera getCamara() {
+		return camara;
+	}
+
+	/**
+	 * Obtiene la altura de la ventana del juego.
+	 * @return Altura.
+	 */
+	public static int getHEIGHT() {
+		return HEIGHT;
+	}
+
+	/**
+	 * Obtiene el ancho de la ventana del juego.
+	 * @return Ancho.
+	 */
+	public static int getWIDTH() {
+		return WIDTH;
+	}
+
 	
 	@Override
 	public void create () {
-		inicializarNavegacion();
 		inicializarCamara();
+		inicializarEstados();
 	}
 	
-	/**
-	 * Inicializa la navegaci�n del juego.
-	 */
-	private void inicializarNavegacion() {
-		_controladorPrincipal = new ControladorPrincipal();
-		
-		IAdministradorEstados administradorNavegacion = AdministradorEstados.getInstancia();
-		administradorNavegacion.setControladorPrincipal(_controladorPrincipal);
-		
-		administradorNavegacion.agregarEstado(NombreEstado.Bienvenida, "com.space.invaders.controladores.ControladorEstadoBienvenida", true);
-		administradorNavegacion.agregarEstado(NombreEstado.MenuPrincipal, "com.space.invaders.controladores.ControladorEstadoMenuPrincipal", true);
-		administradorNavegacion.agregarEstado(NombreEstado.Juego, "com.space.invaders.controladores.ControladorEstadoJuego", true);
-		
-		administradorNavegacion.navegar(NombreEstado.Bienvenida);
-		//administradorNavegacion.navegar(NombreRuta.Juego);
+	@Override
+	public void dispose () {
+		_controladorPrincipal.dispose();
 	}
 
 	/**
@@ -54,6 +66,23 @@ public class SpaceInvadersGame extends ApplicationAdapter {
 		camara.update();
 	}
 	
+	/**
+	 * Inicializa los estados del juego.
+	 */
+	private void inicializarEstados() {
+		_controladorPrincipal = new ControladorPrincipal();
+		
+		IAdministradorEstados administradorEstados = AdministradorEstados.getInstancia();
+		administradorEstados.setControladorPrincipal(_controladorPrincipal);
+		
+		administradorEstados.agregarEstado(NombreEstado.Bienvenida, "com.space.invaders.controladores.ControladorEstadoBienvenida", true);
+		administradorEstados.agregarEstado(NombreEstado.MenuPrincipal, "com.space.invaders.controladores.ControladorEstadoMenuPrincipal", true);
+		administradorEstados.agregarEstado(NombreEstado.Juego, "com.space.invaders.controladores.ControladorEstadoPartidaJuego", true);
+		
+		administradorEstados.setEstado(NombreEstado.Bienvenida);
+		//administradorNavegacion.navegar(NombreRuta.Juego);
+	}
+	
 	@Override
 	public void render () {
 		//Limpia la pantalla pintando el color negro.
@@ -63,11 +92,6 @@ public class SpaceInvadersGame extends ApplicationAdapter {
 		_controladorPrincipal.actualizar(Gdx.graphics.getDeltaTime());
 		_controladorPrincipal.renderizar();
 		_controladorPrincipal.manejarEntradas();		
-	}
-	
-	@Override
-	public void dispose () {
-		_controladorPrincipal.dispose();
 	}
 	
 

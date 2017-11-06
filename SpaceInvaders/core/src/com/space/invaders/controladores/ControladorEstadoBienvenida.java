@@ -23,10 +23,7 @@ public class ControladorEstadoBienvenida extends ControladorEstadoJuegoBase {
 	
 	@Override
 	public void inicializar() {
-		// TODO Auto-generated method stub
-		System.out.println("Iniciando ControladorBienvenida");
 		vistaEstadoBienvenida.inicializar();
-		
 	}
 
 	@Override

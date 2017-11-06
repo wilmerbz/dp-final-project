@@ -7,7 +7,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
 
-import com.space.invaders.actores.ElementoJuego;
+import com.space.invaders.actores.ElementoImagen;
 import com.space.invaders.actores.disparos.Disparo;
 import com.space.invaders.actores.iterator.IteradorGenerico;
 import com.space.invaders.actores.iterator.IteradorListaGenerica;
@@ -144,7 +144,7 @@ public class ModeloPartidaJuego {
 	 * Obtiene los elementos del juego actual.
 	 * @return Naves enemigas.
 	 */
-	public List<ElementoJuego> getElementosJuego(){
+	public List<ElementoImagen> getElementosJuego(){
 		return juego.getElementosJuego();
 	}
 	

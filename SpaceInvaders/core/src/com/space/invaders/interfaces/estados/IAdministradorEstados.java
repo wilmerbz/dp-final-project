@@ -34,11 +34,11 @@ public interface IAdministradorEstados {
 	 * Cambia el estado del controlador principal, al estado indicado.
 	 * @param nombreEstado Nombre del estado.
 	 */
-	public void navegar(NombreEstado nombreEstado);
+	public void setEstado(NombreEstado nombreEstado);
 	
 	/**
 	 * Establece el controlador actual del estado del juego, en el controlador principal.
 	 * @param controladorJuego Controlador del estado del juego.
 	 */
-	void establecerControladorEstadoJuegoActual(IControladorEstadoJuego controladorJuego);
+	void setControladorEstadoJuegoActual(IControladorEstadoJuego controladorJuego);
 }

@@ -16,7 +16,7 @@ import com.space.invaders.vistas.base.VistaEstadoJuego;
  */
 public class VistaEstadoBienvenida extends VistaEstadoJuego {
 
-	SpriteBatch batch;
+	
 	//Texture background;
 	FondoInfinito background;
 	/**
@@ -25,15 +25,11 @@ public class VistaEstadoBienvenida extends VistaEstadoJuego {
 	 */
 	public VistaEstadoBienvenida(IControladorEstadoJuego controlador) {
 		super(controlador);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void inicializar() {
-		// TODO Auto-generated method stub
-		batch = new SpriteBatch();
-		
-		//background = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.GAME_BACKGROUND);
+		super.inicializar();
 		background = new FondoInfinito(NombreTextura.GAME_BACKGROUND);
 	}
 
@@ -44,16 +40,16 @@ public class VistaEstadoBienvenida extends VistaEstadoJuego {
 
 	@Override
 	public void renderizar() {
-		batch.begin();
+		spriteBatch.begin();
 		
-		background.draw(batch, 1);
+		background.draw(spriteBatch, 1);
 		
-		batch.end();
+		spriteBatch.end();
 	}
 
 	@Override
 	public void dispose() {
-		batch.dispose();
+		spriteBatch.dispose();
 		background = null;
 	}
 

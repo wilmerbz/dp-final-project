@@ -5,7 +5,7 @@ import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
-import com.space.invaders.actores.ElementoJuego;
+import com.space.invaders.actores.ElementoImagen;
 import com.space.invaders.actores.disparos.Disparo;
 import com.space.invaders.actores.iterator.IteradorGenerico;
 import com.space.invaders.actores.iterator.IteradorListaGenerica;
@@ -29,7 +29,7 @@ import com.space.invaders.vistas.VistaEstadoPartidaJuego;
 /**
  * Controlador de juego.
  */
-public class ControladorEstadoJuego extends ControladorEstadoJuegoBase implements IColega {
+public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase implements IColega {
 	
 	private int contadorVisualizaciones = 0;
 	private IMediador mediador;
@@ -45,7 +45,7 @@ public class ControladorEstadoJuego extends ControladorEstadoJuegoBase implement
 	/**
 	 * Crea una nueva instancia de Controlador Juego.
 	 */
-	public ControladorEstadoJuego() {
+	public ControladorEstadoPartidaJuego() {
 		modeloNivel = new ModeloNivel();
 		modeloPartidaJuego = new ModeloPartidaJuego();
 		vistaEstadoPartidaJuego = new VistaEstadoPartidaJuego(this);
@@ -131,7 +131,7 @@ public class ControladorEstadoJuego extends ControladorEstadoJuegoBase implement
 	 * Obtiene la lista de elementos del juego.
 	 * @return
 	 */
-	public List<ElementoJuego> getElementosJuego() {
+	public List<ElementoImagen> getElementosJuego() {
 		return modeloPartidaJuego.getElementosJuego();
 	}
 	

@@ -23,7 +23,7 @@ public abstract class ControladorBase implements IControlador {
 	 * @param nombreEstado Nombre de ruta.
 	 */
 	protected void navegarControlador(NombreEstado nombreEstado) {
-		AdministradorEstados.getInstancia().navegar(nombreEstado);
+		AdministradorEstados.getInstancia().setEstado(nombreEstado);
 	}
 	
 	

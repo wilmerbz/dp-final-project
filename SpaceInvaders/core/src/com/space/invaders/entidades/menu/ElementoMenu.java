@@ -87,7 +87,7 @@ public abstract class ElementoMenu {
 	 * Obtiene el valor que indica si el elemento es el elemento activo.
 	 * @return
 	 */
-	public boolean getSeleccionado() {
+	public boolean isSeleccionado() {
 		return seleccionado;
 	}
 	

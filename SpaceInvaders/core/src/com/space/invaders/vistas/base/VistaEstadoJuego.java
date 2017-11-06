@@ -1,6 +1,8 @@
 package com.space.invaders.vistas.base;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.space.invaders.SpaceInvadersGame;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
 import com.space.invaders.interfaces.vistas.IVistaEstadoJuego;;
 
@@ -9,6 +11,7 @@ import com.space.invaders.interfaces.vistas.IVistaEstadoJuego;;
  */
 public abstract class VistaEstadoJuego extends Vista implements IVistaEstadoJuego {
 
+	protected SpriteBatch spriteBatch;
 	
 	/**
 	 * Controlador del estado del juego.
@@ -22,7 +25,7 @@ public abstract class VistaEstadoJuego extends Vista implements IVistaEstadoJueg
 	public VistaEstadoJuego(IControladorEstadoJuego controladorEstadoJuego) {
 		super(controladorEstadoJuego);
 		this.controladorEstadoJuego = controladorEstadoJuego;
-
+		
 	}
 	
 	@Override
@@ -36,13 +39,24 @@ public abstract class VistaEstadoJuego extends Vista implements IVistaEstadoJueg
 		return Gdx.graphics.getHeight();
 	}
 	
+	/**
+	 * Inicializa la vista del estado del juego.
+	 */
+	public void inicializar() {
+		spriteBatch = new SpriteBatch();
+		spriteBatch.setProjectionMatrix(SpaceInvadersGame.getCamara().combined);
+	}
+	
+	/**
+	 * Actualiza la vista del estado del juego.
+	 */
+	public abstract void actualizar(float deltaTiempo);
 	
 	/***
 	 * Renderiza el estado del juego.
 	 */
 	public abstract void renderizar();
 	
-
 	
 	/***
 	 * Dispone de la vista del estado del juego.

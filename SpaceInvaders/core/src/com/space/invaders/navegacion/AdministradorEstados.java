@@ -67,7 +67,7 @@ public class AdministradorEstados implements IAdministradorEstados {
 	}
 	
 	@Override
-	public void navegar(NombreEstado nombreEstado) {
+	public void setEstado(NombreEstado nombreEstado) {
 		
 		IControlador controlador = getControlador(nombreEstado);
 		controlador.inicializar();
@@ -84,7 +84,7 @@ public class AdministradorEstados implements IAdministradorEstados {
 	 * @param controladorJuego Controlador del estado del juego.
 	 */
 	@Override
-	public void establecerControladorEstadoJuegoActual(IControladorEstadoJuego controladorEstadoJuego) {
+	public void setControladorEstadoJuegoActual(IControladorEstadoJuego controladorEstadoJuego) {
 		controladorPrincipal.setControladorEstadoJuegoActual(controladorEstadoJuego);
 	}
 	

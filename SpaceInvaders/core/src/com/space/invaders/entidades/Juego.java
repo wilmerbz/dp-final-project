@@ -3,7 +3,7 @@ package com.space.invaders.entidades;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.space.invaders.actores.ElementoJuego;
+import com.space.invaders.actores.ElementoImagen;
 import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveJugador;
 
@@ -17,12 +17,12 @@ public class Juego {
 	private Nivel nivel;
 	private NaveJugador naveJugador;
 	private List<NaveEnemiga> navesEnemigas;
-	private List<ElementoJuego> elementosJuego;
+	private List<ElementoImagen> elementosJuego;
 
 	public Juego() {
 		partida = new Partida("Default");
 		navesEnemigas = new ArrayList<NaveEnemiga>();
-		elementosJuego = new ArrayList<ElementoJuego>();
+		elementosJuego = new ArrayList<ElementoImagen>();
 	}
 	
 	/**
@@ -132,7 +132,7 @@ public class Juego {
 	 * Obtiene la lista de elementos del juego.
 	 * @return Lista de elementos del juego.
 	 */
-	public List<ElementoJuego> getElementosJuego() {
+	public List<ElementoImagen> getElementosJuego() {
 		return elementosJuego;
 	}
 
@@ -140,7 +140,7 @@ public class Juego {
 	 * Asigna la lista de elementos del juego.
 	 * @param elementosJuego Elementos del juego.
 	 */
-	public void setElementosJuego(List<ElementoJuego> elementosJuego) {
+	public void setElementosJuego(List<ElementoImagen> elementosJuego) {
 		this.elementosJuego = elementosJuego;
 	}
 

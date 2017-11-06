@@ -18,8 +18,8 @@ import com.space.invaders.actores.iterator.IteradorListaGenerica;
 import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveJugador;
 import com.space.invaders.SpaceInvadersGame;
-import com.space.invaders.actores.ElementoJuego;
-import com.space.invaders.controladores.ControladorEstadoJuego;
+import com.space.invaders.actores.ElementoImagen;
+import com.space.invaders.controladores.ControladorEstadoPartidaJuego;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
 import com.space.invaders.recursos.texto.AdministradorTexto;
 import com.space.invaders.recursos.texto.IAdministradorTexto;
@@ -30,12 +30,10 @@ import com.space.invaders.vistas.base.VistaEstadoJuego;
 
 public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 
-	private ControladorEstadoJuego controladorJuego;
-	private SpriteBatch batch;
+	private ControladorEstadoPartidaJuego controladorJuego;
 	private FondoInfinito background;
 	private Texture panel;
 	
-	private final String rutaFuente = "fonts/Hyperspace Bold.ttf";
 	private BitmapFont fuentePuntaje;
 	private static GlyphLayout layoutPuntaje;
 	
@@ -47,10 +45,8 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 	public VistaEstadoPartidaJuego(IControladorEstadoJuego controladorEstadoJuego) {
 		super(controladorEstadoJuego);
 
-		controladorJuego = (ControladorEstadoJuego) controladorEstadoJuego;
-		batch = new SpriteBatch();
-		batch.setProjectionMatrix(SpaceInvadersGame.camara.combined);
-		
+		controladorJuego = (ControladorEstadoPartidaJuego) controladorEstadoJuego;
+
 		//shapeRenderer = new ShapeRenderer();
 		//shapeRenderer.setProjectionMatrix(SpaceInvadersGame.camara.combined);
 		
@@ -60,7 +56,7 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 
 	@Override
 	public void inicializar() {
-		
+		super.inicializar();
 		List<NaveEnemiga> navesEnemigas = controladorJuego.getNavesEnemigas();
 		int cantidadEnemigosPorFila = controladorJuego.getCantidadEnemigosPorFila();
 		float posicionInicialX = 0;
@@ -76,20 +72,22 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 		while (iteradorNavesEnemigas.hasNext()) {
 
 			NaveEnemiga naveEnemiga = iteradorNavesEnemigas.next();
-			 x +=  (naveEnemiga.getActor().getWidth() + espacioX);
+			 x +=  (naveEnemiga.getWidth() + espacioX);
 			 
 			 if(indiceNaveEnemiga % cantidadEnemigosPorFila == 0) {
-				 y -= ((naveEnemiga.getActor().getHeight() + espacioY) * 2);
+				 y -= ((naveEnemiga.getHeight() + espacioY) * 2);
 				 x = posicionInicialX;
 			 }
-			naveEnemiga.getActor().setPosition(x,y);
+			 
+			naveEnemiga.setX(x);
+			naveEnemiga.setY(y);
 			indiceNaveEnemiga++;
 		}
 		
 		NaveJugador naveJugador = controladorJuego.getNaveJugador();
-		float xNaveJugador = (getWidth()/2) - (naveJugador.getActor().getWidth()/2);
-		naveJugador.getActor().setX(xNaveJugador);
-		naveJugador.getActor().setY(5);
+		float xNaveJugador = (getWidth()/2) - (naveJugador.getWidth()/2);
+		naveJugador.setX(xNaveJugador);
+		naveJugador.setY(5);
 		
 		IAdministradorTexto administradorTexto = AdministradorTexto.getInstancia();
 		
@@ -110,30 +108,31 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 	@Override
 	public void renderizar() {
 		
-		batch.begin();
+		spriteBatch.begin();
 		
-		background.draw(batch, 1);
+		background.draw(spriteBatch, 1);
 		
-		List<ElementoJuego> elementosJuego = controladorJuego.getElementosJuego();
-		IteradorGenerico<ElementoJuego> iteradorElementoJuego = new IteradorListaGenerica<ElementoJuego>(elementosJuego);
+		List<ElementoImagen> elementosJuego = controladorJuego.getElementosJuego();
+		IteradorGenerico<ElementoImagen> iteradorElementoJuego = new IteradorListaGenerica<ElementoImagen>(elementosJuego);
 		
 		while (iteradorElementoJuego.hasNext()) {
-			ElementoJuego elementoJuego = iteradorElementoJuego.next();
-			elementoJuego.renderizar(batch);
+			ElementoImagen elementoJuego = iteradorElementoJuego.next();
+			elementoJuego.renderizar(spriteBatch);
 		}
 		
-		batch.draw(panel, 10, getHeight() - (panel.getHeight() + 10));
+		spriteBatch.draw(panel, 10, getHeight() - (panel.getHeight() + 10));
 		
 		long puntos = controladorJuego.getPuntos();
 		layoutPuntaje.setText(fuentePuntaje, "$" + puntos);
-		fuentePuntaje.draw(batch, layoutPuntaje, 205,getHeight()-75);
+		fuentePuntaje.draw(spriteBatch, layoutPuntaje, 205,getHeight()-75);
 		
 		int vidas = controladorJuego.getVidas();
 		layoutVidas.setText(fuenteVidas, Integer.toString(vidas));
-		fuenteVidas.draw(batch, layoutVidas, 135, getHeight()-70);
+		fuenteVidas.draw(spriteBatch, layoutVidas, 135, getHeight()-70);
 		
-		batch.end();
+		spriteBatch.end();
 		
+		//Menu pausa
 //		Gdx.gl.glEnable(GL30.GL_BLEND);
 //		Gdx.gl.glBlendFunc(GL30.GL_SRC_ALPHA, GL30.GL_ONE_MINUS_SRC_ALPHA);
 //		
@@ -149,7 +148,7 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 
 	@Override
 	public void dispose() {
-		batch.dispose();
+		spriteBatch.dispose();
 	}
 
 }

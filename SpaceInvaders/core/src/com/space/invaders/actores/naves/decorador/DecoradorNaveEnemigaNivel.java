@@ -1,7 +1,7 @@
 package com.space.invaders.actores.naves.decorador;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.space.invaders.actores.Actor;
+import com.space.invaders.actores.ActorImagen;
 import com.space.invaders.actores.direccion.DireccionX;
 import com.space.invaders.actores.direccion.DireccionY;
 import com.space.invaders.actores.naves.NaveEnemiga;

@@ -1,7 +1,7 @@
 package com.space.invaders.actores.naves.decorador;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.space.invaders.actores.Actor;
+import com.space.invaders.actores.ActorImagen;
 import com.space.invaders.actores.direccion.DireccionX;
 import com.space.invaders.actores.direccion.DireccionY;
 import com.space.invaders.actores.disparos.Disparo;
@@ -23,11 +23,11 @@ public abstract class DecoradorNaveEnemiga extends NaveEnemiga{
 	}
 
 	@Override
-	public Actor getActor() {		
+	public ActorImagen getActor() {		
 		return naveEnemiga.getActor();
 	}
 	
-	protected Actor getActorDecorador() {		
+	protected ActorImagen getActorDecorador() {		
 		return actor;
 	}
 
@@ -121,5 +121,46 @@ public abstract class DecoradorNaveEnemiga extends NaveEnemiga{
 	@Override
 	public Disparo getDisparo() {
 		return naveEnemiga.getDisparo();
+	}
+	
+	
+	@Override
+	public float getX() {
+		return naveEnemiga.getX();
+	}
+
+	@Override
+	public void setX(float x) {
+		naveEnemiga.setX(x);
+	}
+
+	@Override
+	public float getY() {
+		return naveEnemiga.getY();
+	}
+
+	@Override
+	public void setY(float y) {
+		naveEnemiga.setY(y);
+	}
+	
+	@Override
+	public float getWidth() {
+		return naveEnemiga.getWidth();
+	}
+	
+	@Override
+	public float getHeight() {
+		return naveEnemiga.getHeight();
+	}
+	
+	@Override
+	public void setWidth(float width) {
+		naveEnemiga.setWidth(width);
+	}
+	
+	@Override
+	public void setHeight(float height) {
+		naveEnemiga.setHeight(height);
 	}
 }
