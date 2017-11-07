@@ -12,6 +12,9 @@ import com.space.invaders.interfaces.controladores.IControladorPrincipal;
 import com.space.invaders.interfaces.estados.IAdministradorEstados;
 import com.space.invaders.navegacion.AdministradorEstados;
 import com.space.invaders.navegacion.NombreEstado;
+import com.space.invaders.recursos.sonido.AdministradorSonidos;
+import com.space.invaders.recursos.sonido.IAdministradorSonidos;
+import com.space.invaders.recursos.sonido.NombreSonido;
 import com.space.invaders.recursos.texturas.NombreTextura;
 
 public class SpaceInvadersGame extends ApplicationAdapter {
@@ -56,6 +59,7 @@ public class SpaceInvadersGame extends ApplicationAdapter {
 
 		inicializarCamara();
 		inicializarEstados();
+		cargarSonidos();
 	}
 
 	@Override
@@ -94,10 +98,28 @@ public class SpaceInvadersGame extends ApplicationAdapter {
 				"com.space.invaders.controladores.ControladorEstadoNivelCompletado", true);
 		administradorEstados.agregarEstado(NombreEstado.NivelFallido,
 				"com.space.invaders.controladores.ControladorEstadoNivelFallido", true);
-
+		administradorEstados.agregarEstado(NombreEstado.JuegoCompletado,
+				"com.space.invaders.controladores.ControladorEstadoJuegoCompletado", true);
+		
 		administradorEstados.setEstado(NombreEstado.Bienvenida);
 	}
 
+	private void cargarSonidos() 
+	{
+		IAdministradorSonidos administradorSonidos = AdministradorSonidos.getInstancia();
+		
+		administradorSonidos.obtenerSonido(NombreSonido.MENU_MOVER);
+		administradorSonidos.obtenerSonido(NombreSonido.MENU_REGRESAR);
+		administradorSonidos.obtenerSonido(NombreSonido.MENU_SELECCIONAR);
+		
+		administradorSonidos.obtenerSonido(NombreSonido.DISPARO_ENEMIGO);
+		administradorSonidos.obtenerSonido(NombreSonido.DISPARO_JUGADOR);
+		administradorSonidos.obtenerSonido(NombreSonido.IMPACTO_ESCUDO_NAVE_ENEMIGA);
+		administradorSonidos.obtenerSonido(NombreSonido.IMPACTO_NAVE_ENEMIGA);
+		administradorSonidos.obtenerSonido(NombreSonido.IMPACTO_NAVE_JUGADOR);
+		administradorSonidos.obtenerSonido(NombreSonido.NO_DISPARO_JUGADOR);
+	}
+	
 	@Override
 	public void render() {
 		// Limpia la pantalla pintando el color negro.

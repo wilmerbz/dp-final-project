@@ -31,13 +31,13 @@ public class VistaEstadoBienvenida extends VistaEstadoJuego {
 	public void inicializar() {
 		super.inicializar();
 
-		titulo = new ElementoTexto(textoTitulo, NombreFuente.HYPER_SPACE, 100, Color.WHITE);
+		titulo = new ElementoTexto(textoTitulo, NombreFuente.DEFAULT, 100, Color.WHITE);
 		float xTitulo = (getWidth() - titulo.getWidth()) / 2;
 		float yTitulo = (getHeight() + titulo.getHeight()) / 2;
 		titulo.setX(xTitulo);
 		titulo.setY(yTitulo);
 
-		continuar = new ElementoTexto(textoContinuar, NombreFuente.HYPER_SPACE, 30, Color.LIGHT_GRAY);
+		continuar = new ElementoTexto(textoContinuar, NombreFuente.DEFAULT, 30, Color.LIGHT_GRAY);
 		float xContinuar = (getWidth() - continuar.getWidth()) / 2;
 		float yContinuar = (yTitulo - (titulo.getHeight() * 2));
 		continuar.setX(xContinuar);

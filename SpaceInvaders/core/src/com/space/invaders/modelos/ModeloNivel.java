@@ -80,11 +80,26 @@ public class ModeloNivel {
 		nivel.setVelocidadJugador(7.5f);
 		nivel.setVelocidadDisparosEnemigos(8);
 		nivel.setVelocidadDisparosJugador(16);
+		nivel.getConfiguracionEnemigos().put(0, 15);
+		nivel.getConfiguracionEnemigos().put(1, 30);
+		nivel.getConfiguracionEnemigos().put(2, 15);
+		nivel.setCantidadEnemigosPorFila(15);
+		nivel.setFrecuenciaDisparosEnemigos(0.5f);
+		
+		niveles.add(nivel);
+		
+		nivel = new Nivel();
+		nivel.setNombre("Hardcore mode!");
+		nivel.setNumero(4);
+		nivel.setVelocidadEnemigos(7.5f);
+		nivel.setVelocidadJugador(10f);
+		nivel.setVelocidadDisparosEnemigos(10);
+		nivel.setVelocidadDisparosJugador(20);
 		nivel.getConfiguracionEnemigos().put(0, 20);
 		nivel.getConfiguracionEnemigos().put(1, 40);
 		nivel.getConfiguracionEnemigos().put(2, 20);
 		nivel.setCantidadEnemigosPorFila(20);
-		nivel.setFrecuenciaDisparosEnemigos(0.5f);
+		nivel.setFrecuenciaDisparosEnemigos(0.2f);
 		
 		niveles.add(nivel);
 	}
@@ -118,7 +133,7 @@ public class ModeloNivel {
 	 * Obtiene el siguiente nivel.
 	 * @return Nivel
 	 */
-	public Nivel siguienteNivel() {
+	public Nivel getSiguienteNivel() {
 		nivelActual = iteradorNiveles.next();
 		return nivelActual;
 	}
@@ -129,7 +144,7 @@ public class ModeloNivel {
 	 */
 	public Nivel getPrimerNivel() {
 		crearIteradorNiveles();
-		Nivel primerNivel = siguienteNivel();
+		Nivel primerNivel = getSiguienteNivel();
 		return primerNivel;
 	}
 	
@@ -139,5 +154,14 @@ public class ModeloNivel {
 	 */
 	public Nivel getNivelActual() {
 		return nivelActual;
+	}
+	
+	/**
+	 * Valida si el nivel actual es el ultimo nivel.
+	 * @return Retorna true si el nivel actual es el ultimo nivel; de lo contrario retorna false.
+	 */
+	public boolean esUltimoNivel() {
+		boolean esUltimoNivel = !iteradorNiveles.hasNext();
+		return esUltimoNivel;
 	}
 }

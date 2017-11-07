@@ -85,6 +85,7 @@ public class ControladorEstadoMenuPrincipal extends ControladorEstadoJuegoBase i
 						break;
 					case Regresar:
 						reproducirSonido(NombreSonido.MENU_REGRESAR);
+						vista.setSubTitulo("");
 						modelo.cargarOpcionesPadre();
 						vista.setOpcionesMenu(modelo.getElementosMenu());
 						break;
@@ -92,6 +93,8 @@ public class ControladorEstadoMenuPrincipal extends ControladorEstadoJuegoBase i
 						reproducirSonido(NombreSonido.MENU_SELECCIONAR);
 						try {
 							if(modelo.esSubMenu()) {
+								OpcionMenu opcionMenu = modelo.getElementoMenuActual();
+								vista.setSubTitulo(opcionMenu.getDescripcion());
 								modelo.cargarOpcionesSubMenu();
 								vista.setOpcionesMenu(modelo.getElementosMenu());
 							}else {
@@ -120,6 +123,7 @@ public class ControladorEstadoMenuPrincipal extends ControladorEstadoJuegoBase i
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
 			reproducirSonido(NombreSonido.MENU_REGRESAR);
+			vista.setSubTitulo("");
 			modelo.cargarOpcionesPadre();
 			vista.setOpcionesMenu(modelo.getElementosMenu());
 		}

@@ -50,7 +50,7 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 	 */
 	public ControladorEstadoPartidaJuego() {
 		modeloNivel = new ModeloNivel();
-		modeloPartidaJuego = new ModeloPartidaJuego();
+		modeloPartidaJuego = ModeloPartidaJuego.getInstancia();
 		modeloMenuPausa = new ModeloMenuPausa();
 		vistaEstadoPartidaJuego = new VistaEstadoPartidaJuego(this);
 		temporizadorDisparoEnemigo = new Temporizador();
@@ -103,12 +103,12 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 			Nivel nivel = modeloNivel.getPrimerNivel();
 			iniciarNivel(nivel, true);
 		} else if (mensaje.equals("SiguienteNivel")) {
-			Nivel nivel = modeloNivel.siguienteNivel();
+			Nivel nivel = modeloNivel.getSiguienteNivel();
 			iniciarNivel(nivel, false);
 		} else if (mensaje.equals("ReiniciarNivel")) {
 			reiniciarNivel();
 		} else if (mensaje.equals("CargarJuego")) {
-			Nivel nivel = modeloNivel.getNivelActual();
+			Nivel nivel = getNivelActual();
 			if (nivel == null) {
 				nivel = modeloNivel.getPrimerNivel();
 				iniciarNivel(nivel, false);
@@ -133,7 +133,14 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 		}
 
 		if (modeloPartidaJuego.isCompletado()) {
-			cambiarEstado(NombreEstado.NivelCompletado);
+			boolean esUltimoNivel = modeloNivel.esUltimoNivel();
+			
+			if(esUltimoNivel) {
+				cambiarEstado(NombreEstado.JuegoCompletado);
+			}else {
+				cambiarEstado(NombreEstado.NivelCompletado);	
+			}
+			
 			return;
 		}
 
@@ -316,6 +323,14 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 	 */
 	public List<OpcionMenu> getElementosMenu() {
 		return modeloMenuPausa.getElementosMenu();
+	}
+
+	/**
+	 * Obtiene el nivel actual del juego.
+	 * @return NIvel actual.
+	 */
+	public Nivel getNivelActual() {
+		return modeloNivel.getNivelActual();
 	}
 
 }

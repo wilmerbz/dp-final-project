@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.space.invaders.actores.FondoInfinito;
+import com.space.invaders.entidades.Nivel;
 import com.space.invaders.entidades.iterador.IteradorGenerico;
 import com.space.invaders.entidades.iterador.IteradorListaGenerica;
 import com.space.invaders.actores.naves.NaveEnemiga;
@@ -28,6 +29,8 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 	private Texture panelJugador;
 	private ElementoTexto puntaje;
 	private ElementoTexto vidas;
+	private ElementoTexto tituloNivel;
+	private ElementoTexto nivel;
 	
 	private VistaMenu vistaMenu;
 	private final String textoTituloPausa = "Pausa";
@@ -82,14 +85,22 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 		naveJugador.setX(xNaveJugador);
 		naveJugador.setY(5);
 		
-		puntaje = new ElementoTexto("0", NombreFuente.HYPER_SPACE, 25, Color.WHITE, Color.BLACK);
-		puntaje.setX(205);
-		puntaje.setY(getHeight()-75);
-		
-		vidas = new ElementoTexto("0", NombreFuente.HYPER_SPACE, 30, Color.WHITE, Color.BLACK);
-		vidas.setX(135);
+		vidas = new ElementoTexto("0", NombreFuente.DEFAULT, 30, Color.WHITE, Color.BLACK);
+		vidas.setX(150);
 		vidas.setY(getHeight()-70);
-
+		
+		puntaje = new ElementoTexto("0", NombreFuente.DEFAULT, 30, Color.WHITE, Color.BLACK);
+		puntaje.setX(240);
+		puntaje.setY(getHeight()-70);
+		
+		tituloNivel = new ElementoTexto("nivel", NombreFuente.DEFAULT, 15, Color.WHITE);
+		tituloNivel.setX(380);
+		tituloNivel.setY(getHeight()-40);
+		
+		nivel = new ElementoTexto("1", NombreFuente.DEFAULT, 40, Color.WHITE, Color.BLACK);
+		nivel.setX(390);
+		nivel.setY(getHeight()-60);
+		
 		vistaMenu.inicializar();
 	}
 
@@ -102,9 +113,13 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 		int cantidadVidas = controladorJuego.getVidas();
 		vidas.setTexto(Integer.toString(cantidadVidas));
 		
+		Nivel nivelActual = controladorJuego.getNivelActual();
+		nivel.setTexto(Integer.toString(nivelActual.getNumero()));
+		
 		if(controladorJuego.isPausado()) {
 			vistaMenu.actualizar(deltaTiempo);
 		}
+		
 	}
 
 	@Override
@@ -124,6 +139,9 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 		
 		puntaje.renderizar(spriteBatch);
 		vidas.renderizar(spriteBatch);
+		
+		tituloNivel.renderizar(spriteBatch);
+		nivel.renderizar(spriteBatch);
 		
 		spriteBatch.end();
 		

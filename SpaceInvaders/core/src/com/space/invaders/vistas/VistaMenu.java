@@ -16,59 +16,98 @@ import com.space.invaders.recursos.texto.NombreFuente;
 public class VistaMenu implements IVistaEstadoJuego {
 
 	private List<OpcionMenu> opcionesMenu;
-	private String textoTitulo;
 	private List<ElementoTexto> elementosTextoMenu;
 	private BitmapFont fuenteElementoMenu;
 	private BitmapFont fuenteElementoMenuSeleccionado;
 
+	private String textoTitulo;
+	private String textoSubTitulo;
 	private ElementoTexto titulo;
-	
-	private final int distanciaPrimerElementoMenu = 200;
+	private ElementoTexto subTitulo;
+
+	private final int distanciaPrimerElementoMenu = 300;
 	private final int distanciaElementoMenu = 50;
-	
+
 	private IVistaEstadoJuego padre;
-	
+
 	public VistaMenu(IVistaEstadoJuego padre, String titulo) {
 		this.padre = padre;
 		this.textoTitulo = titulo;
+		textoSubTitulo = "";
+		
+		inicializar();
 	}
-
 
 	public void inicializar() {
-		titulo = new ElementoTexto(textoTitulo, NombreFuente.HYPER_SPACE, 100, Color.WHITE);
-		float xTitulo = (padre.getWidth() - titulo.getWidth()) / 2;
-		float yTitulo = padre.getHeight() - titulo.getHeight();
-		titulo.setX(xTitulo);
-		titulo.setY(yTitulo);
+		titulo = new ElementoTexto(textoTitulo, NombreFuente.DEFAULT, 100, Color.WHITE);
+		subTitulo = new ElementoTexto(textoSubTitulo, NombreFuente.DEFAULT, 50, Color.LIGHT_GRAY);
 
+		actualizarPosicionTitulo();
+		actualizarPosicionSubTitulo();
+		
 		IAdministradorTexto administradorTexto = AdministradorTexto.getInstancia();
-		fuenteElementoMenu = administradorTexto.obtenerFuente(NombreFuente.HYPER_SPACE, 50, Color.WHITE);
-		fuenteElementoMenuSeleccionado = administradorTexto.obtenerFuente(NombreFuente.HYPER_SPACE, 60, Color.SCARLET);
+		fuenteElementoMenu = administradorTexto.obtenerFuente(NombreFuente.DEFAULT, 50, Color.WHITE);
+		fuenteElementoMenuSeleccionado = administradorTexto.obtenerFuente(NombreFuente.DEFAULT, 60, Color.SCARLET);
 	}
-	
+
 	@Override
 	public void actualizar(float deltaTiempo) {
-		
+
 	}
 
-	public void setTitulo(String textoTitulo) {
-		this.textoTitulo = textoTitulo;
+	/**
+	 * Asigna el titulo a mostrar.
+	 * 
+	 * @param texto
+	 *            Titulo.
+	 */
+	public void setTitulo(String texto) {
+		this.textoTitulo = texto;
 		this.titulo.setTexto(textoTitulo);
+		actualizarPosicionTitulo();
+	}
+
+	private void actualizarPosicionTitulo() {
+		float x = (padre.getWidth() - titulo.getWidth()) / 2;
+		float y = padre.getHeight() - (titulo.getHeight()*2);
+		titulo.setX(x);
+		titulo.setY(y);
+	}
+
+	/**
+	 * Asigna el sub titulo a mostrar.
+	 * 
+	 * @param texto
+	 *            Titulo.
+	 */
+	public void setSubTitulo(String texto) {
+		this.textoSubTitulo = texto;
+		this.subTitulo.setTexto(textoSubTitulo);
+		this.actualizarPosicionSubTitulo();
 	}
 	
+	private void actualizarPosicionSubTitulo() {
+		float x = (padre.getWidth() - subTitulo.getWidth()) / 2;
+		float y = titulo.getY() - titulo.getHeight() - (distanciaPrimerElementoMenu / 2);
+		subTitulo.setX(x);
+		subTitulo.setY(y);
+	}
+
 	/**
 	 * Asigna las opciones del menu.
-	 * @param opcionesMenu Opciones de menu.
+	 * 
+	 * @param opcionesMenu
+	 *            Opciones de menu.
 	 */
 	public void setOpcionesMenu(List<OpcionMenu> opcionesMenu) {
 
 		this.opcionesMenu = opcionesMenu;
 		elementosTextoMenu = new ArrayList<ElementoTexto>();
-		
+
 		if (opcionesMenu == null) {
 			return;
 		}
-		
+
 		float yElemento = titulo.getY() - titulo.getHeight() - distanciaPrimerElementoMenu;
 		for (int indiceOpcion = 0; indiceOpcion < this.opcionesMenu.size(); indiceOpcion++) {
 			OpcionMenu elemento = this.opcionesMenu.get(indiceOpcion);
@@ -78,7 +117,7 @@ public class VistaMenu implements IVistaEstadoJuego {
 			elementoTexto.setX(xElemento);
 			elementoTexto.setY(yElemento);
 			elementosTextoMenu.add(elementoTexto);
-			
+
 			yElemento = yElemento - elementoTexto.getHeight() - distanciaElementoMenu;
 		}
 
@@ -86,26 +125,27 @@ public class VistaMenu implements IVistaEstadoJuego {
 
 	@Override
 	public void dispose() {
-		elementosTextoMenu=null;
+		elementosTextoMenu = null;
 	}
-
 
 	@Override
 	public float getWidth() {
 		return padre.getWidth();
 	}
 
-
 	@Override
 	public float getHeight() {
 		return padre.getHeight();
 	}
 
-
 	@Override
 	public void renderizar() {
 		SpriteBatch spriteBatch = padre.getSpriteBatch();
 		titulo.renderizar(spriteBatch);
+
+		if (textoSubTitulo != null && textoSubTitulo != "") {
+			subTitulo.renderizar(spriteBatch);
+		}
 
 		if (elementosTextoMenu == null || elementosTextoMenu.size() == 0) {
 			return;
@@ -120,10 +160,10 @@ public class VistaMenu implements IVistaEstadoJuego {
 			if (elementoMenu.isSeleccionado()) {
 				fuente = fuenteElementoMenuSeleccionado;
 			}
-			
-			if(fuente != elementoTexto.getFuente()) {
+
+			if (fuente != elementoTexto.getFuente()) {
 				elementoTexto.setFuente(fuente);
-				
+
 				float xElemento = (padre.getWidth() - elementoTexto.getWidth()) / 2;
 				elementoTexto.setX(xElemento);
 			}
@@ -131,10 +171,9 @@ public class VistaMenu implements IVistaEstadoJuego {
 		}
 	}
 
-
 	@Override
 	public SpriteBatch getSpriteBatch() {
 		return padre.getSpriteBatch();
 	}
-	
+
 }

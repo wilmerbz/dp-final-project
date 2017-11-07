@@ -6,22 +6,22 @@ import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
 import com.space.invaders.entidades.menu.OpcionMenu;
 import com.space.invaders.interfaces.mensajes.IColega;
 import com.space.invaders.interfaces.mensajes.IMediador;
-import com.space.invaders.modelos.ModeloMenuNivelCompletado;
+import com.space.invaders.modelos.ModeloMenuJuegoCompletado;
 import com.space.invaders.modelos.ModeloPartidaJuego;
 import com.space.invaders.navegacion.NombreEstado;
 import com.space.invaders.recursos.sonido.NombreSonido;
 import com.space.invaders.vistas.VistaEstadoMenu;
 
-public class ControladorEstadoNivelCompletado extends ControladorEstadoJuegoBase implements IColega{
+public class ControladorEstadoJuegoCompletado extends ControladorEstadoJuegoBase implements IColega{
 
 	private VistaEstadoMenu vista;
-	public ModeloMenuNivelCompletado modelo;
-	private final String textoTitulo = "¡Misión Completada!";
-	private final String FORMATO_PUNTOS = "Has obtenido: $%s";
+	public ModeloMenuJuegoCompletado modelo;
+	private final String textoTitulo = "¡Has salvado el universo!";
+	private final String FORMATO_PUNTOS = "Tu recompenza: $%s";
 	
-	public ControladorEstadoNivelCompletado() {
+	public ControladorEstadoJuegoCompletado() {
 		vista = new VistaEstadoMenu(this, textoTitulo);
-		modelo = new ModeloMenuNivelCompletado(); 
+		modelo = new ModeloMenuJuegoCompletado(); 
 	}
 	
 	@Override
@@ -45,13 +45,9 @@ public class ControladorEstadoNivelCompletado extends ControladorEstadoJuegoBase
 				NombreEstado nombreEstado = elementoMenuActual.getNombreRuta();
 
 				switch (nombreEstado) {
-				case SiguienteNivel:
+				case Juego:
 					cambiarEstado(NombreEstado.Juego);
-					mediador.enviarMensaje(this,"SiguienteNivel", null);
-					break;
-				case ReiniciarNivel:
-					cambiarEstado(NombreEstado.Juego);
-					mediador.enviarMensaje(this,"ReiniciarNivel", null);
+					mediador.enviarMensaje(this,"IniciarJuego", null);
 					break;
 				case MenuPrincipal:
 					cambiarEstado(NombreEstado.MenuPrincipal);

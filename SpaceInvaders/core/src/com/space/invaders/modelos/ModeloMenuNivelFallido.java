@@ -8,6 +8,9 @@ import com.space.invaders.entidades.menu.OpcionMenuHoja;
 import com.space.invaders.modelos.base.ModeloMenuBase;
 import com.space.invaders.navegacion.NombreEstado;
 
+/**
+ * Modelo para las opciones de menu de nivel fallido.
+ */
 public class ModeloMenuNivelFallido extends ModeloMenuBase{
 	
 	@Override

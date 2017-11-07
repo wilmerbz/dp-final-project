@@ -9,21 +9,19 @@ import com.space.invaders.modelos.base.ModeloMenuBase;
 import com.space.invaders.navegacion.NombreEstado;
 
 /**
- * Modelo para las opciones de menu de nivel completado.
+ * Modelo para las opciones de menu de juego completado.
  */
-public class ModeloMenuNivelCompletado extends ModeloMenuBase{
+public class ModeloMenuJuegoCompletado extends ModeloMenuBase{
 	
 	@Override
 	protected List<OpcionMenu> inicializarOpcionesMenu() {
 		List<OpcionMenu> opcionesMenu  = new ArrayList<OpcionMenu>();
 		
-		OpcionMenuHoja siguienteNivel = new OpcionMenuHoja(NombreEstado.SiguienteNivel, "Siguiente Nivel");
-		OpcionMenuHoja reiniciarNivel = new OpcionMenuHoja(NombreEstado.ReiniciarNivel, "Reiniciar Nivel");
+		OpcionMenuHoja jugar = new OpcionMenuHoja(NombreEstado.Juego, "Jugar de Nuevo");
 		OpcionMenuHoja menuPrincipal = new OpcionMenuHoja(NombreEstado.MenuPrincipal, "Menu Principal");
 		OpcionMenuHoja salir = new OpcionMenuHoja(NombreEstado.Salir, "Salir");
 		
-		opcionesMenu.add(siguienteNivel);
-		opcionesMenu.add(reiniciarNivel);
+		opcionesMenu.add(jugar);
 		opcionesMenu.add(menuPrincipal);
 		opcionesMenu.add(salir);
 		

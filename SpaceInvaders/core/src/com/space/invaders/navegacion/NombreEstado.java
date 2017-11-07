@@ -21,5 +21,6 @@ public enum NombreEstado {
 	SiguienteNivel, 
 	ReiniciarNivel,
 	NivelCompletado,
-	NivelFallido
+	NivelFallido, 
+	JuegoCompletado
 }

@@ -6,17 +6,18 @@ import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
 import com.space.invaders.entidades.menu.OpcionMenu;
 import com.space.invaders.interfaces.mensajes.IColega;
 import com.space.invaders.interfaces.mensajes.IMediador;
-import com.space.invaders.modelos.ModeloMenuNivelCompletado;
 import com.space.invaders.modelos.ModeloMenuNivelFallido;
+import com.space.invaders.modelos.ModeloPartidaJuego;
 import com.space.invaders.navegacion.NombreEstado;
 import com.space.invaders.recursos.sonido.NombreSonido;
 import com.space.invaders.vistas.VistaEstadoMenu;
 
 public class ControladorEstadoNivelFallido extends ControladorEstadoJuegoBase implements IColega{
 
-	private final String textoTitulo = "xXx Nivel Fallido xXx";
+	private final String textoTitulo = "¡Mision Fallida!";
 	private VistaEstadoMenu vista;
 	public ModeloMenuNivelFallido modelo;
+	private final String FORMATO_PUNTOS = "Obtuviste: $%s";
 	
 	public ControladorEstadoNivelFallido() {
 		vista = new VistaEstadoMenu(this, textoTitulo);
@@ -81,6 +82,8 @@ public class ControladorEstadoNivelFallido extends ControladorEstadoJuegoBase im
 	@Override
 	public void inicializar() {
 		vista.inicializar();
+		ModeloPartidaJuego modeloPartidaJuego = ModeloPartidaJuego.getInstancia();
+		vista.setSubTitulo(String.format(FORMATO_PUNTOS,modeloPartidaJuego.getPuntos()));
 		vista.setOpcionesMenu(modelo.getElementosMenu());
 	}
 

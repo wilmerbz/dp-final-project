@@ -30,8 +30,16 @@ public class VistaEstadoMenu extends VistaEstadoJuego {
 	 * Asigna el titulo de la vista de menu.
 	 * @return
 	 */
-	public void setTitulo(String titulo) {
-		vistaMenu.setTitulo(titulo);
+	public void setTitulo(String texto) {
+		vistaMenu.setTitulo(texto);
+	}
+	
+	/**
+	 * Asigna el sub titulo de la vista de menu.
+	 * @return
+	 */
+	public void setSubTitulo(String texto) {
+		vistaMenu.setSubTitulo(texto);
 	}
 
 	@Override

@@ -28,6 +28,9 @@ import com.space.invaders.entidades.Partida;
  */
 public class ModeloPartidaJuego {
 
+	
+	private static ModeloPartidaJuego instancia;
+	
 	private final long PUNTOS_INICIALES = 0;
 	private final int VIDAS_INICIALES = 10;
 	
@@ -40,10 +43,22 @@ public class ModeloPartidaJuego {
 	/**
 	 * Crea una nueva instancia del modelo de partida de juego.
 	 */
-	public ModeloPartidaJuego() {
+	private ModeloPartidaJuego() {
 		juego = new Juego();
 	}
 
+	/**
+	 * Obtiene la instancia única de ModeloPartidaJuego.
+	 * @return Instancia unica de ModeloPartidaJuego.
+	 */
+	public static synchronized ModeloPartidaJuego getInstancia() {
+		if(instancia == null) {
+			instancia = new ModeloPartidaJuego();
+		}
+		
+		return instancia;
+	} 
+	
 	/**
 	 * Actualiza los actores de la partida de juego actual.
 	 */
@@ -79,7 +94,6 @@ public class ModeloPartidaJuego {
 			if (disparoEnemigo != null && !disparoEnemigo.isImpactado()) {
 				boolean jugadorImpactado = naveJugador.validarImpacto(disparoEnemigo);
 				if (jugadorImpactado) {
-					System.out.println("Quitando vida!");
 					quitarVida();
 				}
 			}

@@ -93,9 +93,6 @@ public class DecoradorNaveEnemigaEscudo extends DecoradorNaveEnemiga {
 			return false;
 		} else {
 			boolean naveImpactada = super.validarImpacto(disparo);
-			if(naveImpactada) {
-				System.out.println("Nave enemiga impactada!");
-			}
 			return naveImpactada;
 		}
 	}
