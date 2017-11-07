@@ -58,19 +58,19 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 
 	@Override
 	public void inicializar() {
-		
+
 		modeloPartidaJuego.setPausado(false);
-		
-		if(this.isInicializado()) {
+
+		if (this.isInicializado()) {
 			return;
 		}
-		
+
 		setInicializado(true);
 
 	}
-	
+
 	private void iniciarNivel(Nivel nivel, boolean reiniciarPuntaje) {
-		
+
 		modeloPartidaJuego.setNivel(nivel);
 		temporizadorDisparoEnemigo.setTiempo(nivel.getFrecuenciaDisparosEnemigos());
 		System.out.println("Nivel: " + nivel.getNumero() + " - " + nivel.getNombre());
@@ -78,7 +78,7 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 		vistaEstadoPartidaJuego.inicializar();
 		vistaEstadoPartidaJuego.setOpcionesMenu(modeloMenuPausa.getElementosMenu());
 		inicializarComandos();
-		
+
 	}
 
 	/**
@@ -98,46 +98,46 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 
 	@Override
 	public void recibirMensaje(String mensaje, Object data) {
-		
-		if(mensaje.equals("IniciarJuego")) {
+
+		if (mensaje.equals("IniciarJuego")) {
 			Nivel nivel = modeloNivel.getPrimerNivel();
 			iniciarNivel(nivel, true);
-		}else if(mensaje.equals("SiguienteNivel")) {
+		} else if (mensaje.equals("SiguienteNivel")) {
 			Nivel nivel = modeloNivel.siguienteNivel();
 			iniciarNivel(nivel, false);
-		}else if(mensaje.equals("ReiniciarNivel")) {
+		} else if (mensaje.equals("ReiniciarNivel")) {
 			reiniciarNivel();
-		}else if(mensaje.equals("CargarJuego")) {
+		} else if (mensaje.equals("CargarJuego")) {
 			Nivel nivel = modeloNivel.getNivelActual();
-			if(nivel == null) {
-				nivel =  modeloNivel.getPrimerNivel();
+			if (nivel == null) {
+				nivel = modeloNivel.getPrimerNivel();
 				iniciarNivel(nivel, false);
 			}
 		}
-		
+
 	}
-	
+
 	private void reiniciarNivel() {
 		Nivel nivel = modeloNivel.getNivelActual();
-		if(nivel == null) {
-			nivel =  modeloNivel.getPrimerNivel();
+		if (nivel == null) {
+			nivel = modeloNivel.getPrimerNivel();
 		}
 		iniciarNivel(nivel, true);
 	}
 
 	@Override
 	public void actualizar(float deltaTiempo) {
-		
+
 		if (modeloPartidaJuego.isPausado()) {
 			return;
 		}
-		
-		if(modeloPartidaJuego.isCompletado()) {
+
+		if (modeloPartidaJuego.isCompletado()) {
 			cambiarEstado(NombreEstado.NivelCompletado);
 			return;
 		}
-		
-		if(modeloPartidaJuego.isFallido()) {
+
+		if (modeloPartidaJuego.isFallido()) {
 			cambiarEstado(NombreEstado.NivelFallido);
 			return;
 		}
@@ -148,7 +148,7 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 		if (temporizadorDisparoEnemigo.esTiempo(deltaTiempo)) {
 			modeloPartidaJuego.generarDisparoEnemigo();
 		}
-		
+
 	}
 
 	@Override
@@ -227,12 +227,16 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 			}
 
 		}
-		
-		if(Gdx.input.isKeyPressed(Input.Keys.W)&& Gdx.input.isKeyPressed(Input.Keys.I) && Gdx.input.isKeyPressed(Input.Keys.N)) {
+
+		if (Gdx.input.isKeyPressed(Input.Keys.W) && Gdx.input.isKeyPressed(Input.Keys.I)
+				&& Gdx.input.isKeyPressed(Input.Keys.N)) {
+			System.out.println("Cheat: Completado");
 			modeloPartidaJuego.setCompletado(true);
 		}
-		
-		if(Gdx.input.isKeyPressed(Input.Keys.D)&& Gdx.input.isKeyPressed(Input.Keys.I) && Gdx.input.isKeyPressed(Input.Keys.E)) {
+
+		if (Gdx.input.isKeyPressed(Input.Keys.L) && Gdx.input.isKeyPressed(Input.Keys.O)
+				&& Gdx.input.isKeyPressed(Input.Keys.S) && Gdx.input.isKeyPressed(Input.Keys.E)) {
+			System.out.println("Cheat: Fallido");
 			modeloPartidaJuego.setFallido(true);
 		}
 	}

@@ -18,7 +18,7 @@ import com.space.invaders.vistas.VistaEstadoMenu;
  */
 public class ControladorEstadoMenuPrincipal extends ControladorEstadoJuegoBase implements IColega {
 	
-	private final String titulo = "SPACE INVADERS";
+	private final String titulo = "* SPACE INVADERS *";
 	private IMediador mediador;
 	private VistaEstadoMenu vista;
 	private ModeloMenuPrincipal modelo;

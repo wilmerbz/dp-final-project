@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.space.invaders.controladores.base.ControladorEstadoJuegoBase;
 import com.space.invaders.navegacion.NombreEstado;
+import com.space.invaders.recursos.sonido.NombreSonido;
 import com.space.invaders.vistas.VistaEstadoBienvenida;
 
 /**
@@ -41,7 +42,7 @@ public class ControladorEstadoBienvenida extends ControladorEstadoJuegoBase {
 		//vistaBienvenida.manejarEntradas();
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-			System.out.println("Enter! Navigate to Main Menu!");
+			reproducirSonido(NombreSonido.MENU_SELECCIONAR);
 			cambiarEstado(NombreEstado.MenuPrincipal);
 		}
 		

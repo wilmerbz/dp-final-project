@@ -25,7 +25,6 @@ import com.space.invaders.vistas.base.VistaEstadoJuego;
 public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 
 	private ControladorEstadoPartidaJuego controladorJuego;
-	private FondoInfinito background;
 	private Texture panelJugador;
 	private ElementoTexto puntaje;
 	private ElementoTexto vidas;
@@ -42,7 +41,6 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(SpaceInvadersGame.getCamara().combined);
 		
-		background = new FondoInfinito(NombreTextura.GAME_BACKGROUND);
 		panelJugador = AdministradorTexturas.getInstancia().obtenerTextura(NombreTextura.PANEL_JUGADOR_PERSONAJE_1);
 		
 		vistaMenu = new VistaMenu(this, textoTituloPausa);
@@ -56,7 +54,7 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 		int cantidadEnemigosPorFila = controladorJuego.getCantidadEnemigosPorFila();
 		float posicionInicialX = 0;
 		float posicionInicialY = getHeight() - 50;
-		float espacioX = 10;
+		float espacioX = 20;
 		float espacioY = 10;
 		
 		float x = posicionInicialX;
@@ -97,7 +95,6 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 
 	@Override
 	public void actualizar(float deltaTiempo) {
-		background.act(deltaTiempo);
 		
 		long puntos = controladorJuego.getPuntos();
 		puntaje.setTexto("$" + puntos);
@@ -114,8 +111,6 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 	public void renderizar() {
 		
 		spriteBatch.begin();
-		
-		background.draw(spriteBatch, 1);
 		
 		List<ElementoImagen> elementosJuego = controladorJuego.getElementosJuego();
 		IteradorGenerico<ElementoImagen> iteradorElementoJuego = new IteradorListaGenerica<ElementoImagen>(elementosJuego);

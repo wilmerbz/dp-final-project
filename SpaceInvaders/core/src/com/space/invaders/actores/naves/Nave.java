@@ -28,19 +28,18 @@ public abstract class Nave extends ElementoSecuenciaImagen implements Cloneable 
 	 * Disparo actual de la nave.
 	 */
 	protected Disparo disparo;
-	
+
 	/**
 	 * Velocidad de disparos.
 	 */
 	protected float velocidadDisparo;
-	
+
 	/**
 	 * Crea una nueva instancia de nave.
 	 */
 	public Nave() {
 		super();
 	}
-	
 
 	/**
 	 * Crea una nueva instancia de Nave.
@@ -53,7 +52,6 @@ public abstract class Nave extends ElementoSecuenciaImagen implements Cloneable 
 	public Nave(List<Texture> texturas, float intervaloAnimacion) {
 		super(texturas, intervaloAnimacion);
 	}
-
 
 	@Override
 	public void actualizar(float deltaTiempo) {
@@ -71,7 +69,6 @@ public abstract class Nave extends ElementoSecuenciaImagen implements Cloneable 
 		}
 	}
 
-	
 	/*
 	 * Implementación metodo para clonar elemento juego.
 	 */
@@ -79,14 +76,13 @@ public abstract class Nave extends ElementoSecuenciaImagen implements Cloneable 
 	public Nave clone() {
 		Nave copiaElemento = null;
 		copiaElemento = (Nave) super.clone();
-		if(this.temporizador!=null) {
-		copiaElemento.temporizador = this.temporizador.clone();
+		if (this.temporizador != null) {
+			copiaElemento.temporizador = this.temporizador.clone();
 		}
-		
+
 		return copiaElemento;
 	}
-	
-	
+
 	/**
 	 * Crea un nuevo disparo para la nave.
 	 * 
@@ -118,17 +114,20 @@ public abstract class Nave extends ElementoSecuenciaImagen implements Cloneable 
 	 * @param disparo
 	 */
 	protected void setUbicacionInicialDisparo(Disparo disparo) {
-		Image actorDisparo= disparo.getActor();
-	
+		Image actorDisparo = disparo.getActor();
+
 		float x = getActor().getX() + (getActor().getWidth() / 2) - (actorDisparo.getWidth() / 2);
 		float y = getActor().getY();
+        int multiplicadorDiferenciaAlturaY = 1;
 		if (disparo.getDireccionY() == DireccionY.Abajo) {
-			y+= getActor().getHeight();
+            multiplicadorDiferenciaAlturaY = 0;
 		}
+		
+        y+= getActor().getHeight() * multiplicadorDiferenciaAlturaY;
+        
 		actorDisparo.setX(x);
 		actorDisparo.setY(y);
 	}
-	
 
 	/**
 	 * Valida si el disparo dado impactó la nave.
@@ -141,34 +140,30 @@ public abstract class Nave extends ElementoSecuenciaImagen implements Cloneable 
 	public boolean validarImpacto(Disparo disparo) {
 		return validarImpacto(getActor(), disparo);
 	}
-	
-	
-	protected boolean validarImpacto(ActorImagen actor, Disparo disparo) {
-		ActorImagen actorDisparo= disparo.getActor();		
-		//SpriteDrawable spriteDrawableDisparo = (SpriteDrawable) actorDisparo.getDrawable();
-		//Sprite spriteDisparo = spriteDrawableDisparo.getSprite();
-		Rectangle rectanguloDisparo = new Rectangle(actorDisparo.getX(), actorDisparo.getY(), actorDisparo.getWidth(), actorDisparo.getHeight());
 
+	protected boolean validarImpacto(ActorImagen actor, Disparo disparo) {
+		ActorImagen actorDisparo = disparo.getActor();
+		Rectangle rectanguloDisparo = new Rectangle(actorDisparo.getX(), actorDisparo.getY(), actorDisparo.getWidth(),
+				actorDisparo.getHeight());
 		Rectangle rectanguloNave = new Rectangle(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 
 		boolean impacto = rectanguloNave.overlaps(rectanguloDisparo);
-
 		if (impacto) {
-			System.out.println("> Nave X: "+ rectanguloNave.getX() + " - Nave Y: "+ rectanguloNave.getY() + "\n- Disparo X: " + actorDisparo.getX()+ "- Disparo Y: " + actorDisparo.getY());
 			disparo.setImpactado(true);
 			impactada();
 		}
 
 		return impacto;
 	}
-	
+
 	/**
 	 * Metodo que se llama cuando la nave ha sido impactada.
 	 */
 	public abstract void impactada();
-	
+
 	/**
 	 * Obtiene la velocidad de los disparos.
+	 * 
 	 * @return Velocidad de disparos.
 	 */
 	public float getVelocidadDisparo() {
@@ -177,7 +172,9 @@ public abstract class Nave extends ElementoSecuenciaImagen implements Cloneable 
 
 	/**
 	 * Asigna la velocidad de los disparos.
-	 * @param velocidadDisparo Velocidad de disparos.
+	 * 
+	 * @param velocidadDisparo
+	 *            Velocidad de disparos.
 	 */
 	public void setVelocidadDisparo(float velocidadDisparo) {
 		this.velocidadDisparo = velocidadDisparo;
