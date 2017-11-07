@@ -19,6 +19,7 @@ public abstract class DecoradorNaveEnemiga extends NaveEnemiga{
 	 * @param naveEnemiga
 	 */
 	public DecoradorNaveEnemiga(NaveEnemiga naveEnemiga) {
+		super();
 		this.naveEnemiga = naveEnemiga;
 	}
 

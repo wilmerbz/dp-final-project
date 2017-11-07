@@ -11,30 +11,30 @@ import com.space.invaders.interfaces.mensajes.IMediador;
 import com.space.invaders.modelos.ModeloMenuPrincipal;
 import com.space.invaders.navegacion.NombreEstado;
 import com.space.invaders.recursos.sonido.NombreSonido;
-import com.space.invaders.vistas.VistaEstadoMenuPrincipal;
+import com.space.invaders.vistas.VistaEstadoMenu;
 
 /**
  * Controlador del menu principal.
  */
 public class ControladorEstadoMenuPrincipal extends ControladorEstadoJuegoBase implements IColega {
 	
+	private final String titulo = "SPACE INVADERS";
 	private IMediador mediador;
-	private VistaEstadoMenuPrincipal vistaEstadoMenuPrincipal;
-	private ModeloMenuPrincipal modeloMenuPrincipal;
+	private VistaEstadoMenu vista;
+	private ModeloMenuPrincipal modelo;
 	
 	/**
 	 * Crea un nuevo controlador de para el Menu Principal.
 	 */
 	public ControladorEstadoMenuPrincipal() {
-		vistaEstadoMenuPrincipal = new VistaEstadoMenuPrincipal(this);	
-		modeloMenuPrincipal = new ModeloMenuPrincipal();
+		vista = new VistaEstadoMenu(this, titulo);	
+		modelo = new ModeloMenuPrincipal();
 	}
 	
 	@Override
 	public void inicializar() {
-		System.out.println("Iniciando ControladorMenuPrincipal");
-		vistaEstadoMenuPrincipal.inicializar();
-		vistaEstadoMenuPrincipal.setOpcionesMenu(modeloMenuPrincipal.getElementosMenu());
+		vista.inicializar();
+		vista.setOpcionesMenu(modelo.getElementosMenu());
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class ControladorEstadoMenuPrincipal extends ControladorEstadoJuegoBase i
 
 	@Override
 	public void renderizar() {
-		vistaEstadoMenuPrincipal.renderizar();
+		vista.renderizar();
 	}
 
 	@Override
@@ -63,39 +63,43 @@ public class ControladorEstadoMenuPrincipal extends ControladorEstadoJuegoBase i
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 			
-			OpcionMenu elementoMenuActual = modeloMenuPrincipal.getElementoMenuActual();
+			OpcionMenu elementoMenuActual = modelo.getElementoMenuActual();
 			
 			if(elementoMenuActual!=null) {
 				NombreEstado nombreEstado = elementoMenuActual.getNombreRuta();
 				
 				switch (nombreEstado) {
-					case SeleccionarJugador:
 					case NuevoJuego:
+						reproducirSonido(NombreSonido.MENU_SELECCIONAR);
+						cambiarEstado(NombreEstado.Juego);
+						mediador.enviarMensaje(this,"IniciarJuego", null);
+						
+						break;
 					case CargarJuego:
 						reproducirSonido(NombreSonido.MENU_SELECCIONAR);
-						setControladorEstado(NombreEstado.Juego);
+						cambiarEstado(NombreEstado.Juego);
+						mediador.enviarMensaje(this,"CargarJuego", null);
 						break;
 					case Salir:
 						Gdx.app.exit();
 						break;
 					case Regresar:
 						reproducirSonido(NombreSonido.MENU_REGRESAR);
-						modeloMenuPrincipal.cargarOpcionesPadre();
-						vistaEstadoMenuPrincipal.setOpcionesMenu(modeloMenuPrincipal.getElementosMenu());
+						modelo.cargarOpcionesPadre();
+						vista.setOpcionesMenu(modelo.getElementosMenu());
 						break;
 					default:
 						reproducirSonido(NombreSonido.MENU_SELECCIONAR);
 						try {
-							if(modeloMenuPrincipal.esSubMenu()) {
-								modeloMenuPrincipal.cargarOpcionesSubMenu();
-								vistaEstadoMenuPrincipal.setOpcionesMenu(modeloMenuPrincipal.getElementosMenu());
+							if(modelo.esSubMenu()) {
+								modelo.cargarOpcionesSubMenu();
+								vista.setOpcionesMenu(modelo.getElementosMenu());
 							}else {
-								setControladorEstado(nombreEstado);
+								cambiarEstado(nombreEstado);
 							}
 						} catch (Exception e) {
 							
 						}
-						
 						
 						break;
 					}
@@ -106,24 +110,24 @@ public class ControladorEstadoMenuPrincipal extends ControladorEstadoJuegoBase i
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 			reproducirSonido(NombreSonido.MENU_MOVER);
-			modeloMenuPrincipal.moverElementoAnterior();
+			modelo.moverElementoAnterior();
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
 			reproducirSonido(NombreSonido.MENU_MOVER);
-			modeloMenuPrincipal.moverElementoSiguiente();
+			modelo.moverElementoSiguiente();
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
 			reproducirSonido(NombreSonido.MENU_REGRESAR);
-			modeloMenuPrincipal.cargarOpcionesPadre();
-			vistaEstadoMenuPrincipal.setOpcionesMenu(modeloMenuPrincipal.getElementosMenu());
+			modelo.cargarOpcionesPadre();
+			vista.setOpcionesMenu(modelo.getElementosMenu());
 		}
 	}
 
 	@Override
 	public void dispose() {
-		vistaEstadoMenuPrincipal.dispose();
+		vista.dispose();
 	}
 
 	/**
@@ -131,7 +135,7 @@ public class ControladorEstadoMenuPrincipal extends ControladorEstadoJuegoBase i
 	 * @return Elementos menu.
 	 */
 	public List<OpcionMenu> getElementosMenu() {
-		return modeloMenuPrincipal.getElementosMenu();
+		return modelo.getElementosMenu();
 	}
 
 }

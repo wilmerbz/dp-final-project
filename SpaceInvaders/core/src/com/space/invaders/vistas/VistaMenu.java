@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.space.invaders.actores.ElementoTexto;
 import com.space.invaders.entidades.menu.OpcionMenu;
-import com.space.invaders.interfaces.vistas.IVista;
 import com.space.invaders.interfaces.vistas.IVistaEstadoJuego;
 import com.space.invaders.recursos.texto.AdministradorTexto;
 import com.space.invaders.recursos.texto.IAdministradorTexto;
@@ -52,6 +51,11 @@ public class VistaMenu implements IVistaEstadoJuego {
 		
 	}
 
+	public void setTitulo(String textoTitulo) {
+		this.textoTitulo = textoTitulo;
+		this.titulo.setTexto(textoTitulo);
+	}
+	
 	/**
 	 * Asigna las opciones del menu.
 	 * @param opcionesMenu Opciones de menu.
@@ -80,6 +84,7 @@ public class VistaMenu implements IVistaEstadoJuego {
 
 	}
 
+	@Override
 	public void dispose() {
 		elementosTextoMenu=null;
 	}

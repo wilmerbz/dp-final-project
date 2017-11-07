@@ -2,8 +2,9 @@ package com.space.invaders.modelos;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.space.invaders.entidades.Nivel;
+import com.space.invaders.entidades.iterador.IteradorGenerico;
+import com.space.invaders.entidades.iterador.IteradorListaGenerica;
 
 /**
  * Modelo para los niveles del juego.
@@ -16,6 +17,8 @@ public class ModeloNivel {
 	private List<Nivel> niveles;
 	
 	
+	private IteradorGenerico<Nivel> iteradorNiveles;
+	
 	/**
 	 * Nivel actual.
 	 */
@@ -27,6 +30,11 @@ public class ModeloNivel {
 	 */
 	public 	ModeloNivel() {
 		cargarNiveles();
+		crearIteradorNiveles();
+	}
+	
+	private void crearIteradorNiveles(){
+		iteradorNiveles = new IteradorListaGenerica<Nivel>(niveles);
 	}
 
 	/**
@@ -35,44 +43,50 @@ public class ModeloNivel {
 	private void cargarNiveles() {
 		
 		niveles = new ArrayList<Nivel>();
-		Nivel nivel1 = new Nivel();
-		nivel1.setNombre("Lets kill some aliens!  ;)");
-		nivel1.setNumero(1);
-		nivel1.setVelocidadEnemigos(1f);
-		nivel1.setVelocidadDisparos(3);
-		nivel1.getConfiguracionEnemigos().put(0, 15);
-		nivel1.getConfiguracionEnemigos().put(1, 15);
-		nivel1.getConfiguracionEnemigos().put(2, 15);
-		nivel1.setCantidadEnemigosPorFila(15);
-		nivel1.setFrecuenciaDisparosEnemigos(1);
+		Nivel nivel = new Nivel();
+		nivel.setNombre("Lets kill some aliens!  ;)");
+		nivel.setNumero(1);
+		nivel.setVelocidadEnemigos(1f);
+		nivel.setVelocidadJugador(5f);
+		nivel.setVelocidadDisparosEnemigos(2.5f);
+		nivel.setVelocidadDisparosJugador(5);
+		nivel.getConfiguracionEnemigos().put(0, 10);
+		nivel.getConfiguracionEnemigos().put(1, 10);
+		nivel.getConfiguracionEnemigos().put(2, 10);
+		nivel.setCantidadEnemigosPorFila(10);
+		nivel.setFrecuenciaDisparosEnemigos(1);
 		
-		niveles.add(nivel1);
+		niveles.add(nivel);
 		
-		Nivel nivel2 = new Nivel();
-		nivel2.setNombre("It's getting complicated!  :o");
-		nivel2.setNumero(2);
-		nivel2.setVelocidadEnemigos(2f);
-		nivel2.setVelocidadDisparos(6);
-		nivel2.getConfiguracionEnemigos().put(0, 20);
-		nivel2.getConfiguracionEnemigos().put(1, 40);
-		nivel2.getConfiguracionEnemigos().put(2, 20);
-		nivel2.setCantidadEnemigosPorFila(20);
-		nivel2.setFrecuenciaDisparosEnemigos(0.75f);
+		nivel = new Nivel();
+		nivel.setNombre("It's getting complicated!  :o");
+		nivel.setNumero(2);
+		nivel.setVelocidadEnemigos(3);
+		nivel.setVelocidadJugador(6);
+		nivel.setVelocidadDisparosEnemigos(4);
+		nivel.setVelocidadDisparosJugador(8);
+		nivel.getConfiguracionEnemigos().put(0, 10);
+		nivel.getConfiguracionEnemigos().put(1, 20);
+		nivel.getConfiguracionEnemigos().put(2, 10);
+		nivel.setCantidadEnemigosPorFila(10);
+		nivel.setFrecuenciaDisparosEnemigos(0.75f);
 		
-		niveles.add(nivel2);
+		niveles.add(nivel);
 		
-		Nivel nivel3 = new Nivel();
-		nivel3.setNombre("This is the end!  X(");
-		nivel3.setNumero(3);
-		nivel3.setVelocidadEnemigos(3f);
-		nivel3.setVelocidadDisparos(9);
-		nivel3.getConfiguracionEnemigos().put(0, 40);
-		nivel3.getConfiguracionEnemigos().put(1, 40);
-		nivel3.getConfiguracionEnemigos().put(2, 40);
-		nivel3.setCantidadEnemigosPorFila(20);
-		nivel3.setFrecuenciaDisparosEnemigos(0.5f);
+		nivel = new Nivel();
+		nivel.setNombre("This is the end!  X(");
+		nivel.setNumero(3);
+		nivel.setVelocidadEnemigos(5);
+		nivel.setVelocidadJugador(7.5f);
+		nivel.setVelocidadDisparosEnemigos(8);
+		nivel.setVelocidadDisparosJugador(16);
+		nivel.getConfiguracionEnemigos().put(0, 20);
+		nivel.getConfiguracionEnemigos().put(1, 40);
+		nivel.getConfiguracionEnemigos().put(2, 20);
+		nivel.setCantidadEnemigosPorFila(20);
+		nivel.setFrecuenciaDisparosEnemigos(0.5f);
 		
-		niveles.add(nivel3);
+		niveles.add(nivel);
 	}
 
 	/**
@@ -98,5 +112,32 @@ public class ModeloNivel {
 	 */
 	public Nivel getNivel(int indiceNivel) {
 		return this.niveles.get(indiceNivel);
+	}
+	
+	/**
+	 * Obtiene el siguiente nivel.
+	 * @return Nivel
+	 */
+	public Nivel siguienteNivel() {
+		nivelActual = iteradorNiveles.next();
+		return nivelActual;
+	}
+	
+	/**
+	 * Obtiene el primer nivel.
+	 * @return
+	 */
+	public Nivel getPrimerNivel() {
+		crearIteradorNiveles();
+		Nivel primerNivel = siguienteNivel();
+		return primerNivel;
+	}
+	
+	/**
+	 * Obtiene el nivel actual.
+	 * @return Nivel actual.
+	 */
+	public Nivel getNivelActual() {
+		return nivelActual;
 	}
 }

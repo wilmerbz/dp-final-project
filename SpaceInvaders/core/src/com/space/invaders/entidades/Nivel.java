@@ -3,21 +3,24 @@ package com.space.invaders.entidades;
 import java.util.Hashtable;
 
 public class Nivel {
+	
 	private String nombre;
 	private int numero;
 	private float velocidadEnemigos;
-	private float velocidadDisparos;
+	private float velocidadJugador;
+	private float velocidadDisparosEnemigos;
+
+	private float velocidadDisparosJugador;
+
 	private int cantidadEnemigosPorFila;
 	private float frecuenciaDisparosEnemigos;
 	Hashtable<Integer, Integer> configuracionEnemigos;
-
 	/**
 	 * Crea una nueva instancia de nivel.
 	 */
 	public Nivel() {
 		configuracionEnemigos =new Hashtable<Integer, Integer>();
 	}
-
 	/**
 	 * Obtiene la cantidad de enemigos por fila.
 	 * @return Cantidad de enemigos por fila.
@@ -25,7 +28,7 @@ public class Nivel {
 	public int getCantidadEnemigosPorFila() {
 		return cantidadEnemigosPorFila;
 	}
-	
+
 	/**
 	 * @return the configuracionEnemigos
 	 */
@@ -40,7 +43,7 @@ public class Nivel {
 	public float getFrecuenciaDisparosEnemigos() {
 		return frecuenciaDisparosEnemigos;
 	}
-
+	
 	/**
 	 * Obtiene el nombre del nivel.
 	 * @return Nombre del nivel.
@@ -61,8 +64,16 @@ public class Nivel {
 	 * Obtiene la velocidad de disparos.
 	 * @return Velocidad de disparos.
 	 */
-	public float getVelocidadDisparos() {
-		return velocidadDisparos;
+	public float getVelocidadDisparosEnemigos() {
+		return velocidadDisparosEnemigos;
+	}
+
+	/**
+	 * Obtiene la velocidad de disparos del jugador.
+	 * @return Velocidad de disparos del jugador.
+	 */
+	public float getVelocidadDisparosJugador() {
+		return velocidadDisparosJugador;
 	}
 
 	/**
@@ -71,6 +82,14 @@ public class Nivel {
 	 */
 	public float getVelocidadEnemigos() {
 		return velocidadEnemigos;
+	}
+	
+	/**
+	 * Obtiene la velocidad del jugador.
+	 * @return Velocidad del jugador. 
+	 */
+	public float getVelocidadJugador() {
+		return velocidadJugador;
 	}
 
 	/**
@@ -112,14 +131,22 @@ public class Nivel {
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-	
-	
+
 	/**
 	 * Asigna la velocidad de los disparos.
 	 * @param velocidadDisparos Velocidad de disparos.
 	 */
-	public void setVelocidadDisparos(float velocidadDisparos) {
-		this.velocidadDisparos = velocidadDisparos;
+	public void setVelocidadDisparosEnemigos(float velocidadDisparos) {
+		this.velocidadDisparosEnemigos = velocidadDisparos;
+	}
+	
+	
+	/**
+	 * Asigna la velocidad de los disparos del jugador.
+	 * @param velocidadDisparosJugador Velocidad de disparos.
+	 */
+	public void setVelocidadDisparosJugador(float velocidadDisparosJugador) {
+		this.velocidadDisparosJugador = velocidadDisparosJugador;
 	}
 
 	/**
@@ -128,5 +155,13 @@ public class Nivel {
 	 */
 	public void setVelocidadEnemigos(float velocidadEnemigos) {
 		this.velocidadEnemigos = velocidadEnemigos;
+	}
+	
+	/**
+	 * Asigna la velocidad del jugador.
+	 * @param velocidadJugador Velocidad del jugador.
+	 */
+	public void setVelocidadJugador(float velocidadJugador) {
+		this.velocidadJugador = velocidadJugador;
 	}
 }

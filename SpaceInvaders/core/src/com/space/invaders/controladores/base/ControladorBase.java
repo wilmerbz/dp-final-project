@@ -11,6 +11,7 @@ import com.space.invaders.recursos.sonido.AdministradorSonidos;
  */
 public abstract class ControladorBase implements IControlador {
 
+	private boolean inicializado;
 
 	/**
 	 * Crea una nueva instancia del controlador.
@@ -28,5 +29,24 @@ public abstract class ControladorBase implements IControlador {
 		AdministradorSonidos.getInstancia().reproducirSonido(nombreSonido);
 	}
 	
+	/**
+	 * Inidica si el controlador ya fue inicializado.
+	 * @return Iniciado.
+	 */
+	@Override
+	public boolean isInicializado() {
+		return inicializado;
+	}
+
+
+	/**
+	 * Asigna la bandera que indica si el controlador ya fue inicializado.
+	 * @param inicializado Iniciado.
+	 */
+	@Override
+	public void setInicializado(boolean inicializado) {
+		this.inicializado = inicializado;
+	}
+
 	
 }

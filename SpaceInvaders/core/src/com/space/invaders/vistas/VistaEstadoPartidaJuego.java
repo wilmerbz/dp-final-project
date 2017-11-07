@@ -1,20 +1,14 @@
 package com.space.invaders.vistas;
 
 import java.util.List;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.space.invaders.actores.FondoInfinito;
-import com.space.invaders.actores.iterator.IteradorGenerico;
-import com.space.invaders.actores.iterator.IteradorListaGenerica;
+import com.space.invaders.entidades.iterador.IteradorGenerico;
+import com.space.invaders.entidades.iterador.IteradorListaGenerica;
 import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveJugador;
 import com.space.invaders.SpaceInvadersGame;
@@ -23,8 +17,6 @@ import com.space.invaders.actores.ElementoTexto;
 import com.space.invaders.controladores.ControladorEstadoPartidaJuego;
 import com.space.invaders.entidades.menu.OpcionMenu;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
-import com.space.invaders.recursos.texto.AdministradorTexto;
-import com.space.invaders.recursos.texto.IAdministradorTexto;
 import com.space.invaders.recursos.texto.NombreFuente;
 import com.space.invaders.recursos.texturas.AdministradorTexturas;
 import com.space.invaders.recursos.texturas.NombreTextura;

@@ -27,17 +27,13 @@ public abstract class NaveEnemiga extends Nave {
 	 */
 	protected long puntos;
 	
+	/**
+	 * Crea una nueva instancia de nave enemiga.
+	 */
 	public NaveEnemiga() {
-		
+		super();
 	}
 	
-	/**
-	 * Crea una nueva instancia de NaveEnemiga.
-	 * @param intervaloAnimacion Intervalo de cambio de texturas para la animación.
-	 */
-	public NaveEnemiga(float intervaloAnimacion) {
-		super(intervaloAnimacion);
-	}
 
 	/**
 	 * Crea una nueva instancia de NaveEnemiga.
@@ -61,6 +57,7 @@ public abstract class NaveEnemiga extends Nave {
 			return null;
 		}
 		disparo = FachadaCreacionDisparo.getInstancia().construirDisparoEnemigo();
+		disparo.setVelocidadY(getVelocidadDisparo());
 		setUbicacionInicialDisparo(disparo);
 		AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.DISPARO_ENEMIGO);
 		return disparo;

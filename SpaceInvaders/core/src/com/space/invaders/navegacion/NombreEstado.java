@@ -17,5 +17,9 @@ public enum NombreEstado {
 	NuevoJuego, 
 	CargarJuego, 
 	Regresar,
-	Continuar
+	Continuar, 
+	SiguienteNivel, 
+	ReiniciarNivel,
+	NivelCompletado,
+	NivelFallido
 }

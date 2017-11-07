@@ -7,8 +7,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.space.invaders.actores.ElementoImagen;
 import com.space.invaders.actores.disparos.Disparo;
-import com.space.invaders.actores.iterator.IteradorGenerico;
-import com.space.invaders.actores.iterator.IteradorListaGenerica;
+import com.space.invaders.entidades.iterador.IteradorGenerico;
+import com.space.invaders.entidades.iterador.IteradorListaGenerica;
 import com.space.invaders.actores.naves.NaveEnemiga;
 import com.space.invaders.actores.naves.NaveJugador;
 import com.space.invaders.actores.naves.comandos.ComandoNaveDisparar;
@@ -34,7 +34,6 @@ import com.space.invaders.vistas.VistaEstadoPartidaJuego;
  */
 public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase implements IColega {
 
-	private int contadorVisualizaciones = 0;
 	private IMediador mediador;
 	private ModeloPartidaJuego modeloPartidaJuego;
 	private ModeloMenuPausa modeloMenuPausa;
@@ -59,17 +58,27 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 
 	@Override
 	public void inicializar() {
-		contadorVisualizaciones++;
-		System.out.println("Iniciando ControladorJuego: " + contadorVisualizaciones);
-		Nivel nivel = modeloNivel.getNivel(0);
+		
+		modeloPartidaJuego.setPausado(false);
+		
+		if(this.isInicializado()) {
+			return;
+		}
+		
+		setInicializado(true);
+
+	}
+	
+	private void iniciarNivel(Nivel nivel, boolean reiniciarPuntaje) {
+		
 		modeloPartidaJuego.setNivel(nivel);
 		temporizadorDisparoEnemigo.setTiempo(nivel.getFrecuenciaDisparosEnemigos());
 		System.out.println("Nivel: " + nivel.getNumero() + " - " + nivel.getNombre());
-		modeloPartidaJuego.inicializarPartidaJuego();
+		modeloPartidaJuego.inicializarPartidaJuego(reiniciarPuntaje);
 		vistaEstadoPartidaJuego.inicializar();
 		vistaEstadoPartidaJuego.setOpcionesMenu(modeloMenuPausa.getElementosMenu());
 		inicializarComandos();
-
+		
 	}
 
 	/**
@@ -89,15 +98,47 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 
 	@Override
 	public void recibirMensaje(String mensaje, Object data) {
-		// Jugador jugador = (Jugador) data;
-		// System.out.println("Mensaje recibido por ControladorJuego: " + mensaje + " -
-		// Nombre: " + jugador.getNombre() + " - Nickname: " + jugador.getNickname());
+		
+		if(mensaje.equals("IniciarJuego")) {
+			Nivel nivel = modeloNivel.getPrimerNivel();
+			iniciarNivel(nivel, true);
+		}else if(mensaje.equals("SiguienteNivel")) {
+			Nivel nivel = modeloNivel.siguienteNivel();
+			iniciarNivel(nivel, false);
+		}else if(mensaje.equals("ReiniciarNivel")) {
+			reiniciarNivel();
+		}else if(mensaje.equals("CargarJuego")) {
+			Nivel nivel = modeloNivel.getNivelActual();
+			if(nivel == null) {
+				nivel =  modeloNivel.getPrimerNivel();
+				iniciarNivel(nivel, false);
+			}
+		}
+		
+	}
+	
+	private void reiniciarNivel() {
+		Nivel nivel = modeloNivel.getNivelActual();
+		if(nivel == null) {
+			nivel =  modeloNivel.getPrimerNivel();
+		}
+		iniciarNivel(nivel, true);
 	}
 
 	@Override
 	public void actualizar(float deltaTiempo) {
-
+		
 		if (modeloPartidaJuego.isPausado()) {
+			return;
+		}
+		
+		if(modeloPartidaJuego.isCompletado()) {
+			cambiarEstado(NombreEstado.NivelCompletado);
+			return;
+		}
+		
+		if(modeloPartidaJuego.isFallido()) {
+			cambiarEstado(NombreEstado.NivelFallido);
 			return;
 		}
 
@@ -107,6 +148,7 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 		if (temporizadorDisparoEnemigo.esTiempo(deltaTiempo)) {
 			modeloPartidaJuego.generarDisparoEnemigo();
 		}
+		
 	}
 
 	@Override
@@ -136,12 +178,14 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 
 					switch (nombreEstado) {
 					case Continuar:
-
 						modeloPartidaJuego.alternarPausa();
+						break;
+					case ReiniciarNivel:
+						reiniciarNivel();
 						break;
 					case MenuPrincipal:
 						nombreSonido = NombreSonido.MENU_REGRESAR;
-						setControladorEstado(nombreEstado);
+						cambiarEstado(nombreEstado);
 						break;
 					case Salir:
 						Gdx.app.exit();
@@ -182,6 +226,14 @@ public class ControladorEstadoPartidaJuego extends ControladorEstadoJuegoBase im
 				comandoNaveDisparar.ejecutar();
 			}
 
+		}
+		
+		if(Gdx.input.isKeyPressed(Input.Keys.W)&& Gdx.input.isKeyPressed(Input.Keys.I) && Gdx.input.isKeyPressed(Input.Keys.N)) {
+			modeloPartidaJuego.setCompletado(true);
+		}
+		
+		if(Gdx.input.isKeyPressed(Input.Keys.D)&& Gdx.input.isKeyPressed(Input.Keys.I) && Gdx.input.isKeyPressed(Input.Keys.E)) {
+			modeloPartidaJuego.setFallido(true);
 		}
 	}
 

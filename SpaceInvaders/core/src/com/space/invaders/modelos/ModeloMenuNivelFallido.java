@@ -8,18 +8,17 @@ import com.space.invaders.entidades.menu.OpcionMenuHoja;
 import com.space.invaders.modelos.base.ModeloMenuBase;
 import com.space.invaders.navegacion.NombreEstado;
 
-public class ModeloMenuPausa extends ModeloMenuBase{
+public class ModeloMenuNivelFallido extends ModeloMenuBase{
 	
 	@Override
 	protected List<OpcionMenu> inicializarOpcionesMenu() {
 		List<OpcionMenu> opcionesMenu  = new ArrayList<OpcionMenu>();
-		OpcionMenuHoja continuar = new OpcionMenuHoja(NombreEstado.Continuar, "Continuar");
-		OpcionMenuHoja reiniciar = new OpcionMenuHoja(NombreEstado.ReiniciarNivel, "Reiniciar");
-		OpcionMenuHoja menuPrincipal = new OpcionMenuHoja(NombreEstado.MenuPrincipal, "Menú Principal");
+		
+		OpcionMenuHoja reiniciarNivel = new OpcionMenuHoja(NombreEstado.ReiniciarNivel, "Reiniciar Nivel");
+		OpcionMenuHoja menuPrincipal = new OpcionMenuHoja(NombreEstado.MenuPrincipal, "Menu Principal");
 		OpcionMenuHoja salir = new OpcionMenuHoja(NombreEstado.Salir, "Salir");
 		
-		opcionesMenu.add(continuar);
-		opcionesMenu.add(reiniciar);
+		opcionesMenu.add(reiniciarNivel);
 		opcionesMenu.add(menuPrincipal);
 		opcionesMenu.add(salir);
 		

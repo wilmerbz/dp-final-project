@@ -78,6 +78,8 @@ public class SpaceInvadersGame extends ApplicationAdapter {
 		administradorEstados.agregarEstado(NombreEstado.Bienvenida, "com.space.invaders.controladores.ControladorEstadoBienvenida", true);
 		administradorEstados.agregarEstado(NombreEstado.MenuPrincipal, "com.space.invaders.controladores.ControladorEstadoMenuPrincipal", true);
 		administradorEstados.agregarEstado(NombreEstado.Juego, "com.space.invaders.controladores.ControladorEstadoPartidaJuego", true);
+		administradorEstados.agregarEstado(NombreEstado.NivelCompletado, "com.space.invaders.controladores.ControladorEstadoNivelCompletado", true);
+		administradorEstados.agregarEstado(NombreEstado.NivelFallido, "com.space.invaders.controladores.ControladorEstadoNivelFallido", true);
 		
 		administradorEstados.setEstado(NombreEstado.Bienvenida);
 	}

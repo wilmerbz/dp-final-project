@@ -42,7 +42,7 @@ public class ControladorEstadoBienvenida extends ControladorEstadoJuegoBase {
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 			System.out.println("Enter! Navigate to Main Menu!");
-			setControladorEstado(NombreEstado.MenuPrincipal);
+			cambiarEstado(NombreEstado.MenuPrincipal);
 		}
 		
 	}

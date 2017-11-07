@@ -8,11 +8,12 @@ import com.space.invaders.navegacion.NombreEstado;
  * Clase base para los controladores de estado del juego.
  */
 public abstract class ControladorEstadoJuegoBase extends ControladorBase implements IControladorEstadoJuego{
+	
 	/**
-	 * Navegar a la ruta indicada.
-	 * @param nombreEstado Nombre de ruta.
+	 * Cambiar al estado indicado.
+	 * @param nombreEstado Nombre del estado.
 	 */
-	protected void setControladorEstado(NombreEstado nombreEstado) {
+	protected void cambiarEstado(NombreEstado nombreEstado) {
 		AdministradorEstados.getInstancia().setEstado(nombreEstado);
 	}
 }

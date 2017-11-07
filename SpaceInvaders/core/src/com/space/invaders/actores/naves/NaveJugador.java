@@ -16,15 +16,6 @@ public class NaveJugador extends Nave {
 
 	/**
 	 * Crea una nueva instancia de NaveJugador.
-	 * @param intervaloAnimacion Intervalo de cambio de texturas para la animación.
-	 */
-	public NaveJugador(float intervaloAnimacion) {
-		super(intervaloAnimacion);
-	}
-	
-	
-	/**
-	 * Crea una nueva instancia de NaveJugador.
 	 * @param texturas Texturas utilizadas para la animación.
 	 * @param intervaloAnimacion Intervalo de cambio de texturas para la animación.
 	 */
@@ -43,6 +34,7 @@ public class NaveJugador extends Nave {
 		}
 		
 		disparo = FachadaCreacionDisparo.getInstancia().construirDisparoJugador();
+		disparo.setVelocidadY(getVelocidadDisparo());
 		setUbicacionInicialDisparo(disparo);
 		AdministradorSonidos.getInstancia().reproducirSonido(NombreSonido.DISPARO_JUGADOR);
 		return disparo;

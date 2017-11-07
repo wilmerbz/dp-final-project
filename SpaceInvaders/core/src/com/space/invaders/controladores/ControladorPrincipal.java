@@ -10,11 +10,12 @@ import com.space.invaders.interfaces.vistas.IVista;
 public class ControladorPrincipal implements IControladorPrincipal {
 
 	private IControladorEstadoJuego _controladorEstadoJuego;
-	
+	private boolean inicializado;
 	
 	@Override
 	public void inicializar() {
 		System.out.println("Iniciando ControladorPrincipal");
+		this.inicializado = true;
 	}
 	
 	/**
@@ -47,6 +48,16 @@ public class ControladorPrincipal implements IControladorPrincipal {
 		// TODO Auto-generated method stub
 		_controladorEstadoJuego.dispose();
 		
+	}
+
+	@Override
+	public void setInicializado(boolean inicializado) {
+		this.inicializado = true;
+	}
+
+	@Override
+	public boolean isInicializado() {
+		return this.inicializado;
 	}
 
 }

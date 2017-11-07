@@ -34,19 +34,13 @@ public abstract class Nave extends ElementoSecuenciaImagen implements Cloneable 
 	 */
 	protected float velocidadDisparo;
 	
-	public Nave() {
-		
-	}
-
 	/**
-	 * Crea una nueva instancia de Nave.
-	 * 
-	 * @param intervaloAnimacion
-	 *            Intervalo de cambio de texturas para la animación.
+	 * Crea una nueva instancia de nave.
 	 */
-	public Nave(float intervaloAnimacion) {
-		super(intervaloAnimacion);
+	public Nave() {
+		super();
 	}
+	
 
 	/**
 	 * Crea una nueva instancia de Nave.
@@ -60,9 +54,6 @@ public abstract class Nave extends ElementoSecuenciaImagen implements Cloneable 
 		super(texturas, intervaloAnimacion);
 	}
 
-	public Nave(NaveEnemiga naveEnemiga) {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public void actualizar(float deltaTiempo) {
@@ -131,14 +122,9 @@ public abstract class Nave extends ElementoSecuenciaImagen implements Cloneable 
 	
 		float x = getActor().getX() + (getActor().getWidth() / 2) - (actorDisparo.getWidth() / 2);
 		float y = getActor().getY();
-		int multiplicadorDiferenciaAlturaY = 1;
 		if (disparo.getDireccionY() == DireccionY.Abajo) {
-			multiplicadorDiferenciaAlturaY = 0;
+			y+= getActor().getHeight();
 		}
-		
-		y+= getActor().getHeight() * multiplicadorDiferenciaAlturaY;
-		
-		
 		actorDisparo.setX(x);
 		actorDisparo.setY(y);
 	}
@@ -158,16 +144,17 @@ public abstract class Nave extends ElementoSecuenciaImagen implements Cloneable 
 	
 	
 	protected boolean validarImpacto(ActorImagen actor, Disparo disparo) {
-		Image actorDisparo= disparo.getActor();		
-		SpriteDrawable spriteDrawableDisparo = (SpriteDrawable) actorDisparo.getDrawable();
-		Sprite spriteDisparo = spriteDrawableDisparo.getSprite();
-		Rectangle rectanguloDisparo = spriteDisparo.getBoundingRectangle();
+		ActorImagen actorDisparo= disparo.getActor();		
+		//SpriteDrawable spriteDrawableDisparo = (SpriteDrawable) actorDisparo.getDrawable();
+		//Sprite spriteDisparo = spriteDrawableDisparo.getSprite();
+		Rectangle rectanguloDisparo = new Rectangle(actorDisparo.getX(), actorDisparo.getY(), actorDisparo.getWidth(), actorDisparo.getHeight());
 
 		Rectangle rectanguloNave = new Rectangle(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 
 		boolean impacto = rectanguloNave.overlaps(rectanguloDisparo);
 
 		if (impacto) {
+			System.out.println("> Nave X: "+ rectanguloNave.getX() + " - Nave Y: "+ rectanguloNave.getY() + "\n- Disparo X: " + actorDisparo.getX()+ "- Disparo Y: " + actorDisparo.getY());
 			disparo.setImpactado(true);
 			impactada();
 		}

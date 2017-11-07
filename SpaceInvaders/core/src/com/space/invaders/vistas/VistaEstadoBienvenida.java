@@ -1,13 +1,7 @@
 package com.space.invaders.vistas;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.space.invaders.actores.FondoInfinito;
-import com.space.invaders.interfaces.controladores.IControlador;
 import com.space.invaders.interfaces.controladores.IControladorEstadoJuego;
-import com.space.invaders.recursos.texturas.AdministradorTexturas;
 import com.space.invaders.recursos.texturas.NombreTextura;
 import com.space.invaders.vistas.base.VistaEstadoJuego;
 
