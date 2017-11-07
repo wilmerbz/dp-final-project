@@ -89,7 +89,7 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 		vidas.setX(150);
 		vidas.setY(getHeight()-70);
 		
-		puntaje = new ElementoTexto("0", NombreFuente.DEFAULT, 30, Color.WHITE, Color.BLACK);
+		puntaje = new ElementoTexto("0", NombreFuente.DEFAULT, 25, Color.WHITE, Color.BLACK);
 		puntaje.setX(240);
 		puntaje.setY(getHeight()-70);
 		
@@ -97,7 +97,7 @@ public class VistaEstadoPartidaJuego extends VistaEstadoJuego {
 		tituloNivel.setX(380);
 		tituloNivel.setY(getHeight()-40);
 		
-		nivel = new ElementoTexto("1", NombreFuente.DEFAULT, 40, Color.WHITE, Color.BLACK);
+		nivel = new ElementoTexto("1", NombreFuente.DEFAULT, 35, Color.WHITE, Color.BLACK);
 		nivel.setX(390);
 		nivel.setY(getHeight()-60);
 		
