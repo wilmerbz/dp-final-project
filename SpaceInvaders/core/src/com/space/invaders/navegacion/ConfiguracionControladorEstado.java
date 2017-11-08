@@ -9,7 +9,7 @@ import com.space.invaders.interfaces.controladores.IControlador;
 	
 	private NombreEstado nombreEstado;
 	private String nombreClaseControlador;
-	private Boolean isSingleton;
+	private Boolean singleton;
 	private IControlador instanciaControlador;
 	
 	/**
@@ -21,7 +21,7 @@ import com.space.invaders.interfaces.controladores.IControlador;
 	public ConfiguracionControladorEstado(NombreEstado nombreEstado, String nombreClaseControlador, boolean isSingleton) {
 		this.nombreEstado = nombreEstado;
 		this.nombreClaseControlador = nombreClaseControlador;
-		this.isSingleton = isSingleton;
+		this.singleton = isSingleton;
 	}
 	
 	/**
@@ -36,7 +36,7 @@ import com.space.invaders.interfaces.controladores.IControlador;
 	 * Asigna el nombre del estado.
 	 * @param nombreEstado Nombre del estado.
 	 */
-	public void setNombreRuta(NombreEstado nombreEstado) {
+	public void setNombreEstado(NombreEstado nombreEstado) {
 		this.nombreEstado = nombreEstado;
 	}
 	
@@ -60,16 +60,16 @@ import com.space.invaders.interfaces.controladores.IControlador;
 	 * Indica si el la instancia del controlador es unica o se crea una nueva en cada vez que se cambie al este estado.
 	 * @return Retorna true si la instancia es singleton; de lo contrario false. 
 	 */
-	public Boolean getIsSingleton() {
-		return isSingleton;
+	public Boolean isSingleton() {
+		return singleton;
 	}
 	
 	/**
 	 * Asigna el valor que indica si el la instancia del controlador es unica o se crea una nueva en cada navegaci�n.
 	 * @param isSingleton true si la instancia es singleton; de lo contrario false.
 	 */
-	public void setIsSingleton(Boolean isSingleton) {
-		this.isSingleton = isSingleton;
+	public void setSingleton(Boolean isSingleton) {
+		this.singleton = isSingleton;
 	}
 	
 	/**

@@ -40,5 +40,5 @@ public interface IAdministradorEstados {
 	 * Establece el controlador actual del estado del juego, en el controlador principal.
 	 * @param controladorJuego Controlador del estado del juego.
 	 */
-	void setControladorEstadoJuegoActual(IControladorEstadoJuego controladorJuego);
+	//void setControladorEstadoJuegoActual(IControladorEstadoJuego controladorJuego);
 }

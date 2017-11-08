@@ -16,7 +16,7 @@ public class ControladorFactory implements IControladorFactory{
 	@Override
 	public IControlador crearControlador(ConfiguracionControladorEstado informacionRuta) {
 		// TODO Auto-generated method stub
-		if(informacionRuta.getIsSingleton() && informacionRuta.getInstanciaControlador() != null) {
+		if(informacionRuta.isSingleton() && informacionRuta.getInstanciaControlador() != null) {
 			return informacionRuta.getInstanciaControlador();
 		}
 		
@@ -28,7 +28,7 @@ public class ControladorFactory implements IControladorFactory{
 			Constructor<?> contructorControlador = claseControlador.getConstructor();
 			controlador = (IControlador) contructorControlador.newInstance();
 			
-			if(informacionRuta.getIsSingleton()) {
+			if(informacionRuta.isSingleton()) {
 				informacionRuta.setInstanciaControlador(controlador);
 			}
 			

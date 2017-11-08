@@ -78,17 +78,6 @@ public class AdministradorEstados implements IAdministradorEstados {
 		
 	}
 	
-	
-	/**
-	 * Establece el controlador actual del estado del juego, en el controlador principal.
-	 * @param controladorJuego Controlador del estado del juego.
-	 */
-	@Override
-	public void setControladorEstadoJuegoActual(IControladorEstadoJuego controladorEstadoJuego) {
-		controladorPrincipal.setControladorEstadoJuegoActual(controladorEstadoJuego);
-	}
-	
-	
 	protected IControlador getControlador(NombreEstado nombreEstado) {
 		
 		ConfiguracionControladorEstado informacionControlador = getInformacionControlador(nombreEstado);
