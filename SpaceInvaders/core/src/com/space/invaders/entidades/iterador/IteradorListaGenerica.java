@@ -8,8 +8,8 @@ import java.util.List;
  */
 public class IteradorListaGenerica<T> implements IteradorGenerico<T>{
 	
-	   	private int pos;
-	    private List<T> items;
+	   	private int posicion;
+	    private List<T> lista;
 	    
 	    /**
 	     * Crea una nueva instancia del iterador de lista generica.
@@ -17,13 +17,13 @@ public class IteradorListaGenerica<T> implements IteradorGenerico<T>{
 	     */
 		public IteradorListaGenerica(List<T> list){
 	        super();
-	        pos = -1;
-	        this.items = list;
+	        posicion = -1;
+	        this.lista = list;
 	    }
 
 	    @Override
 	    public boolean hasNext() {
-	        return (pos + 1) < items.size();
+	        return (posicion + 1) < lista.size();
 	    }
 
 	    @Override
@@ -34,16 +34,16 @@ public class IteradorListaGenerica<T> implements IteradorGenerico<T>{
 	    		return null;
 	    	}
 	    	
-	    	pos++;
-	        T elemento = items.get(pos);
+	    	posicion++;
+	        T elemento = lista.get(posicion);
 	        
 	        return elemento;
 	    }
 
 	    @Override
 	    public T first() {
-	        pos = 0;
-	        T elemento = items.get(pos);
+	        posicion = 0;
+	        T elemento = lista.get(posicion);
 	        return elemento;
 	    }
 
